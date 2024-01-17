@@ -25,7 +25,6 @@ export default function Home() {
   };
 
   function displayWSQImage(wsqData) {
-    console.log(wsqData.trim(6));
     // Decode the base64-encoded WSQ data
     const binaryData = atob(wsqData);
     const byteArray = new Uint8Array(binaryData.length);
@@ -39,7 +38,6 @@ export default function Home() {
     // Create a data URL from the Blob
     const imageUrl = URL.createObjectURL(blob);
 
-    console.log("Image URL:", imageUrl);
     return imageUrl;
   }
 

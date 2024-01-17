@@ -25,7 +25,6 @@ export default function Home() {
   };
 
   function displayWSQImage(wsqData) {
-    console.log(wsqData.trim(6));
     // Decode the base64-encoded WSQ data
     const binaryData = atob(wsqData);
     const byteArray = new Uint8Array(binaryData.length);
@@ -39,9 +38,7 @@ export default function Home() {
     // Create a data URL from the Blob
     const imageUrl = URL.createObjectURL(blob);
 
-    console.log("Image URL:", imageUrl);
     return imageUrl;
-  }
 
   return (
     <div className="flex flex-col items-center justify-center">
@@ -91,7 +88,7 @@ export default function Home() {
                   <td>
                     {data.wsqImage && (
                       <Image
-                        src={`data:image/png;base64,${displayWSQImage(data.wsqImage)}`}
+                        src={`data:image/png;base64,${data.templateBase64}`}
                         alt="WSQ Image"
                         height="300"
                         width="300"
