@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useState } from "react";
 import Image from "next/image";
 export default function Home() {
@@ -78,17 +78,20 @@ export default function Home() {
                   <th>NFIQ</th>
                   <td>{data.nfiq}</td>
                 </tr>
-
+                {/* <tr>
+                  <th>Template Base64</th>
+                  <td>{data.templateBase64}</td>
+                </tr>
                 <tr>
                   <th>WSQ Image Size</th>
                   <td>{data.wsqImageSize}</td>
-                </tr>
+                </tr> */}
                 <tr>
                   <th>WSQ Image</th>
                   <td>
-                    {data.bmpBase64 && (
+                    {data.wsqImage && (
                       <Image
-                        src={`data:image/bmp;base64,${data.bmpBase64}`}
+                        src={`data:image/bmp;base64,${displayWSQImage(data.wsqImage)}`}
                         alt="WSQ Image"
                         height="300"
                         width="300"
