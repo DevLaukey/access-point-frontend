@@ -13,7 +13,8 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <head />
+      <body>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
         >
           {children}
         </ThemeProvider>
-      </body>
+      </body>{" "}
     </html>
   );
 }
