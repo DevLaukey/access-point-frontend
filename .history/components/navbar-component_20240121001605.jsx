@@ -16,12 +16,6 @@ function NavbarComponent() {
 
   const [loggedInUser, setLoggedInUser] = React.useState(false);
   const router = useRouter();
-
-  React.useEffect(() => { 
-    // get session
-    const session = supabase.auth.getSession();
-    console.log(session)
-  },[])
   const redirectToLogin = () => {
     console.log("redirecting to login");
     router.push("/auth/login");
@@ -42,7 +36,7 @@ function NavbarComponent() {
   };
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
-      <div className="max-w-screen-xl flex md:flex-wrap items-center justify-between mx-auto p-4">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a
           href="https://flowbite.com/"
           className="flex items-center space-x-3 rtl:space-x-reverse"
@@ -64,16 +58,14 @@ function NavbarComponent() {
           >
             Get started
           </button>
-          {
-            loggedInUser &&
-            <button
-              type="button"
-              onClick={logoutUser}
-              className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mr-2"
-            >
-              Log out
-            </button>
-          }
+          <button
+            type="button"
+            onClick={logoutUser}
+            className="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 mr-2"
+          >
+            Log out
+          </button>
+
           <ModeToggle />
         </div>
       </div>
