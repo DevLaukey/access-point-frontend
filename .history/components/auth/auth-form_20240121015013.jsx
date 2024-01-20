@@ -7,13 +7,27 @@ import { useEffect, useState } from "react";
 
 export default function AuthForm() {
   const supabase = createClientComponentClient();
+  const [session, setSession] = useState(null);
   const router = useRouter();
 
-  supabase.auth.onAuthStateChange((session) => {
-    if (session == "SIGNED_IN") {
+  useEffect(() => {
+    getSession();
+  }, [session, setSession]);
+
+  const getSession =  () => {
+   
+    const { data } = supabase.auth.onAuthStateChange((session) => {
+      setSession(session);
+      console.log(session);
+    });
+
+    console.log(data);
+    if (data?.session !==null) {
+      setSession(data.session);
       router.push("/account");
     }
-  });
+    return null;
+  };
 
   return (
     <Auth

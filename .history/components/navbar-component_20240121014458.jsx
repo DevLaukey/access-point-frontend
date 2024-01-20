@@ -25,6 +25,7 @@ function NavbarComponent() {
 
   const getUser = async () => {
     const { data } = await supabase.auth.getUser();
+    console.log(data);
     if (data.user !== null) {
       setEmail(data.user?.email)
       setLoggedInUser(true);
