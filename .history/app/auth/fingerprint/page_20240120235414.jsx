@@ -10,9 +10,7 @@ const Page = () => {
 
   const handleCaptureFingerprint = () => {
     // Code to capture fingerprint goes here
-      setFingerprintCaptured(true);
-      
-        toast.success("Fingerprint captured successfully!");
+    setFingerprintCaptured(true);
   };
 
   return (

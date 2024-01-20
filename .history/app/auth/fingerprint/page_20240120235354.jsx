@@ -2,23 +2,18 @@
 import React, { useState } from "react";
 import { Button } from "../../../components/ui/button";
 import NavbarComponent from "../../../components/navbar-component";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 const Page = () => {
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
 
   const handleCaptureFingerprint = () => {
     // Code to capture fingerprint goes here
-      setFingerprintCaptured(true);
-      
-        toast.success("Fingerprint captured successfully!");
+    setFingerprintCaptured(true);
   };
 
   return (
     <div className="flex flex-col items-center justify-center h-screen px-2 text-center">
-      <ToastContainer />
-
       <NavbarComponent />
       <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
       <iframe

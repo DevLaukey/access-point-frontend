@@ -2,19 +2,15 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect } from "react";
 
 export default function AuthForm() {
   const supabase = createClientComponentClient();
 
-  useEffect(() => {
-    supabase.auth.getSession().then(function (session) {
-      console.log("Session ", session);
-      if (session) {
-        window.location.href = "/auth/fingerprint";
-      }
-    });
-  }, []);
+  supabase.auth.getSession().then(function (session) { 
+    if (session) {
+      window.location.href = "/dashboard";
+    }
+  });
 
   return (
     <Auth

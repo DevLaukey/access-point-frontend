@@ -11,7 +11,7 @@ export default function AuthForm() {
     supabase.auth.getSession().then(function (session) {
       console.log("Session ", session);
       if (session) {
-        window.location.href = "/auth/fingerprint";
+        window.location.href = "/dashboard";
       }
     });
   }, []);
