@@ -6,14 +6,14 @@ import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function AuthForm() {
-  const supabase = createClientComponentClient();
   const [session, setSession] = useState(null);
   const router = useRouter()
   
-
+  
   useEffect(() => {
     getSession();
   }, [session, setSession]);
+  const supabase = createClientComponentClient();
 
   const getSession = async () => {
     const { data } = await supabase.auth.getSession();

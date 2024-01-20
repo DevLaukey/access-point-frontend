@@ -2,29 +2,15 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
 
-export default function AuthForm() {
+export default async function AuthForm() {
   const supabase = createClientComponentClient();
-  const [session, setSession] = useState(null);
-  const router = useRouter()
-  
+  const { data } = await supabase.auth.getSession();
 
-  useEffect(() => {
-    getSession();
-  }, [session, setSession]);
-
-  const getSession = async () => {
-    const { data } = await supabase.auth.getSession();
-
-    console.log(data);
-      if (data?.session) {
-      setSession(data.session);
-      router.push('/account');
-    }
-    return null;
-  };
+  if (data?.session) {
+    redirect('/');
+  }
 
   return (
     <Auth
@@ -44,6 +30,7 @@ export default function AuthForm() {
       theme="dark"
       providers={["google"]}
       redirectTo="http://localhost:3000/auth/callback"
+      
     />
   );
 }

@@ -2,29 +2,19 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 export default function AuthForm() {
   const supabase = createClientComponentClient();
-  const [session, setSession] = useState(null);
-  const router = useRouter()
-  
 
-  useEffect(() => {
-    getSession();
-  }, [session, setSession]);
-
-  const getSession = async () => {
-    const { data } = await supabase.auth.getSession();
-
-    console.log(data);
-      if (data?.session) {
-      setSession(data.session);
-      router.push('/account');
-    }
-    return null;
-  };
+  // useEffect(() => {
+  //   supabase.auth.getSession().then(function (session) {
+  //     console.log("Session ", session);
+  //     if (session) {
+  //       window.location.href = "/auth/fingerprint";
+  //     }
+  //   });
+  // }, []);
 
   return (
     <Auth
@@ -35,8 +25,8 @@ export default function AuthForm() {
         variables: {
           default: {
             colors: {
-              brand: "blue",
-              brandAccent: "darkblue",
+              brand: "red",
+              brandAccent: "darkred",
             },
           },
         },

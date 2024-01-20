@@ -2,13 +2,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Avatar from "./avatar";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function AccountForm({ user }) {
   const supabase = createClientComponentClient();
   const [loading, setLoading] = useState(true);
-  const [fullname, setFullname]  = useState(null);
+  const [fullname, setFullname] = useState(null);
   const [username, setUsername] = useState(null);
   const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
@@ -20,13 +18,16 @@ export default function AccountForm({ user }) {
       const { data, error, status } = await supabase
         .from("profiles")
         .select(`full_name, username, website, avatar_url`)
-        .eq("id", user?.id);
+        .eq("id", user?.id)
+        
 
       if (error && status !== 406) {
         throw error;
       }
+
+   
     } catch (error) {
-      toast.error("Error loading user data!");
+      toast("Error loading user data!");
     } finally {
       setLoading(false);
     }

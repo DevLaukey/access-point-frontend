@@ -15,8 +15,7 @@ function NavbarComponent() {
   const supabase = createClientComponentClient();
   const router = useRouter();
 
-  const [loggedInUser, setLoggedInUser] = React.useState(false);
-  const [email, setEmail] = React.useState('')
+  const [loggedInUser, setLoggedInUser] = React.useState({});
   
 
   React.useEffect(() => {
@@ -27,8 +26,7 @@ function NavbarComponent() {
     const { data } = await supabase.auth.getUser();
     console.log(data);
     if (data) {
-      setEmail(data.user.email)
-      setLoggedInUser(true);
+      setLoggedInUser(data);
     }
   };
 
@@ -60,8 +58,8 @@ function NavbarComponent() {
         </a>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
-            <p className="text-sm hidden md:inline  text-gray-500 dark:text-white hover:underline">
-              {email}
+            <p className="text-sm  text-gray-500 dark:text-white hover:underline">
+              {loggedInUser.email}
             </p>
           )}
           {!loggedInUser && (

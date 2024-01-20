@@ -3,11 +3,11 @@ import AuthForm from "../../../components/auth/auth-form";
 
 const page = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2 mt-8 ">
+    <div className="flex flex-col items-center justify-center min-h-screen py-2 border-spacing-2 border bg-fuchsia-100">
       <h3 className="text-md ">
         Welcome to the <span className="font-bold">Access IT</span> platform.
-      </h3>
 
+      </h3>
       <AuthForm />
     </div>
   );

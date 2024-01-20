@@ -13,6 +13,5 @@ export default async function Account() {
   if (!user) {
     redirect("/sign-in");
   }
-  
   return <AccountForm user={user} />;
 }

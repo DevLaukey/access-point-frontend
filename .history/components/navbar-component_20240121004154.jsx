@@ -16,32 +16,25 @@ function NavbarComponent() {
   const router = useRouter();
 
   const [loggedInUser, setLoggedInUser] = React.useState(false);
-  const [email, setEmail] = React.useState('')
-  
 
-  React.useEffect(() => {
-    getUser();
-  }, [loggedInUser]);
-
-  const getUser = async () => {
-    const { data } = await supabase.auth.getUser();
-    console.log(data);
-    if (data) {
-      setEmail(data.user.email)
-      setLoggedInUser(true);
-    }
-  };
-
+  React.useEffect(() => { 
+    // get session
+    const session = supabase.auth.getUser();
+    console.log(session)
+  },[])
   const redirectToLogin = () => {
     router.push("/auth/login");
+    console.log("redirecting to login");
   };
 
   const logoutUser = async () => {
     try {
       const { error } = await supabase.auth.signOut();
+
       if (error) {
         throw error;
       }
+
       router.push("/");
     } catch (error) {
       console.log(error);
@@ -60,20 +53,19 @@ function NavbarComponent() {
         </a>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
-            <p className="text-sm hidden md:inline  text-gray-500 dark:text-white hover:underline">
-              {email}
+            <p className="text-sm  text-gray-500 dark:text-white hover:underline">
+              UserName
             </p>
           )}
-          {!loggedInUser && (
-            <button
-              type="button"
-              onClick={redirectToLogin}
-              className="text-whsite bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2"
-            >
-              Get started
-            </button>
-          )}
-          {loggedInUser && (
+          <button
+            type="button"
+            onClick={redirectToLogin}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2"
+          >
+            Get started
+          </button>
+          {
+            loggedInUser &&
             <button
               type="button"
               onClick={logoutUser}
@@ -81,7 +73,7 @@ function NavbarComponent() {
             >
               Log out
             </button>
-          )}
+          }
           <ModeToggle />
         </div>
       </div>

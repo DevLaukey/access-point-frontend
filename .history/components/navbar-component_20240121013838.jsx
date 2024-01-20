@@ -27,7 +27,7 @@ function NavbarComponent() {
     const { data } = await supabase.auth.getUser();
     console.log(data);
     if (data) {
-      setEmail(data.user.email)
+      setEmail(data.email)
       setLoggedInUser(true);
     }
   };
@@ -60,7 +60,7 @@ function NavbarComponent() {
         </a>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
-            <p className="text-sm hidden md:inline  text-gray-500 dark:text-white hover:underline">
+            <p className="text-sm  text-gray-500 dark:text-white hover:underline">
               {email}
             </p>
           )}

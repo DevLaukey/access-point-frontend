@@ -16,24 +16,23 @@ function NavbarComponent() {
   const router = useRouter();
 
   const [loggedInUser, setLoggedInUser] = React.useState(false);
-  const [email, setEmail] = React.useState('')
-  
 
   React.useEffect(() => {
     getUser();
-  }, [loggedInUser]);
+  }, [loggedInUser]); 
 
-  const getUser = async () => {
+
+  const getUser = async () => { 
     const { data } = await supabase.auth.getUser();
     console.log(data);
     if (data) {
-      setEmail(data.user.email)
       setLoggedInUser(true);
     }
-  };
-
+  }
+  
   const redirectToLogin = () => {
     router.push("/auth/login");
+    console.log("redirecting to login");
   };
 
   const logoutUser = async () => {
@@ -60,19 +59,17 @@ function NavbarComponent() {
         </a>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
-            <p className="text-sm hidden md:inline  text-gray-500 dark:text-white hover:underline">
-              {email}
+            <p className="text-sm  text-gray-500 dark:text-white hover:underline">
+              UserName
             </p>
           )}
-          {!loggedInUser && (
-            <button
-              type="button"
-              onClick={redirectToLogin}
-              className="text-whsite bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2"
-            >
-              Get started
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={redirectToLogin}
+            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 mr-2"
+          >
+            Get started
+          </button>
           {loggedInUser && (
             <button
               type="button"

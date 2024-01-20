@@ -16,12 +16,12 @@ export async function middleware(req) {
 
   // if user is not signed in and the current path is not / redirect the user to /
   if (!user && req.nextUrl.pathname !== "/") {
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ["/", "/account"],
+  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };

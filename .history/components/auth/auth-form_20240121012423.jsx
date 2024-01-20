@@ -2,26 +2,21 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { redirect } from "next/navigation";
+import { useEffect } from "react";
 
 export default function AuthForm() {
-  const supabase = createClientComponentClient();
-  const [session, setSession] = useState(null);
-  const router = useRouter()
-  
-
   useEffect(() => {
     getSession();
-  }, [session, setSession]);
+  }, []);
+  const supabase = createClientComponentClient();
 
   const getSession = async () => {
     const { data } = await supabase.auth.getSession();
 
     console.log(data);
-      if (data?.session) {
-      setSession(data.session);
-      router.push('/account');
+    if (data?.session) {
+      redirect("/");
     }
     return null;
   };
