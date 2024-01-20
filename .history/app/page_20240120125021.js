@@ -1,5 +1,6 @@
+import NavbarComponent from '@/components/navbar-component';
 import React from 'react';
-import NavbarComponent from "../components/navbar-component";
+
 const Page = () => {
     return (
         <div>

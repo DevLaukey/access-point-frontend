@@ -22,9 +22,9 @@ function NavbarComponent() {
             ACCESS IT.
           </span>
         </a>
-        <div className="flex items-center space-x-6 rtl:space-x-reverse">
+        <div class="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
-            <p className="text-sm  text-gray-500 dark:text-white hover:underline">
+            <p class="text-sm  text-gray-500 dark:text-white hover:underline">
               UserName
             </p>
           )}
