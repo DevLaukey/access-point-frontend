@@ -1,14 +1,15 @@
-import { Inter } from "next/font/google";
+import { Inter } from 'next/font/google'
 import { ThemeProvider } from "../components/theme-provider";
 
-import "./globals.css";
+import './globals.css'
+import NavbarComponent from "../components/navbar-component";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: "Access point management system",
-  description: "Handle access points and their users",
-};
+  title: 'Access point management system',
+  description: 'Handle access points and their users',
+}
 
 export default function RootLayout({ children }) {
   return (
@@ -20,6 +21,7 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>

@@ -12,8 +12,8 @@ export default function AuthForm() {
       view="sign_in"
       appearance={{ theme: ThemeSupa }}
       theme="dark"
-      providers={["google"]}
-      redirectTo="http://localhost:3000/auth/callback"
+      providers={['google']}
+      redirectTo="http://localhost:3000/"
     />
   );
 }
