@@ -28,8 +28,7 @@ const Page = () => {
   const [uniqueId, setUniqueId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-    const [idNumber, setIdNumber] = useState("");
-    const router = useRouter();
+  const [idNumber, setIdNumber] = useState("");
 
   useEffect(() => {
     // Generate a unique ID here

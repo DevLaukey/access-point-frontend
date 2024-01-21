@@ -28,8 +28,7 @@ const Page = () => {
   const [uniqueId, setUniqueId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-    const [idNumber, setIdNumber] = useState("");
-    const router = useRouter();
+  const [idNumber, setIdNumber] = useState("");
 
   useEffect(() => {
     // Generate a unique ID here
@@ -38,8 +37,8 @@ const Page = () => {
   }, []);
 
   const confirmEntry = async () => {
-    console.log("Confirm entry");
-    router.push("/add-user/confirm-entry");
+      console.log("Confirm entry");
+      router.push("/add-user/confirm-entry")
   };
   const submitUserDetails = async () => {
     //   input validation
@@ -47,7 +46,8 @@ const Page = () => {
       toast.error("Please fill in all fields");
       return;
     }
-    router.push("/add-user/confirm-entry");
+            router.push("/add-user/confirm-entry");
+
   };
   const generateUniqueId = () => {
     // Generate a unique ID logic here
