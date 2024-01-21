@@ -2,7 +2,7 @@
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 export default function AuthForm() {
   const supabase = createClientComponentClient();
@@ -10,7 +10,7 @@ export default function AuthForm() {
 
   supabase.auth.onAuthStateChange((session) => {
     if (session == "SIGNED_IN") {
-      router.push("/dashboard");
+      router.push("/account");
     }
   });
 

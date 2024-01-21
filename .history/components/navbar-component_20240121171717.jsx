@@ -21,7 +21,7 @@ function NavbarComponent() {
 
   React.useEffect(() => {
     getUser();
-  }, [loggedInUser, setLoggedInUser, email, setEmail]);
+  }, [loggedInUser, setLoggedInUserm, email, setEmail]);
 
   const getUser = async () => {
     const { data } = await supabase.auth.getUser();

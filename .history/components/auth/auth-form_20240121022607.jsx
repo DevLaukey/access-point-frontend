@@ -10,14 +10,14 @@ export default function AuthForm() {
 
   supabase.auth.onAuthStateChange((session) => {
     if (session == "SIGNED_IN") {
-      router.push("/dashboard");
+      router.push("/account");
     }
   });
 
   return (
     <Auth
       supabaseClient={supabase}
-      view="sign_in"
+      view="magic_link"
       appearance={{
         theme: ThemeSupa,
         variables: {
