@@ -21,7 +21,7 @@ const Page = () => {
     router.push("/add-user/capture");
   };
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4 mt-12 mx-3">
       <div className="flex flex-col items-center justify-center h-screen px-2 text-center">
         <ToastContainer />
 

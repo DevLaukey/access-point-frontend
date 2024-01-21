@@ -20,8 +20,6 @@ import {
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 const Page = () => {
   const [uniqueId, setUniqueId] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -37,13 +35,7 @@ const Page = () => {
   const confirmEntry = async () => {
     console.log("Confirm entry");
   };
-  const submitUserDetails = async () => {
-    //   input validation
-    if (firstName === "" || lastName === "" || idNumber === "") {
-      toast.error("Please fill in all fields");
-      return;
-    }
-  };
+  const submitUserDetails = async () => {};
   const generateUniqueId = () => {
     // Generate a unique ID logic here
     // ...
@@ -52,8 +44,6 @@ const Page = () => {
 
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full mt-4">
-      <ToastContainer />
-
       <h1 className="text-2xl font-bold m-4">Add User Details</h1>
 
       <Tabs defaultValue="form" className="w-[full]">

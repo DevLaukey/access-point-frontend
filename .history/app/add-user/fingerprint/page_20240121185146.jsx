@@ -21,13 +21,13 @@ const Page = () => {
     router.push("/add-user/capture");
   };
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4 mt-12 mx-3">
       <div className="flex flex-col items-center justify-center h-screen px-2 text-center">
         <ToastContainer />
 
         <NavbarComponent />
-        <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
-        <h5 className="font-bold mb-4">Add a new visitor</h5>
+        <h1 className="text-4xl font-bold mt-6">Fingerprint Capture</h1>
+        <h5 className="font-bold mt-6">Add a new visitor</h5>
         {fingerprintCaptured ? (
           <>
             {/* <Image
