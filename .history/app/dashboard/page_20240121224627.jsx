@@ -157,9 +157,9 @@ const DashboardPage = async () => {
               </Card>
               <Card className="col-span-4 md:col-span-3">
                 <CardHeader>
-                  <CardTitle>Top Access Points</CardTitle>
+                  <CardTitle>Recent Sales</CardTitle>
                   <CardDescription>
-                    These are the access points registered.
+                    You made 265 sales this month.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

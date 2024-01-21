@@ -5,51 +5,51 @@ import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 const data = [
   {
     name: "Jan",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Feb",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Mar",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Apr",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "May",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Jun",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Jul",
-    total: 10,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Aug",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Sep",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Oct",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Nov",
-    total: 2,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
   {
     name: "Dec",
-    total: 20,
+    total: Math.floor(Math.random() * 5000) + 1000,
   },
 ];
 
@@ -69,7 +69,7 @@ export function Overview() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `${value}`}
+          tickFormatter={(value) => `$${value}`}
         />
         <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
       </BarChart>

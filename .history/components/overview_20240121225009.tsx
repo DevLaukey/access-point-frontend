@@ -29,7 +29,7 @@ const data = [
   },
   {
     name: "Jul",
-    total: 10,
+    total: 20,
   },
   {
     name: "Aug",
@@ -45,7 +45,7 @@ const data = [
   },
   {
     name: "Nov",
-    total: 2,
+    total: 20,
   },
   {
     name: "Dec",
@@ -69,7 +69,7 @@ export function Overview() {
           fontSize={12}
           tickLine={false}
           axisLine={false}
-          tickFormatter={(value) => `${value}`}
+          tickFormatter={(value) => `$${value}`}
         />
         <Bar dataKey="total" fill="#adfa1d" radius={[4, 4, 0, 0]} />
       </BarChart>

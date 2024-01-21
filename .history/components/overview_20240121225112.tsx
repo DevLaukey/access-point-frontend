@@ -29,7 +29,7 @@ const data = [
   },
   {
     name: "Jul",
-    total: 10,
+    total: 20,
   },
   {
     name: "Aug",
@@ -45,7 +45,7 @@ const data = [
   },
   {
     name: "Nov",
-    total: 2,
+    total: 20,
   },
   {
     name: "Dec",
