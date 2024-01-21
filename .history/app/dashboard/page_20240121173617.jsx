@@ -33,7 +33,7 @@ const DashboardPage = () => {
 
   const router = useRouter();
   const handleAddUser = () => {
-      router.push("add-user/fingerprint");
+      router.push("/add-user/fingerprint");
   };
 
   return (
