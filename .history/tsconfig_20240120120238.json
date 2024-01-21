@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx"  ],
+  ],
   "exclude": [
     "node_modules"
   ]
