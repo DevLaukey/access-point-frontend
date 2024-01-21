@@ -10,8 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-
-import { redirect } from "next/navigation";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../components/ui/select";
+import { useRouter } from "next/navigation";
 
 import { ScrollArea } from "../../components/ui/scroll-area";
 import { CalendarDateRangePicker } from "../../components/date-range-picker";
@@ -31,6 +39,7 @@ const DashboardPage = async () => {
     { id: 3, name: "Bob Johnson" },
   ];
 
+  const router = useRouter();
   const cookieStore = cookies();
   const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
@@ -42,7 +51,7 @@ const DashboardPage = async () => {
     redirect("/sign-in");
   }
   const handleAddUser = () => {
-    redirect("add-user/fingerprint");
+    router.push("add-user/fingerprint");
   };
 
   return (

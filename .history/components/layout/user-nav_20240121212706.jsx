@@ -42,7 +42,7 @@ const session =[]
                 src="https://github.com/shadcn.png"
                 alt={user?.email ?? ""}
               />
-              <AvatarFallback>{session.user?.email}</AvatarFallback>
+              <AvatarFallback>{session.user?.email?.[0]}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -50,10 +50,10 @@ const session =[]
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                {user.user?.email}
-                </p>
+                {session.user?.name}
+              </p>
               <p className="text-xs leading-none text-muted-foreground">
-                {user.user?.email}
+                {session.user?.email}
               </p>
             </div>
           </DropdownMenuLabel>

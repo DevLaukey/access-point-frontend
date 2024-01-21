@@ -4,9 +4,8 @@ import { DashboardNav } from "../dashboard-nav";
 
 export default function Sidebar() {
   return (
-    // to add hidden
     <nav
-      className=" relative h-screen border-r mt-20 md:block w-72">
+      className="relative hidden h-screen border-r pt-16 md:block w-72">
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <div className="space-y-1">

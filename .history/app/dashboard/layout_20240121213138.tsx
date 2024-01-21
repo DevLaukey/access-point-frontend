@@ -9,10 +9,10 @@ export default function DashboardLayout({
 }) {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <div className="flex h-screen overflow-hidden">
         <Sidebar />
-        <main className="w-full mt-16">{children}</main>
+        {/* <main className="w-full mt-16">{children}</main> */}
       </div>
     </>
   );

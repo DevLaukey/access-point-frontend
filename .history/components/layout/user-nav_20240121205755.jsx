@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import {  Avatar,AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import {
   DropdownMenu,
@@ -13,36 +13,29 @@ import {
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useEffect, useState } from "react";
 
 export function UserNav() {
   const supabase = createClientComponentClient();
+  const { data: session } = supabase.auth.getSession();
+    const router = useRouter();
 
-  const [user, setUser] = useState();
-  useEffect(() => {
-    getUser();
-  }, []);
+  console.log("session: " + session);
+  // if (session === undefined) {
+  //       router.push("/auth/login");
 
-  const getUser = async () => {
-    const user = await supabase.auth.getUser();
-    console.log( user);
-    setUser(user.data.user);
-  };
+  //  }
 
-
-const session =[]
-
-  if (user) {
+  if (session) {
     return (
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
             <Avatar className="h-8 w-8">
               <AvatarImage
-                src="https://github.com/shadcn.png"
-                alt={user?.email ?? ""}
+                src={session.user?.image ?? ""}
+                alt={session.user?.name ?? ""}
               />
-              <AvatarFallback>{session.user?.email}</AvatarFallback>
+              <AvatarFallback>{session.user?.name?.[0]}</AvatarFallback>
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
@@ -50,10 +43,10 @@ const session =[]
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
               <p className="text-sm font-medium leading-none">
-                {user.user?.email}
-                </p>
+                {session.user?.name}
+              </p>
               <p className="text-xs leading-none text-muted-foreground">
-                {user.user?.email}
+                {session.user?.email}
               </p>
             </div>
           </DropdownMenuLabel>
@@ -74,16 +67,14 @@ const session =[]
             <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={async () => {
-              const { error } = await supabase.auth.signOut();
-              if (error) {
-                throw error;
-              }
-              setLoggedInUser(false);
-              router.push("/");
-            }}
-          >
+          <DropdownMenuItem onClick={async() => {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+              throw error;
+            }
+            setLoggedInUser(false)
+            router.push("/")
+          }}>
             Log out
             <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>

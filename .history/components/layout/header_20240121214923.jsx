@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { cn } from "../../lib/utils";
 import { MobileSidebar } from "./mobile-sidebar";
 import { UserNav } from "./user-nav";
@@ -31,18 +31,18 @@ export default function Header() {
     }
   };
 
-  const logoutUser = async () => {
-    try {
-      const { error } = await supabase.auth.signOut();
-      if (error) {
-        throw error;
+    const logoutUser = async () => {
+      try {
+        const { error } = await supabase.auth.signOut();
+        if (error) {
+          throw error;
+        }
+        setLoggedInUser(false);
+        router.push("/");
+      } catch (error) {
+        console.log(error);
       }
-      setLoggedInUser(false);
-      router.push("/");
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
   return (
     <div className="fixed top-0 left-0 right-0 supports-backdrop-blur:bg-background/60 border-b bg-background/95 backdrop-blur z-20">
       <nav className="h-14 flex items-center justify-between px-4">
@@ -66,10 +66,9 @@ export default function Header() {
         <div className={cn("block sm:!hidden")}>
           <MobileSidebar />
         </div>
-        <div className="flex space-x-4">
-          <UserNav />
-          <ModeToggle />
-        </div>
+
+        <UserNav />
+        <ModeToggle />
       </nav>
     </div>
   );
