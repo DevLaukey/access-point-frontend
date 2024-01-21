@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx", "components/date-range-picker.jsx", "components/ui/calendar.jsx", "components/recent-sales.jsx"  ],
+, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx", "components/date-range-picker.jsx", "components/ui/calendar.jsx"  ],
   "exclude": [
     "node_modules"
   ]
