@@ -17,7 +17,7 @@ import { useEffect, useState } from "react";
 
 export function UserNav() {
   const supabase = createClientComponentClient();
-  const router = useRouter();
+
   const [user, setUser] = useState();
   useEffect(() => {
     getUser();
@@ -25,10 +25,13 @@ export function UserNav() {
 
   const getUser = async () => {
     const user = await supabase.auth.getUser();
-    console.log(user);
+    console.log( user);
     setUser(user.data.user);
     console.log(user.data.user);
   };
+
+
+const session =[]
 
   if (user) {
     return (
@@ -44,10 +47,12 @@ export function UserNav() {
             </Avatar>
           </Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent className="w-56 " align="end" forceMount>
+        <DropdownMenuContent className="w-56" align="end" forceMount>
           <DropdownMenuLabel className="font-normal">
             <div className="flex flex-col space-y-1">
-              <p className="text-sm font-medium leading-none">{user?.email}</p>
+              <p className="text-sm font-medium leading-none">
+                {user?.email}
+                </p>
               <p className="text-xs leading-none text-muted-foreground">
                 {user?.email}
               </p>
@@ -55,13 +60,19 @@ export function UserNav() {
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem
-              onClick={() => {
-                router.push("/dashboard/profile");
-              }}
-            >
+            <DropdownMenuItem>
               Profile
+              <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
             </DropdownMenuItem>
+            <DropdownMenuItem>
+              Billing
+              <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              Settings
+              <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+            </DropdownMenuItem>
+            <DropdownMenuItem>New Team</DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem
@@ -75,6 +86,7 @@ export function UserNav() {
             }}
           >
             Log out
+            <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
