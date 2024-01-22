@@ -70,7 +70,7 @@ export default function Header() {
           <MobileSidebar />
         </div>
         <div className="flex space-x-4">
-          <Button onClick={() => router.push("/existing-user/fingerprint")}>
+          <Button onClick={() => router.push("/add-user/fingerprint")}>
             Existing Users
           </Button>
           <Button onClick={() => router.push("/add-user/fingerprint")}>
