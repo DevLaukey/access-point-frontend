@@ -7,7 +7,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 import { ModeToggle } from "../toggle-component";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
 
 export const dm_serif_display = DM_Serif_Display({
   subsets: ["latin"],
@@ -17,7 +16,6 @@ export const dm_serif_display = DM_Serif_Display({
 
 export default function Header() {
   const supabase = createClientComponentClient();
-  const router = useRouter();
 
   const [loggedInUser, setLoggedInUser] = useState(false);
   const [email, setEmail] = useState("");

@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
-import Image from "next/image";
 
 import NavbarComponent from "../../../components/navbar-component";
 import { ToastContainer, toast } from "react-toastify";
@@ -65,16 +64,6 @@ const Page = () => {
         <NavbarComponent />
         <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
         <h5 className="font-bold mb-4">Add a new visitor</h5>
-        {data.length !== 0 &&
-          (!fingerprintCapturedError ? (
-            <p className="text-green-500 mb-4">
-              Fingerprint captured successfully!
-            </p>
-          ) : (
-            <p className="text-red-500 mb-4">
-              Fingerprint capture failed. Please try again.
-            </p>
-          ))}
         {fingerprintCaptured ? (
           <>
             <Image
@@ -83,14 +72,6 @@ const Page = () => {
               height="300"
               width="300"
             />
-            <div className="flex flex-col space-y-2 mt-2 items-start">
-              <p className="font-bold">
-                Serial Number : {data.serialNumber}
-              </p>
-               <p className="font-bold">
-                Image Quality : {data.imageQuality}
-              </p>
-            </div>
           </>
         ) : (
           <iframe
@@ -107,6 +88,16 @@ const Page = () => {
             fingerprint.
           </p>
         )}
+        {data.length !== 0 &&
+          (!fingerprintCapturedError ? (
+            <p className="text-green-500 mb-4">
+              Fingerprint captured successfully!
+            </p>
+          ) : (
+            <p className="text-red-500 mb-4">
+              Fingerprint capture failed. Please try again.
+            </p>
+          ))}
         {fingerprintCaptured ? (
           <Button onClick={captureName}>Continue</Button>
         ) : (

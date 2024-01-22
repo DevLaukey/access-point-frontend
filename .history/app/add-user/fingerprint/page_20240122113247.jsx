@@ -65,16 +65,6 @@ const Page = () => {
         <NavbarComponent />
         <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
         <h5 className="font-bold mb-4">Add a new visitor</h5>
-        {data.length !== 0 &&
-          (!fingerprintCapturedError ? (
-            <p className="text-green-500 mb-4">
-              Fingerprint captured successfully!
-            </p>
-          ) : (
-            <p className="text-red-500 mb-4">
-              Fingerprint capture failed. Please try again.
-            </p>
-          ))}
         {fingerprintCaptured ? (
           <>
             <Image
@@ -107,6 +97,16 @@ const Page = () => {
             fingerprint.
           </p>
         )}
+        {data.length !== 0 &&
+          (!fingerprintCapturedError ? (
+            <p className="text-green-500 mb-4">
+              Fingerprint captured successfully!
+            </p>
+          ) : (
+            <p className="text-red-500 mb-4">
+              Fingerprint capture failed. Please try again.
+            </p>
+          ))}
         {fingerprintCaptured ? (
           <Button onClick={captureName}>Continue</Button>
         ) : (
