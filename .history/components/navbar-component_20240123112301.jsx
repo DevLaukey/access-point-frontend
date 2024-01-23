@@ -42,7 +42,7 @@ function NavbarComponent() {
     }
 
     // redux
-      const store = useAppStore()
+    const store = useAppStore()
       const initialized = useRef(false);
       if (!initialized.current) {
         store.dispatch(setAdminUserDetails(user));

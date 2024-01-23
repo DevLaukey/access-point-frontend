@@ -31,7 +31,7 @@ function NavbarComponent() {
   const getUser = async () => {
     const { data } = await supabase.auth.getUser();
     const {email, id} = data.user
-    const { avatar_url, full_name } = data.user.user_metadata;
+    const { avatar_url, name, full_name } = data.user.user_metadata;
 
     
     const user = {
@@ -42,7 +42,7 @@ function NavbarComponent() {
     }
 
     // redux
-      const store = useAppStore()
+    const store = useAppStore()
       const initialized = useRef(false);
       if (!initialized.current) {
         store.dispatch(setAdminUserDetails(user));
@@ -86,7 +86,7 @@ function NavbarComponent() {
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
             <p className="text-sm hidden md:inline  text-gray-500 dark:text-white hover:underline">
-              {full_name}
+              {email}
             </p>
           )}
           {!loggedInUser && (

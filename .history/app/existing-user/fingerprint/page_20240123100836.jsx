@@ -15,18 +15,27 @@ const Page = () => {
     useState(false);
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [failure, setFailure] = useState(false);
 
   const router = useRouter();
 
   const handleCaptureFingerprint = async () => {
     try {
+
+      const body = JSON.stringify({
+        template1: "casdcas",
+        template2: "casdcas",
+      }, true);
+
       const response = await fetch(
-        "https://localhost:7030/api/Fingerprint/capture",
+        "https://localhost:7030/api/Fingerprint/match",
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
+          body: body
         }
       );
 
@@ -49,21 +58,25 @@ const Page = () => {
     }
   };
 
-  const redoCapture = () => {
-    setFingerprintCaptured(false);
-    setfingerprintCapturedError(false);
-    setData([]);
-  }
-
   const captureName = () => {
-    
-    router.push("/add-user/capture");
+    router.push("/dashboard   ");
   };
 
   if (isloading) {
     return <Skeleton color="#202020" highlightColor="#444" />;
   }
 
+  const LoginResponse = () => {
+    if (isloading) {
+      return <Skeleton color="#202020" highlightColor="#444" />;
+    }
+    if (success) {
+      return <p>Sucess</p>;
+    }
+    if (failure) {
+      return <p>Failure</p>;
+    }
+  };
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col items-center justify-center h-screen px-2 text-center">
@@ -71,7 +84,7 @@ const Page = () => {
 
         <NavbarComponent />
         <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
-        <h5 className="font-bold mb-4">Add a new visitor</h5>
+        <h5 className="font-bold mb-4">Login an existing visitor</h5>
         {data.length !== 0 &&
           (!fingerprintCapturedError ? (
             <p className="text-green-500 mb-4">
@@ -83,18 +96,7 @@ const Page = () => {
             </p>
           ))}
         {fingerprintCaptured ? (
-          <>
-            <Image
-              src={`data:image/bmp;base64,${data.bmpBase64}`}
-              alt="WSQ Image"
-              height="300"
-              width="300"
-            />
-            <div className="flex flex-col space-y-2 mt-2 items-start">
-              <p className="font-bold">Serial Number : {data.serialNumber}</p>
-              <p className="font-bold">Image Quality : {data.imageQuality}</p>
-            </div>
-          </>
+          <LoginResponse />
         ) : (
           <iframe
             width={100}
@@ -111,13 +113,7 @@ const Page = () => {
           </p>
         )}
         {fingerprintCaptured ? (
-          <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={redoCapture} className="mr-2" variant="outline">
-              Repeat
-            </Button>
-            <Button onClick={captureName}>Continue</Button>
-            
-          </div>
+          <Button onClick={captureName}>Continue</Button>
         ) : (
           <Button onClick={handleCaptureFingerprint}>
             Capture Fingerprint

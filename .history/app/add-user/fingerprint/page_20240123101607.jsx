@@ -49,14 +49,7 @@ const Page = () => {
     }
   };
 
-  const redoCapture = () => {
-    setFingerprintCaptured(false);
-    setfingerprintCapturedError(false);
-    setData([]);
-  }
-
   const captureName = () => {
-    
     router.push("/add-user/capture");
   };
 
@@ -111,13 +104,7 @@ const Page = () => {
           </p>
         )}
         {fingerprintCaptured ? (
-          <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={redoCapture} className="mr-2" variant="outline">
-              Repeat
-            </Button>
-            <Button onClick={captureName}>Continue</Button>
-            
-          </div>
+          <Button onClick={captureName}>Continue</Button>
         ) : (
           <Button onClick={handleCaptureFingerprint}>
             Capture Fingerprint

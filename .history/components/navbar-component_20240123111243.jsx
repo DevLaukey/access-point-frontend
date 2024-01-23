@@ -1,5 +1,5 @@
 "use client";
-import React, { useRef } from "react";
+import React from "react";
 import { ModeToggle } from "./toggle-component";
 import { DM_Serif_Display } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
@@ -30,22 +30,11 @@ function NavbarComponent() {
 
   const getUser = async () => {
     const { data } = await supabase.auth.getUser();
-    const {email, id} = data.user
-    const { avatar_url, full_name } = data.user.user_metadata;
 
-    
-    const user = {
-      email,
-      id,
-      avatar_url,
-      full_name,
-    }
-
-    // redux
-      const store = useAppStore()
+    const store = useAppStore()
       const initialized = useRef(false);
       if (!initialized.current) {
-        store.dispatch(setAdminUserDetails(user));
+        store.dispatch(setAdminUserDetails(data.user));
         initialized.current = true;
       }
 
@@ -86,7 +75,7 @@ function NavbarComponent() {
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
           {loggedInUser && (
             <p className="text-sm hidden md:inline  text-gray-500 dark:text-white hover:underline">
-              {full_name}
+              {email}
             </p>
           )}
           {!loggedInUser && (

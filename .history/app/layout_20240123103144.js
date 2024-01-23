@@ -16,6 +16,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <Provider store={store}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -25,7 +26,7 @@ export default function RootLayout({ children }) {
             <NavbarComponent />
             {children}
           </ThemeProvider>
-        
+        </Provider>
       </body>
     </html>
   );
