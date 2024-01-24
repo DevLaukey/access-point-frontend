@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import setUserDetails from "./users/userReducer";
-import  setAdminUserDetails  from "./users/adminUserReducer";
+import {setUserDetails, setAdminUserDetails } from "./users/userSlice";
 
 export const store = configureStore({
   reducer: {
