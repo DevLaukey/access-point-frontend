@@ -21,10 +21,8 @@ const Page = () => {
   );
 
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
-  const [fingerprintCapturedError, setfingerprintCapturedError] =
-    useState(false);
-  const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
-    useState(false);
+  const [fingerprintCapturedError, setfingerprintCapturedError] = useState(false);
+  const [secondFingerprintCaptured, setSecondFingerprintCaptured] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [comparisonResult, setComparisonResult] = useState(false);
   const [data, setData] = useState([]);
@@ -127,7 +125,7 @@ const Page = () => {
 
       console.log(data.bmpBase64, firstFingerprintCaptured);
       // Code to capture the second fingerprint goes here
-      setFingerprintCaptured(true); // Reset the first fingerprint capture state
+      setFingerprintCaptured(false); // Reset the first fingerprint capture state
       setSecondFingerprintCaptured(true);
 
       toast.success("Second fingerprint captured successfully!");

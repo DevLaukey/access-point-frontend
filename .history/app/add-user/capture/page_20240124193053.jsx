@@ -32,12 +32,12 @@ const Page = () => {
   const [idNumber, setIdNumber] = useState("");
   const router = useRouter();
   const userDetails = useSelector((state) => {
-    state.user
+    state.user.captureComplete
   });
 
 
   console.log(userDetails);
-
+  
   useEffect(() => {
     // Generate a unique ID here
     const generatedId = generateUniqueId();

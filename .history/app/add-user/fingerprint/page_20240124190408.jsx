@@ -1,12 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { useSelector, useDispatch } from "react-redux";
-import Image from "next/image";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
+import Image from "next/image";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useRouter } from "next/navigation";
+import { useSelector, useDispatch } from "react-redux";
 import Header from "../../../components/layout/header";
 import {
   setFingerprintDetails,
@@ -21,13 +22,11 @@ const Page = () => {
   );
 
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
-  const [fingerprintCapturedError, setfingerprintCapturedError] =
-    useState(false);
-  const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
-    useState(false);
-  const [isloading, setIsLoading] = useState(false);
-  const [comparisonResult, setComparisonResult] = useState(false);
+  const [fingerprintCapturedError, setfingerprintCapturedError] = useState(false);
   const [data, setData] = useState([]);
+  const [isloading, setIsLoading] = useState(false);
+  const [secondFingerprintCaptured, setSecondFingerprintCaptured] = useState(false);
+  const [comparisonResult, setComparisonResult] = useState(false);
 
   useEffect(() => {
     if (firstFingerprintCaptured.isCapture) {
@@ -127,7 +126,7 @@ const Page = () => {
 
       console.log(data.bmpBase64, firstFingerprintCaptured);
       // Code to capture the second fingerprint goes here
-      setFingerprintCaptured(true); // Reset the first fingerprint capture state
+      setFingerprintCaptured(false); // Reset the first fingerprint capture state
       setSecondFingerprintCaptured(true);
 
       toast.success("Second fingerprint captured successfully!");
