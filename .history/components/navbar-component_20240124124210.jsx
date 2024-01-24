@@ -3,6 +3,7 @@ import React from "react";
 import { ModeToggle } from "./toggle-component";
 import { DM_Serif_Display } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export const dm_serif_display = DM_Serif_Display({
   subsets: ["latin"],

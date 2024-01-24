@@ -1,6 +1,7 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import AccountForm from "./account-form";
+import { UserNav } from "../../components/layout/user-nav";
 
 export default async function Account() {
   const cookieStore = cookies();
@@ -13,6 +14,6 @@ export default async function Account() {
   if (!user) {
     redirect("/sign-in");
   }
-  
+
   return <AccountForm user={user} />;
 }

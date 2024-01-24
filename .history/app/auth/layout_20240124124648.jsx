@@ -4,13 +4,11 @@ import  Footer  from '../../components/footer';
 
 const AuthLayout = ({ children }) => {
     return (
-        <div>
+        <>
            <NavbarComponent />
-            <main>
-                {children}
-            </main>
+           children
             <Footer />
-        </div>
+        </>
     );
 };
 

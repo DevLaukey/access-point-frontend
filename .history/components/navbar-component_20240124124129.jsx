@@ -3,6 +3,7 @@ import React from "react";
 import { ModeToggle } from "./toggle-component";
 import { DM_Serif_Display } from "next/font/google";
 import { usePathname, useRouter } from "next/navigation";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 export const dm_serif_display = DM_Serif_Display({
   subsets: ["latin"],
@@ -12,7 +13,6 @@ export const dm_serif_display = DM_Serif_Display({
 
 function NavbarComponent() {
   const pathname = usePathname();
-  const router = useRouter();
   const[inAuth, setInAuth] = React.useState(false);
 
  
@@ -22,6 +22,9 @@ function NavbarComponent() {
 
 
 
+  if (pathname === "/auth") {
+    
+  }
   return (
     <nav className="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
       <div className="max-w-screen-xl flex md:flex-wrap items-center justify-between mx-auto p-4">

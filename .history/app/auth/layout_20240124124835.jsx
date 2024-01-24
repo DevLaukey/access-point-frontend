@@ -4,12 +4,12 @@ import  Footer  from '../../components/footer';
 
 const AuthLayout = ({ children }) => {
     return (
-        <div>
+        <div className='h-screen flex flex-1 flex-col'>
            <NavbarComponent />
             <main>
                 {children}
-            </main>
             <Footer />
+            </main>
         </div>
     );
 };
