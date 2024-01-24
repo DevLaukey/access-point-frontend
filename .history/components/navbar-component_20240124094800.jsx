@@ -37,7 +37,18 @@ function NavbarComponent() {
       full_name,
     }
 
-   
+    // // redux
+    //   const store = useAppStore()
+    //   const initialized = useRef(false);
+    //   if (!initialized.current) {
+    //     store.dispatch(setAdminUserDetails(user));
+    //     initialized.current = true;
+    //   }
+
+    // if (data.user !== null) {
+    //   setEmail(data.user?.email)
+    //   setLoggedInUser(true);
+    // }
   };
 
   const redirectToLogin = () => {

@@ -1,3 +1,4 @@
+'use server'
 import { configureStore } from "@reduxjs/toolkit";
 import {setUserDetails, setAdminUserDetails } from "./users/userSlice";
 
