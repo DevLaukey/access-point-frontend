@@ -13,12 +13,17 @@ const compareFingerPrints = async (template1, template2) => {
     redirect: "follow",
   };
 
-  const response = fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
-    .catch((error) => console.log("error", error));
-  
-  console.log(response)
+  try {
+    
+    const response = fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
+
+    const result = response.text()
+    console.log(result)
+    
+     return result
+  } catch (error) {
+    console.log(error)
+  }
 };
 
 export default compareFingerPrints;

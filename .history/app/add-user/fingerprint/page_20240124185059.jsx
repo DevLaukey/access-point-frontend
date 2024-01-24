@@ -9,10 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../../components/layout/header";
-import {
-  setFingerprintDetails,
-  setFirstFingerprintCaptured,
-} from "../../../lib/users/userReducer";
+import { setFirstFingerprintCaptured } from "../../../lib/users/userReducer";
 import compareFingerPrints from "../../../lib/compare-fingerprints";
 
 const Page = () => {
@@ -29,7 +26,7 @@ const Page = () => {
   const [isloading, setIsLoading] = useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
     useState(false);
-  const [comparisonResult, setComparisonResult] = useState(false);
+  const [comparisonResult, setComparisonResult] = useState(null);
 
   useEffect(() => {
     if (firstFingerprintCaptured.isCapture) {
@@ -39,13 +36,8 @@ const Page = () => {
   }, [firstFingerprintCaptured]);
 
   useEffect(() => {
-    secondFingerprintCaptured &&
-      compareFingerPrints(fingerprintTemplate, data.bmpBase64);
+    secondFingerprintCaptured && (fingerprintTemplate, data.bmpBase64);
   }, [secondFingerprintCaptured, fingerprintTemplate]);
-
-  useEffect(() => {
-    comparisonResult && dispatch(setFingerprintDetails());
-  }, [comparisonResult, setComparisonResult]);
 
   const compareFingerPrints = async (template1, template2) => {
     var myHeaders = new Headers();
@@ -62,10 +54,14 @@ const Page = () => {
       redirect: "follow",
     };
 
-    fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
+     fetch(
+      "https://localhost:7030/api/Fingerprint/match",
+      requestOptions
+    )
       .then((response) => response.text())
-      .then((result) => setComparisonResult(result.isMatch))
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
+
   };
 
   const handleCaptureFingerprint = async () => {

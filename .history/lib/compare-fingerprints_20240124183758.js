@@ -15,7 +15,9 @@ const compareFingerPrints = async (template1, template2) => {
 
   const response = fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log(result))
+    .then((result) => {
+      return result
+    })
     .catch((error) => console.log("error", error));
   
   console.log(response)

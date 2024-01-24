@@ -9,64 +9,27 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../../components/layout/header";
-import {
-  setFingerprintDetails,
-  setFirstFingerprintCaptured,
-} from "../../../lib/users/userReducer";
+import { setFirstFingerprintCaptured } from "../../../lib/users/userReducer";
 import compareFingerPrints from "../../../lib/compare-fingerprints";
 
 const Page = () => {
-  const router = useRouter();
   const dispatch = useDispatch();
-  const { firstFingerprintCaptured, fingerprintTemplate } = useSelector(
-    (state) => state.user
-  );
-
+  const { firstFingerprintCaptured } = useSelector((state) => state.user);
+  console.log("Fingerprint", firstFingerprintCaptured);
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(false);
-  const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
-    useState(false);
-  const [comparisonResult, setComparisonResult] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (firstFingerprintCaptured.isCapture) {
       setFingerprintCaptured(false);
-      setData([]);
+      setData(firstFingerprintCaptured.fingerprintTemplate);
     }
   }, [firstFingerprintCaptured]);
-
-  useEffect(() => {
-    secondFingerprintCaptured &&
-      compareFingerPrints(fingerprintTemplate, data.bmpBase64);
-  }, [secondFingerprintCaptured, fingerprintTemplate]);
-
-  useEffect(() => {
-    comparisonResult && dispatch(setFingerprintDetails());
-  }, [comparisonResult, setComparisonResult]);
-
-  const compareFingerPrints = async (template1, template2) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const body = JSON.stringify({
-      template1,
-      template2,
-    });
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: body,
-      redirect: "follow",
-    };
-
-    fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
-      .then((response) => response.text())
-      .then((result) => setComparisonResult(result.isMatch))
-      .catch((error) => console.log("error", error));
-  };
 
   const handleCaptureFingerprint = async () => {
     try {
@@ -88,8 +51,8 @@ const Page = () => {
         setfingerprintCapturedError(true);
         throw new Error(data.message);
       }
-
-      // Code to capture the first fingerprint goes here
+      console.log("Response:", data);
+      // Code to capture fingerprint goes here
       setFingerprintCaptured(true);
 
       toast.success("Fingerprint captured successfully!");
@@ -105,42 +68,8 @@ const Page = () => {
     }
   };
 
-  const handleCaptureSecondFingerprint = async () => {
-    try {
-      const response = await fetch(
-        "https://localhost:7030/api/Fingerprint/capture",
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      if (response.status !== 200) {
-        setfingerprintCapturedError(true);
-        throw new Error(data.message);
-      }
-      const data = await response.json();
-
-      setIsLoading(true);
-      setData(data);
-
-      data && setIsLoading(false);
-
-      console.log(data.bmpBase64, firstFingerprintCaptured);
-      // Code to capture the second fingerprint goes here
-      setFingerprintCaptured(false); // Reset the first fingerprint capture state
-      setSecondFingerprintCaptured(true);
-
-      toast.success("Second fingerprint captured successfully!");
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   const redoCapture = () => {
     setFingerprintCaptured(false);
-    setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
     setData([]);
   };
@@ -171,7 +100,7 @@ const Page = () => {
               Fingerprint capture failed. Please try again.
             </p>
           ))}
-        {fingerprintCaptured || secondFingerprintCaptured ? (
+        {fingerprintCaptured ? (
           <>
             <Image
               src={`data:image/bmp;base64,${data.bmpBase64}`}
@@ -193,41 +122,29 @@ const Page = () => {
           ></iframe>
         )}
 
-        {!fingerprintCaptured && !secondFingerprintCaptured && (
-          <>
-            <p className="text-lg mb-8">
-              Please place your finger on the fingerprint scanner to capture
-              your fingerprint.
-            </p>
-
-            <Button
-              onClick={handleCaptureFingerprint}
-              className="mr-2"
-              variant="outline"
-            >
-              Capture
-            </Button>
-          </>
+        {!fingerprintCaptured && (
+          <p className="text-lg mb-8">
+            Please place your finger on the fingerprint scanner to capture your
+            fingerprint.
+          </p>
         )}
-
-        {fingerprintCaptured && !secondFingerprintCaptured && (
-          <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={redoCapture} className="mr-2" variant="outline">
-              Repeat
-            </Button>
-            <Button onClick={handleCaptureSecondFingerprint}>
-              Capture Second Fingerprint
-            </Button>
-          </div>
-        )}
-
-        {secondFingerprintCaptured && (
+        {fingerprintCaptured ? (
           <div className="flex w-full justify-center items-center mt-3">
             <Button onClick={redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button onClick={captureName}>Continue</Button>
           </div>
+        ) : (
+          <Button
+            onClick={() =>
+              firstFingerprintCaptured
+                ? compareFingerPrints()
+                : handleCaptureFingerprint
+            }
+          >
+            Capture Fingerprint
+          </Button>
         )}
       </div>
     </div>

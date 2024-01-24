@@ -9,11 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../../components/layout/header";
-import {
-  setFingerprintDetails,
-  setFirstFingerprintCaptured,
-} from "../../../lib/users/userReducer";
-import compareFingerPrints from "../../../lib/compare-fingerprints";
+import { setFirstFingerprintCaptured } from "../../../lib/users/userReducer";
 
 const Page = () => {
   const router = useRouter();
@@ -29,7 +25,6 @@ const Page = () => {
   const [isloading, setIsLoading] = useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
     useState(false);
-  const [comparisonResult, setComparisonResult] = useState(false);
 
   useEffect(() => {
     if (firstFingerprintCaptured.isCapture) {
@@ -39,34 +34,12 @@ const Page = () => {
   }, [firstFingerprintCaptured]);
 
   useEffect(() => {
-    secondFingerprintCaptured &&
-      compareFingerPrints(fingerprintTemplate, data.bmpBase64);
+    if (secondFingerprintCaptured) {
+      // Logic to handle the second fingerprint capture
+      // For example, you can dispatch an action or perform an API call
+      console.log("Second fingerprint captured:", fingerprintTemplate);
+    }
   }, [secondFingerprintCaptured, fingerprintTemplate]);
-
-  useEffect(() => {
-    comparisonResult && dispatch(setFingerprintDetails());
-  }, [comparisonResult, setComparisonResult]);
-
-  const compareFingerPrints = async (template1, template2) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const body = JSON.stringify({
-      template1,
-      template2,
-    });
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: body,
-      redirect: "follow",
-    };
-
-    fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
-      .then((response) => response.text())
-      .then((result) => setComparisonResult(result.isMatch))
-      .catch((error) => console.log("error", error));
-  };
 
   const handleCaptureFingerprint = async () => {
     try {
@@ -116,23 +89,22 @@ const Page = () => {
           },
         }
       );
+      const data = await response.json();
+
+      setIsLoading(true);
+
+      data && setIsLoading(false);
       if (response.status !== 200) {
         setfingerprintCapturedError(true);
         throw new Error(data.message);
       }
-      const data = await response.json();
 
-      setIsLoading(true);
-      setData(data);
-
-      data && setIsLoading(false);
-
-      console.log(data.bmpBase64, firstFingerprintCaptured);
       // Code to capture the second fingerprint goes here
       setFingerprintCaptured(false); // Reset the first fingerprint capture state
       setSecondFingerprintCaptured(true);
 
       toast.success("Second fingerprint captured successfully!");
+      setData(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -200,11 +172,7 @@ const Page = () => {
               your fingerprint.
             </p>
 
-            <Button
-              onClick={handleCaptureFingerprint}
-              className="mr-2"
-              variant="outline"
-            >
+            <Button onClick={handleCaptureFingerprint} className="mr-2" variant="outline">
               Capture
             </Button>
           </>

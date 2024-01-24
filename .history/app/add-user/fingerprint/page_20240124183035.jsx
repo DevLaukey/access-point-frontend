@@ -9,10 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import Header from "../../../components/layout/header";
-import {
-  setFingerprintDetails,
-  setFirstFingerprintCaptured,
-} from "../../../lib/users/userReducer";
+import { setFirstFingerprintCaptured } from "../../../lib/users/userReducer";
 import compareFingerPrints from "../../../lib/compare-fingerprints";
 
 const Page = () => {
@@ -29,7 +26,6 @@ const Page = () => {
   const [isloading, setIsLoading] = useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
     useState(false);
-  const [comparisonResult, setComparisonResult] = useState(false);
 
   useEffect(() => {
     if (firstFingerprintCaptured.isCapture) {
@@ -39,35 +35,18 @@ const Page = () => {
   }, [firstFingerprintCaptured]);
 
   useEffect(() => {
-    secondFingerprintCaptured &&
-      compareFingerPrints(fingerprintTemplate, data.bmpBase64);
+   getMatchScore()
   }, [secondFingerprintCaptured, fingerprintTemplate]);
 
-  useEffect(() => {
-    comparisonResult && dispatch(setFingerprintDetails());
-  }, [comparisonResult, setComparisonResult]);
-
-  const compareFingerPrints = async (template1, template2) => {
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const body = JSON.stringify({
-      template1,
-      template2,
-    });
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: body,
-      redirect: "follow",
-    };
-
-    fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
-      .then((response) => response.text())
-      .then((result) => setComparisonResult(result.isMatch))
-      .catch((error) => console.log("error", error));
-  };
-
+  const getMatchScore = async () => {
+     if (secondFingerprintCaptured) {
+       const response =  await compareFingerPrints(
+         fingerprintTemplate,
+         data.bmpBase64
+       );
+       console.log("MATCH SCORE:",response);
+     }
+  }
   const handleCaptureFingerprint = async () => {
     try {
       const response = await fetch(

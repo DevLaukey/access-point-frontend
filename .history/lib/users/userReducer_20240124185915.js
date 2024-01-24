@@ -8,7 +8,7 @@ const initialState = {
   departureTime: "",
   fingerprintTemplate: "",
   firstFingerprintCaptured: false,
-  captureComplete: false,
+  captureComplete:false,
   error: null,
 };
 
@@ -16,14 +16,20 @@ const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    setFirstFingerprintCaptured: (state, action) => {
+
+    setFirstFingerprintCaptured: (
+      state,
+      action
+    ) => {
       state.firstFingerprintCaptured = action.payload.isCapture;
       state.fingerprintTemplate = action.payload.fingerprintTemplate;
     },
     setFingerprintDetails: (state, action) => {
       state.arrivalTime = Date.now();
-      state.captureComplete = true;
+      state.captureComplete=true;
     },
+
+    
 
     setUserDetails: (state, action) => {
       const {
@@ -41,14 +47,11 @@ const userSlice = createSlice({
       state.departureTime = departureTime;
 
       state.fingerprintTemplate = fingerprintTemplate;
-    },
-  },
+    }
+  }
 });
 
-export const {
-  setFingerprintDetails,
-  setFirstFingerprintCaptured,
-  setUserDetails,
-} = userSlice.actions;
+export const {setFingerprintDetails,setFirstFingerprintCaptured,setUserDetails } =
+  userSlice.actions;
 
 export default userSlice.reducer;
