@@ -41,7 +41,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    
+    console.log(comparisonResult);
     comparisonResult && dispatch(setFingerprintCaptureComplete());
   }, [comparisonResult, dispatch]);
 
@@ -62,6 +62,7 @@ const Page = () => {
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         setComparisonResult(result?.isMatch);
       })
       .catch((error) => console.log("error", error));

@@ -41,7 +41,7 @@ const Page = () => {
 
 
   useEffect(() => {
-    
+    console.log(comparisonResult);
     comparisonResult && dispatch(setFingerprintCaptureComplete());
   }, [comparisonResult, dispatch]);
 
@@ -60,9 +60,10 @@ const Page = () => {
       redirect: "follow",
     };
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
-      .then((response) => response.json())
+      .then((response) => response.text())
       .then((result) => {
-        setComparisonResult(result?.isMatch);
+        console.log(result.isMatch);
+        setComparisonResult(result.isMatch);
       })
       .catch((error) => console.log("error", error));
   };
@@ -128,6 +129,8 @@ const Page = () => {
 
       data && setIsLoading(false)
 
+      console.log(data.bmpBase64);
+      console.log(fingerprintTemplate);
       // Code to capture the second fingerprint goes here
       setSecondFingerprintCaptured(true);
       compareFingerPrints(data.bmpBase64, fingerprintTemplate);

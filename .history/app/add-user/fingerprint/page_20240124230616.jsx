@@ -21,7 +21,6 @@ const Page = () => {
   );
 
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
-  
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
@@ -30,18 +29,22 @@ const Page = () => {
   const [comparisonResult, setComparisonResult] = useState(false);
   const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   console.log(fingerprintCaptured, "fingerpri");
-  //   if (fingerprintCaptured) {
-  //     setFingerprintCaptured(false);
-  //     setData([]);
-  //     console.log("Ready for 2nd registration");
-  //   }
-  // }, [fingerprintCaptured]);
-
+  useEffect(() => {
+    console.log(fingerprintCaptured,"fingerpri")
+    if (firstFingerprintCaptured) {
+      setFingerprintCaptured(false);
+      setData([]);
+      console.log("Ready for 2nd registration")
+    }
+  }, [firstFingerprintCaptured,]);
 
   useEffect(() => {
-    
+    secondFingerprintCaptured &&
+      compareFingerPrints(fingerprintTemplate, data.bmpBase64);
+  }, [secondFingerprintCaptured, fingerprintTemplate]);
+
+  useEffect(() => {
+    console.log(comparisonResult);
     comparisonResult && dispatch(setFingerprintCaptureComplete());
   }, [comparisonResult, dispatch]);
 
@@ -60,9 +63,10 @@ const Page = () => {
       redirect: "follow",
     };
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
-      .then((response) => response.json())
+      .then((response) => response.text())
       .then((result) => {
-        setComparisonResult(result?.isMatch);
+        console.log(result);
+        setComparisonResult(result.isMatch);
       })
       .catch((error) => console.log("error", error));
   };
@@ -105,7 +109,6 @@ const Page = () => {
     }
   };
 
-
   const handleCaptureSecondFingerprint = async () => {
     try {
       const response = await fetch(
@@ -126,14 +129,14 @@ const Page = () => {
       setIsLoading(true);
       setData(data);
 
-      data && setIsLoading(false)
+      data && setIsLoading(false);
 
+      console.log(data.bmpBase64, firstFingerprintCaptured);
       // Code to capture the second fingerprint goes here
+      setFingerprintCaptured(true); // Reset the first fingerprint capture state
       setSecondFingerprintCaptured(true);
-      compareFingerPrints(data.bmpBase64, fingerprintTemplate);
 
       toast.success("Second fingerprint captured successfully!");
-      
     } catch (error) {
       console.log(error.message);
     }
@@ -196,7 +199,6 @@ const Page = () => {
 
         {!fingerprintCaptured && !secondFingerprintCaptured && (
           <>
-            {fingerprintCaptured}
             <p className="text-lg mb-8">
               Please place your finger on the fingerprint scanner to capture
               your fingerprint.
