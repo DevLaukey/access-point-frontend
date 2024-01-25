@@ -9,7 +9,6 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import {
-  clearTemplate,
   setFingerprintCaptureComplete,
   setFirstFingerprintCaptured,
 } from "../../../lib/users/userReducer";
@@ -42,17 +41,12 @@ const Page = () => {
     if (comparisonResult) {
       dispatch(setFingerprintCaptureComplete());
     } else {
-    fingerprintCaptured &&
-      secondFingerprintCaptured && toast.error(
-        "The fingerprints provided do not match. Please try again."
-      );
+      toast.error("The fingerprints provided do not match. Please try again.");
       redoCapture();
     }
   }, [comparisonResult, dispatch]);
 
   const compareFingerPrints = async (template1, template2) => {
-    console.log(template1)
-    console.log(template2)
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -69,7 +63,6 @@ const Page = () => {
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result?.isMatch, result)
         setComparisonResult(result?.isMatch);
       })
       .catch((error) => console.log("error", error));
@@ -148,7 +141,6 @@ const Page = () => {
     setFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
-    dispatch(clearTemplate())
     setData([]);
   };
 

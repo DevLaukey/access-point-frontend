@@ -43,10 +43,6 @@ const userSlice = createSlice({
     saveUserDetail: (state, action) => {},
     clearTemplate: (state, action) => {
       state.fingerprintTemplate = "";
-      state.captureComplete = false;
-      state.firstFingerprintCaptured = false;
-      state.arrivalTime = "";
-    
     }
   },
 });
@@ -55,7 +51,6 @@ export const {
   setFirstFingerprintCaptured,
   setFingerprintCaptureComplete,
   setUserDetails,
-  clearTemplate
 } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -9,7 +9,6 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import {
-  clearTemplate,
   setFingerprintCaptureComplete,
   setFirstFingerprintCaptured,
 } from "../../../lib/users/userReducer";
@@ -52,7 +51,7 @@ const Page = () => {
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1)
-    console.log(template2)
+    console.log(template2
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -148,7 +147,6 @@ const Page = () => {
     setFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
-    dispatch(clearTemplate())
     setData([]);
   };
 

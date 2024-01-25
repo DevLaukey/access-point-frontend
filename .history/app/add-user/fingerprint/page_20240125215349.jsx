@@ -9,7 +9,6 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import {
-  clearTemplate,
   setFingerprintCaptureComplete,
   setFirstFingerprintCaptured,
 } from "../../../lib/users/userReducer";

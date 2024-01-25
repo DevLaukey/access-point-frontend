@@ -55,7 +55,6 @@ export const {
   setFirstFingerprintCaptured,
   setFingerprintCaptureComplete,
   setUserDetails,
-  clearTemplate
 } = userSlice.actions;
 
 export default userSlice.reducer;
