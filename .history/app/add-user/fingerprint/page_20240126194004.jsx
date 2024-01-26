@@ -8,9 +8,10 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 const Page = () => {
   const router = useRouter();
+  const supabase = createClientComponentClient();
 
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
@@ -21,6 +22,7 @@ const Page = () => {
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
+  const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -29,9 +31,22 @@ const Page = () => {
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
 
+  useEffect(() => {
+    getUser();
+  }, []);
 
+  const getUser = async () => {
+    try {
+      const userObj = await supabase.auth.getUser();
+      const user = userObj?.data.user;
+      setUser(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const compareFingerPrints = async (template1, template2) => {
+  
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -113,7 +128,7 @@ const Page = () => {
 
       // Code to capture the second fingerprint goes here
       setSecondFingerprintCaptured(true);
-
+      
       toast.success("Second fingerprint captured successfully!");
     } catch (error) {
       console.log(error.message);
@@ -128,13 +143,15 @@ const Page = () => {
     setFingerprintTemplate2(null);
     setData([]);
   };
+ 
 
   const captureName = () => {
     try {
       localStorage.setItem("capture", fingerprintTemplate1);
 
       router.push("/add-user/capture");
-   
+      // saveUserDetails(user_id);
+      // uploadFileToSupabase(user_id, fingerprintTemplate2);
     } catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");

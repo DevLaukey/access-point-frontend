@@ -8,9 +8,10 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 const Page = () => {
   const router = useRouter();
+  const supabase = createClientComponentClient();
 
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
@@ -21,6 +22,7 @@ const Page = () => {
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
+  const [user, setUser] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -29,9 +31,23 @@ const Page = () => {
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
 
+  useEffect(() => {
+    getUser();
+  }, []);
 
+  const getUser = async () => {
+    try {
+      const userObj = await supabase.auth.getUser();
+      const user = userObj?.data.user;
+      setUser(user);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   const compareFingerPrints = async (template1, template2) => {
+    console.log(template1);
+    console.log(template2);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -104,6 +120,7 @@ const Page = () => {
       }
       const data = await response.json();
 
+      console.log(data);
       setIsLoading(true);
       setData(data);
 
@@ -113,6 +130,8 @@ const Page = () => {
 
       // Code to capture the second fingerprint goes here
       setSecondFingerprintCaptured(true);
+      console.log(fingerprintTemplate1);
+      console.log(data.bmpBase64);
 
       toast.success("Second fingerprint captured successfully!");
     } catch (error) {
@@ -128,13 +147,71 @@ const Page = () => {
     setFingerprintTemplate2(null);
     setData([]);
   };
+  // Function to generate a unique file name based on user_id and timestamp
+  const generateFileName = async (user_id) => {
+    const timestamp = Date.now();
+    return `${user_id}_${timestamp}`;
+  };
+
+  // Function to upload a file in Base64 format to Supabase storage
+  const uploadFileToSupabase = async (user_id, base64Data) => {
+    try {
+      const fileName = generateFileName(user_id);
+
+      // Convert the Base64 string to Uint8Array
+      const uint8Array = new Uint8Array(
+        atob(base64Data)
+          .split("")
+          .map((char) => char.charCodeAt(0))
+      );
+
+      // Create a Blob from the Uint8Array
+      const blob = new Blob([uint8Array]);
+
+      // Upload the file to Supabase storage
+      const { data, error } = await supabase.storage
+        .from("fingerprints") // Replace "your-bucket-name" with your actual bucket name
+        .upload(fileName, blob);
+
+      if (error) {
+        console.error("Error uploading file:", error.message);
+      } else {
+        console.log("File uploaded successfully:", data);
+        // router.push("/add-user/capture");
+
+        // The 'data' object will contain information about the uploaded file
+      }
+    } catch (error) {
+      console.error("Error processing file:", error.message);
+    }
+  };
+
+  async function saveUserDetails() {
+    try {
+      const user_id = user.id;
+      const { data, error } = await supabase.from("users").insert([
+        {
+          admin_user: user_id,
+          arrival_time: new Date().toISOString(),
+        },
+      ]);
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      console.log(data);
+      // uploadFileToSupabase(user_id, fingerprintTemplate1);
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
 
   const captureName = () => {
     try {
-      localStorage.setItem("capture", fingerprintTemplate1);
-
-      router.push("/add-user/capture");
-   
+      const user_id = user.id;
+      saveUserDetails(user_id);
+      // uploadFileToSupabase(user_id, fingerprintTemplate2);
     } catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");

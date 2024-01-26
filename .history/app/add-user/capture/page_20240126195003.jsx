@@ -98,9 +98,6 @@ const Page = () => {
       const user_id = user.id;
       const { data, error } = await supabase.from("users").insert([
         {
-          first_name: firstName,
-          last_name: lastName,
-          fingerprintTemplate: fingerprintTemplate,
           admin_user: user_id,
           arrival_time: new Date().toISOString(),
         },

@@ -25,28 +25,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
+
 const Page = () => {
   const [uniqueId, setUniqueId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [idNumber, setIdNumber] = useState("");
+  const [idNumber, setIdNumber] = useState("")
   const [user, setUser] = useState([]);
-  const supabase = createClientComponentClient();
-  const [fingerprintTemplate, setFingerprintTemplate] = useState("");
-
+    const supabase = createClientComponentClient();
 
   const router = useRouter();
 
   useEffect(() => {
-    getUserDetails();
+    getUser();
   }, []);
 
-  const getUserDetails = async () => {
+  const getUser = async () => {
     try {
       const userObj = await supabase.auth.getUser();
       const user = userObj?.data.user;
-      fingerprint = localStorage.getItem("capture") || "";
-      setFingerprintTemplate(fingerprint);
+        fingerprint = localStorage.getItem("capture") || "";
 
       setUser(user);
     } catch (error) {
@@ -98,9 +96,6 @@ const Page = () => {
       const user_id = user.id;
       const { data, error } = await supabase.from("users").insert([
         {
-          first_name: firstName,
-          last_name: lastName,
-          fingerprintTemplate: fingerprintTemplate,
           admin_user: user_id,
           arrival_time: new Date().toISOString(),
         },

@@ -32,21 +32,18 @@ const Page = () => {
   const [idNumber, setIdNumber] = useState("");
   const [user, setUser] = useState([]);
   const supabase = createClientComponentClient();
-  const [fingerprintTemplate, setFingerprintTemplate] = useState("");
-
 
   const router = useRouter();
 
   useEffect(() => {
-    getUserDetails();
+    getUser();
   }, []);
 
-  const getUserDetails = async () => {
+  const getUser = async () => {
     try {
       const userObj = await supabase.auth.getUser();
       const user = userObj?.data.user;
       fingerprint = localStorage.getItem("capture") || "";
-      setFingerprintTemplate(fingerprint);
 
       setUser(user);
     } catch (error) {
@@ -98,9 +95,6 @@ const Page = () => {
       const user_id = user.id;
       const { data, error } = await supabase.from("users").insert([
         {
-          first_name: firstName,
-          last_name: lastName,
-          fingerprintTemplate: fingerprintTemplate,
           admin_user: user_id,
           arrival_time: new Date().toISOString(),
         },

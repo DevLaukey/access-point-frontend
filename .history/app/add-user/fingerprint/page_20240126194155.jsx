@@ -134,7 +134,8 @@ const Page = () => {
       localStorage.setItem("capture", fingerprintTemplate1);
 
       router.push("/add-user/capture");
-   
+      // saveUserDetails(user_id);
+      // uploadFileToSupabase(user_id, fingerprintTemplate2);
     } catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");
