@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import NavbarComponent from "../../../components/navbar-component";
-import ResponseMessage from "../../../components/fingerprint/response-component";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
@@ -33,26 +32,17 @@ const Page = () => {
       body: body,
       redirect: "follow",
     };
-
-    setIsLoading(true);
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-            setIsLoading(false);
-
         if (result?.isMatch === true) {
           toast.success("Fingerprints matched successfully!");
-          setSuccess(true);
-          setFailure(false);
-        
         } else {
           toast.error("Fingerprints do not match!");
           setFailure(true);
-          setSuccess(false);
         }
       })
       .catch((error) => console.log("error", error));
-    
   };
 
   const handleCaptureFingerprint = async () => {
@@ -111,7 +101,7 @@ const Page = () => {
       return <ResponseMessage status={"success"} />;
     }
     if (failure) {
-      return <ResponseMessage status={"failure"} />;
+      return <p>Failure</p>;
     }
   };
   return (

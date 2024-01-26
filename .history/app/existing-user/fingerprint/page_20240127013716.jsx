@@ -38,13 +38,11 @@ const Page = () => {
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-            setIsLoading(false);
-
         if (result?.isMatch === true) {
           toast.success("Fingerprints matched successfully!");
           setSuccess(true);
           setFailure(false);
-        
+          se
         } else {
           toast.error("Fingerprints do not match!");
           setFailure(true);
@@ -53,6 +51,7 @@ const Page = () => {
       })
       .catch((error) => console.log("error", error));
     
+    setIsLoading(false);
   };
 
   const handleCaptureFingerprint = async () => {

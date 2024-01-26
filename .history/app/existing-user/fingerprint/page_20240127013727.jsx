@@ -44,7 +44,7 @@ const Page = () => {
           toast.success("Fingerprints matched successfully!");
           setSuccess(true);
           setFailure(false);
-        
+          se
         } else {
           toast.error("Fingerprints do not match!");
           setFailure(true);
