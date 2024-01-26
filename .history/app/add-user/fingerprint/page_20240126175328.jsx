@@ -54,7 +54,7 @@ const Page = () => {
           toast.success("Fingerprints matched successfully!");
         } else {
           toast.error("Fingerprints do not match!");
-          redoCapture();
+          ()=>redoCapture();
         }
       })
       .catch((error) => console.log("error", error));

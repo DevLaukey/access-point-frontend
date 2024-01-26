@@ -72,18 +72,19 @@ const Page = () => {
         }
       );
       const data = await response.json();
+      data && setIsLoading(false);
+
       setData(data);
       setIsLoading(true);
+      setFingerprintTemplate1(data.bmpBase64);
+      setFirstFingerprintCaptured(true);
 
-      data && setIsLoading(false);
       if (response.status !== 200) {
         setfingerprintCapturedError(true);
         throw new Error(data.message);
       }
-      setFingerprintTemplate1(data.bmpBase64);
-      setFirstFingerprintCaptured(true);
-
       toast.success("First Fingerprint captured successfully!");
+
     } catch (error) {
       console.log(error.message);
     }
@@ -199,7 +200,7 @@ const Page = () => {
         {/* Second fingerprint captured */}
         {firstFingerPrintCaptured && !secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
+            <Button onClick={redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button
@@ -215,7 +216,7 @@ const Page = () => {
 
         {secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
+            <Button onClick={redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button onClick={captureName}>Continue</Button>

@@ -54,7 +54,7 @@ const Page = () => {
           toast.success("Fingerprints matched successfully!");
         } else {
           toast.error("Fingerprints do not match!");
-          redoCapture();
+          ()=>redoCapture();
         }
       })
       .catch((error) => console.log("error", error));
@@ -125,7 +125,7 @@ const Page = () => {
     }
   };
 
-  const redoCapture = () => {
+  const ()=>redoCapture = () => {
     setFirstFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
@@ -199,7 +199,7 @@ const Page = () => {
         {/* Second fingerprint captured */}
         {firstFingerPrintCaptured && !secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
+            <Button onClick={()=>redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button
@@ -215,7 +215,7 @@ const Page = () => {
 
         {secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
+            <Button onClick={()=>redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button onClick={captureName}>Continue</Button>

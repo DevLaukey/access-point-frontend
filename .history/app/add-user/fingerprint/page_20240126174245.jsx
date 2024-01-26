@@ -8,16 +8,15 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
+  
 
 const Page = () => {
   const router = useRouter();
 
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
-  const [firstFingerPrintCaptured, setFirstFingerprintCaptured] =
-    useState(false);
-  const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
-    useState(false);
+  const [firstFingerPrintCaptured, setFirstFingerprintCaptured] = useState(false);
+  const [secondFingerprintCaptured, setSecondFingerprintCaptured] = useState(false);
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
@@ -26,9 +25,21 @@ const Page = () => {
 
   useEffect(() => {
     if (firstFingerPrintCaptured && secondFingerprintCaptured) {
+      
       compareFingerPrints(fingerprintTemplate1, fingerprintTemplate2);
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
+
+  useEffect(() => {
+    if (comparisonResult && firstFingerPrintCaptured && secondFingerprintCaptured) {
+      firstFingerPrintCaptured &&
+        secondFingerprintCaptured &&
+        toast.error(
+          "The fingerprints provided do not match. Please try again."
+        );
+      redoCapture();
+    }
+  }, [comparisonResult]);
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1);
@@ -49,13 +60,8 @@ const Page = () => {
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if (result?.isMatch === true) {
-          setComparisonResult(true);
-          toast.success("Fingerprints matched successfully!");
-        } else {
-          toast.error("Fingerprints do not match!");
-          redoCapture();
-        }
+        console.log(result?.isMatch, result);
+        setComparisonResult(result?.isMatch);
       })
       .catch((error) => console.log("error", error));
   };
@@ -72,7 +78,7 @@ const Page = () => {
         }
       );
       const data = await response.json();
-      setData(data);
+
       setIsLoading(true);
 
       data && setIsLoading(false);
@@ -81,8 +87,11 @@ const Page = () => {
         throw new Error(data.message);
       }
       setFingerprintTemplate1(data.bmpBase64);
-      setFirstFingerprintCaptured(true);
 
+      // Code to capture the first fingerprint goes here
+      setFirstFingerprintCaptured(true);
+      console.log(data.imageQuality);
+      setData(data);
       toast.success("First Fingerprint captured successfully!");
     } catch (error) {
       console.log(error.message);
@@ -119,6 +128,7 @@ const Page = () => {
       console.log(fingerprintTemplate1);
       console.log(data.bmpBase64);
 
+
       toast.success("Second fingerprint captured successfully!");
     } catch (error) {
       console.log(error.message);
@@ -129,8 +139,8 @@ const Page = () => {
     setFirstFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
-    setFingerprintTemplate1(null);
-    setFingerprintTemplate2(null);
+    setFingerprintTemplate1(null)
+    setFingerprintTemplate2(null)
     setData([]);
   };
 
@@ -199,7 +209,7 @@ const Page = () => {
         {/* Second fingerprint captured */}
         {firstFingerPrintCaptured && !secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
+            <Button onClick={redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button
@@ -215,7 +225,7 @@ const Page = () => {
 
         {secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
+            <Button onClick={redoCapture} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button onClick={captureName}>Continue</Button>
