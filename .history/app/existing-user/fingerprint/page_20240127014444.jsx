@@ -13,9 +13,9 @@ const Page = () => {
   const router = useRouter();
   const supabase = createClientComponentClient();
 
-  const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
-  const [user, setUser] = useState([]);
 
+
+  const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [data, setData] = useState([]);
@@ -31,19 +31,9 @@ const Page = () => {
 
   const getFingerprints = async () => {
     try {
-      const userObj = await supabase.auth.getUser();
-      const id = userObj?.data.user.id;
-
       let { data: users, error } = await supabase
-        .from("*")
-        .select("id_number")
-        .eq("admin_id", id);
-      
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log(users);
-      setUser(users);
+        .from("users")
+        .select("id_number");
     } catch (error) {}
   };
 

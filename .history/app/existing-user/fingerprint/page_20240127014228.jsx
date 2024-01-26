@@ -7,15 +7,9 @@ import ResponseMessage from "../../../components/fingerprint/response-component"
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const Page = () => {
-  const router = useRouter();
-  const supabase = createClientComponentClient();
-
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
-  const [user, setUser] = useState([]);
-
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [data, setData] = useState([]);
@@ -24,28 +18,7 @@ const Page = () => {
   const [failure, setFailure] = useState(false);
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
-
-  useEffect(() => {
-    getFingerprints();
-  }, []);
-
-  const getFingerprints = async () => {
-    try {
-      const userObj = await supabase.auth.getUser();
-      const id = userObj?.data.user.id;
-
-      let { data: users, error } = await supabase
-        .from("*")
-        .select("id_number")
-        .eq("admin_id", id);
-      
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log(users);
-      setUser(users);
-    } catch (error) {}
-  };
+  const router = useRouter();
 
   const compareFingerPrints = async (template1, template2) => {
     var myHeaders = new Headers();
