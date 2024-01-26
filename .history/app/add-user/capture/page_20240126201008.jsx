@@ -33,7 +33,6 @@ const Page = () => {
   const [user, setUser] = useState([]);
   const supabase = createClientComponentClient();
   const [fingerprintTemplate, setFingerprintTemplate] = useState("");
-  const [confirmEntryValues, setConfirmEntryValues] = useState(false)
 
 
   const router = useRouter();
@@ -123,8 +122,9 @@ const Page = () => {
     setUniqueId(generatedId);
   }, []);
 
-  const confirmEntry =  () => {
-   setConfirmEntryValues(true);
+  const confirmEntry = async () => {
+    console.log("Confirm entry");
+    router.push("/add-user/confirm-entry");
   };
   const submitUserDetails = async () => {
     //   input validation
@@ -141,77 +141,6 @@ const Page = () => {
     return "uniqueId123";
   };
 
-  if (confirmEntryValues) {
-    return (
-        <div className="flex flex-col items-center justify-center h-screen w-full mt-4">
-      <ToastContainer />
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Confirm User Details</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <form
-            onSubmit={handleSubmit}
-            className="flex items-center justify-center flex-col"
-          >
-            <div className="mb-4">
-              <Label htmlFor="firstName" className="block font-bold mb-2">
-                First Name
-              </Label>
-              <Input
-                type="text"
-                id="firstName"
-                name="firstName"
-                value={userDetails.firstName}
-                onChange={handleInputChange}
-                className="border border-gray-300 px-4 py-2 rounded-md w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <Label htmlFor="lastName" className="block font-bold mb-2">
-                Last Name
-              </Label>
-              <Input
-                type="text"
-                id="lastName"
-                name="lastName"
-                value={userDetails.lastName}
-                onChange={handleInputChange}
-                className="border border-gray-300 px-4 py-2 rounded-md w-full"
-              />
-            </div>
-            <div className="mb-4">
-              <Label htmlFor="idNumber" className="block font-bold mb-2">
-                ID Number
-              </Label>
-              <Input
-                type="number"
-                id="idNumber"
-                name="idNumber"
-                value={userDetails.idNumber}
-                onChange={handleInputChange}
-                className="border border-gray-300 px-4 py-2 rounded-md w-full"
-              />
-            </div>
-          </form>
-        </CardContent>
-        <CardFooter className="items-center justify-center w-full">
-          <Button
-            type="submit"
-            onClick={handleSubmit}
-            className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
-          >
-            Confirm
-          </Button>
-        </CardFooter>
-      </Card>
-    </div>
-    )
-  }
-  
-    
-    
   return (
     <div className="flex flex-col items-center justify-center h-screen w-full mt-4">
       <ToastContainer />
@@ -237,6 +166,7 @@ const Page = () => {
                   <Label htmlFor="fname">First Name</Label>
                   <Input
                     id="fname"
+                    value={firstName}
                     placeholder="John"
                     onChange={(e) => {
                       setFirstName(e.target.value);
@@ -247,6 +177,7 @@ const Page = () => {
                   <Label htmlFor="lname">Last Name</Label>
                   <Input
                     id="lname"
+                    value={lastName}
                     placeholder="Doe"
                     onChange={(e) => {
                       setLastName(e.target.value);
@@ -258,6 +189,7 @@ const Page = () => {
                 <Label htmlFor="id_number">ID number</Label>
                 <Input
                   type="number"
+                  value={idNumber}
                   id="id_number"
                   placeholder="12345678"
                   onChange={(e) => {
@@ -298,6 +230,6 @@ const Page = () => {
       </Tabs>
     </div>
   );
-}
+};
 
 export default Page;
