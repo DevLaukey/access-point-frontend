@@ -143,8 +143,7 @@ const Page = () => {
     setFirstFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
-    setFingerprintTemplate1(null)
-    setFingerprintTemplate2(null)
+
     setData([]);
   };
 
