@@ -36,7 +36,7 @@ const ResponseMessage = ({status}) => {
               clip-rule="evenodd"
             ></path>
           </svg>
-          <span className="text-red-500 text-4xl">Failure!</span>
+          <span className="text-red-500">Failure!</span>
         </>
       )}
     </div>

@@ -23,7 +23,7 @@ const ResponseMessage = ({status}) => {
       ) : (
         <>
           <svg
-            width="100"
+            width="10"
             height="100"
             viewBox="0 0 15 15"
             fill="none"
@@ -36,7 +36,7 @@ const ResponseMessage = ({status}) => {
               clip-rule="evenodd"
             ></path>
           </svg>
-          <span className="text-red-500 text-4xl">Failure!</span>
+          <span className="text-red-500">Failure!</span>
         </>
       )}
     </div>

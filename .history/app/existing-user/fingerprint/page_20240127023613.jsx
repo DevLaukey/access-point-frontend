@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-import Skeleton from "../../../components/ui/skeleton";
 
 const Page = () => {
   const router = useRouter();
@@ -21,7 +20,7 @@ const Page = () => {
     useState(false);
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(false);
-  const [isMatch, setIsMatch] = useState(null);
+  const [isMatch, setIsMatch] = useState(false);
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
 
@@ -35,7 +34,7 @@ const Page = () => {
         compareFingerPrints(fingerprintTemplate1, user.fingerprint_template);
       }
     });
-  }, [user, fingerprintTemplate1]);
+  }, [user, fingerprintTemplate2]);
 
   const getFingerprints = async () => {
     try {
@@ -125,6 +124,7 @@ const Page = () => {
     return <Skeleton color="#202020" highlightColor="#444" />;
   }
 
+
   return (
     <>
       <Header />
@@ -135,7 +135,7 @@ const Page = () => {
           <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
           <h5 className="font-bold mb-4">Login an existing visitor</h5>
 
-          {isMatch !== null && <ResponseMessage status={isMatch} />}
+          {fingerprintCaptured && <ResponseMessage status={isMatch} />}
           {data.length !== 0 &&
             (!fingerprintCapturedError ? (
               <p className="text-green-500 mb-4">

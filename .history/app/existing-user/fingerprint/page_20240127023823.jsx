@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-import Skeleton from "../../../components/ui/skeleton";
 
 const Page = () => {
   const router = useRouter();
@@ -35,7 +34,7 @@ const Page = () => {
         compareFingerPrints(fingerprintTemplate1, user.fingerprint_template);
       }
     });
-  }, [user, fingerprintTemplate1]);
+  }, [user, fingerprintTemplate2]);
 
   const getFingerprints = async () => {
     try {
