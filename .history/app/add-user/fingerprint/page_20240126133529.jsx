@@ -19,35 +19,44 @@ import {
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { fingerprintTemplate } = useSelector((state) => state.user);
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
   const [firstFingerPrintCaptured, setFirstFingerprintCaptured] = useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] = useState(false);
+
+
+
+
+  const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
+
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [comparisonResult, setComparisonResult] = useState(false);
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    if (firstFingerPrintCaptured && secondFingerprintCaptured) {
-      
-      compareFingerPrints(fingerprintTemplate1, fingerprintTemplate2);
-    }
-  }, [secondFingerprintCaptured, fingerprintTemplate2]);
+  // useEffect(() => {
+  //   console.log(fingerprintCaptured, "fingerpri");
+  //   if (fingerprintCaptured) {
+  //     setFingerprintCaptured(false);
+  //     setData([]);
+  //     console.log("Ready for 2nd registration");
+  //   }
+  // }, [fingerprintCaptured]);
 
   useEffect(() => {
     if (comparisonResult == true) {
       dispatch(setFingerprintCaptureComplete());
     } else {
-      firstFingerPrintCaptured &&
+      fingerprintCaptured &&
         secondFingerprintCaptured &&
         toast.error(
           "The fingerprints provided do not match. Please try again."
         );
       redoCapture();
     }
-  }, [comparisonResult]);
+  }, [comparisonResult, dispatch]);
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1);
@@ -144,7 +153,7 @@ const Page = () => {
   };
 
   const redoCapture = () => {
-    setFirstFingerprintCaptured(false);
+    setFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
     dispatch(clearTemplate());

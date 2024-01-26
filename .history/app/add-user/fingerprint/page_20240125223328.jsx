@@ -8,8 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
-import ScannerResult from "../../../components/fingerprint/Scanner";
-
 import {
   clearTemplate,
   setFingerprintCaptureComplete,
@@ -19,35 +17,41 @@ import {
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { fingerprintTemplate } = useSelector((state) => state.user);
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
-  const [firstFingerPrintCaptured, setFirstFingerprintCaptured] = useState(false);
-  const [secondFingerprintCaptured, setSecondFingerprintCaptured] = useState(false);
+
+  const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
+
   const [fingerprintCapturedError, setfingerprintCapturedError] =
+    useState(false);
+  const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [comparisonResult, setComparisonResult] = useState(false);
   const [data, setData] = useState([]);
 
-  useEffect(() => {
-    if (firstFingerPrintCaptured && secondFingerprintCaptured) {
-      
-      compareFingerPrints(fingerprintTemplate1, fingerprintTemplate2);
-    }
-  }, [secondFingerprintCaptured, fingerprintTemplate2]);
+  // useEffect(() => {
+  //   console.log(fingerprintCaptured, "fingerpri");
+  //   if (fingerprintCaptured) {
+  //     setFingerprintCaptured(false);
+  //     setData([]);
+  //     console.log("Ready for 2nd registration");
+  //   }
+  // }, [fingerprintCaptured]);
 
   useEffect(() => {
     if (comparisonResult == true) {
       dispatch(setFingerprintCaptureComplete());
     } else {
-      firstFingerPrintCaptured &&
+      fingerprintCaptured &&
         secondFingerprintCaptured &&
         toast.error(
           "The fingerprints provided do not match. Please try again."
         );
       redoCapture();
     }
-  }, [comparisonResult]);
+  }, [comparisonResult, dispatch]);
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1);
@@ -94,13 +98,20 @@ const Page = () => {
         setfingerprintCapturedError(true);
         throw new Error(data.message);
       }
-      setFingerprintTemplate1(data.bmpBase64);
 
+      dispatch(
+        setFirstFingerprintCaptured({
+          isCapture: true,
+          fingerprintTemplate: data.bmpBase64,
+        })
+      );
       // Code to capture the first fingerprint goes here
-      setFirstFingerprintCaptured(true);
+      setFingerprintCaptured(true);
+
       console.log(data.imageQuality);
+
       setData(data);
-      toast.success("First Fingerprint captured successfully!");
+      toast.success("Fingerprint captured successfully!");
     } catch (error) {
       console.log(error.message);
     }
@@ -123,19 +134,16 @@ const Page = () => {
       }
       const data = await response.json();
 
-      console.log(data);
       setIsLoading(true);
       setData(data);
 
       data && setIsLoading(false);
 
-      setFingerprintTemplate2(data.bmpBase64);
-
       // Code to capture the second fingerprint goes here
       setSecondFingerprintCaptured(true);
-      console.log(fingerprintTemplate1);
       console.log(data.bmpBase64);
-
+      console.log(fingerprintTemplate);
+      compareFingerPrints(data.bmpBase64, fingerprintTemplate);
 
       toast.success("Second fingerprint captured successfully!");
     } catch (error) {
@@ -144,7 +152,7 @@ const Page = () => {
   };
 
   const redoCapture = () => {
-    setFirstFingerprintCaptured(false);
+    setFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
     dispatch(clearTemplate());
@@ -177,12 +185,19 @@ const Page = () => {
               Fingerprint capture failed. Please try again.
             </p>
           ))}
-        {firstFingerPrintCaptured || secondFingerprintCaptured ? (
-          <ScannerResult
-            imgSrc={data.bmpBase64}
-            serialNumber={data.serialNumber}
-            imageQuality={data.imageQuality}
-          />
+        {fingerprintCaptured || secondFingerprintCaptured ? (
+          <>
+            <Image
+              src={`data:image/bmp;base64,${data.bmpBase64}`}
+              alt="WSQ Image"
+              height="300"
+              width="300"
+            />
+            <div className="flex flex-col space-y-2 mt-2 items-start">
+              <p className="font-bold">Serial Number : {data.serialNumber}</p>
+              <p className="font-bold">Image Quality : {data.imageQuality}</p>
+            </div>
+          </>
         ) : (
           <iframe
             width={100}
@@ -192,9 +207,9 @@ const Page = () => {
           ></iframe>
         )}
 
-        {/* First fingerprint captured */}
-        {!firstFingerPrintCaptured && !secondFingerprintCaptured && (
+        {!fingerprintCaptured && !secondFingerprintCaptured && (
           <>
+            {fingerprintCaptured}
             <p className="text-lg mb-8">
               Please place your finger on the fingerprint scanner to capture
               your fingerprint.
@@ -213,8 +228,7 @@ const Page = () => {
           </>
         )}
 
-        {/* Second fingerprint captured */}
-        {firstFingerPrintCaptured && !secondFingerprintCaptured && (
+        {fingerprintCaptured && !secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
             <Button onClick={redoCapture} className="mr-2" variant="outline">
               Repeat

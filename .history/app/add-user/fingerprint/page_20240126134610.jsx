@@ -47,7 +47,7 @@ const Page = () => {
         );
       redoCapture();
     }
-  }, [comparisonResult]);
+  }, [comparisonResult, dispatch]);
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1);
@@ -144,7 +144,7 @@ const Page = () => {
   };
 
   const redoCapture = () => {
-    setFirstFingerprintCaptured(false);
+    setFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
     dispatch(clearTemplate());

@@ -144,7 +144,7 @@ const Page = () => {
   };
 
   const redoCapture = () => {
-    setFirstFingerprintCaptured(false);
+    setFingerprintCaptured(false);
     setSecondFingerprintCaptured(false);
     setfingerprintCapturedError(false);
     dispatch(clearTemplate());
