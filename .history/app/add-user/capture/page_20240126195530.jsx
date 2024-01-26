@@ -84,6 +84,7 @@ const Page = () => {
         console.error("Error uploading file:", error.message);
       } else {
         console.log("File uploaded successfully:", data);
+        // router.push("/add-user/capture");
 
         // The 'data' object will contain information about the uploaded file
       }
@@ -104,13 +105,13 @@ const Page = () => {
           arrival_time: new Date().toISOString(),
         },
       ]);
-      
+
       if (error) {
         throw new Error(error.message);
       }
-      uploadFileToSupabase(user_id, fingerprintTemplate);
 
       console.log(data);
+      uploadFileToSupabase(user_id, fingerprintTemplate);
     } catch (error) {
       console.log(error.message);
     }
@@ -132,7 +133,6 @@ const Page = () => {
       toast.error("Please fill in all fields");
       return;
     }
-    saveUserDetails();
     router.push("/add-user/confirm-entry");
   };
   const generateUniqueId = () => {

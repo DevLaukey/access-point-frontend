@@ -132,7 +132,6 @@ const Page = () => {
       toast.error("Please fill in all fields");
       return;
     }
-    saveUserDetails();
     router.push("/add-user/confirm-entry");
   };
   const generateUniqueId = () => {

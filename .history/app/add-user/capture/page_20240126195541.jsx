@@ -104,13 +104,13 @@ const Page = () => {
           arrival_time: new Date().toISOString(),
         },
       ]);
-      
+
       if (error) {
         throw new Error(error.message);
       }
-      uploadFileToSupabase(user_id, fingerprintTemplate);
 
       console.log(data);
+      uploadFileToSupabase(user_id, fingerprintTemplate);
     } catch (error) {
       console.log(error.message);
     }
@@ -132,7 +132,6 @@ const Page = () => {
       toast.error("Please fill in all fields");
       return;
     }
-    saveUserDetails();
     router.push("/add-user/confirm-entry");
   };
   const generateUniqueId = () => {
