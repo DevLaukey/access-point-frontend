@@ -24,7 +24,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Header from "../../../components/layout/header";
 
 const Page = () => {
   const [uniqueId, setUniqueId] = useState("");

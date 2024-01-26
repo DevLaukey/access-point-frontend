@@ -24,7 +24,6 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Header from "../../../components/layout/header";
 
 const Page = () => {
   const [uniqueId, setUniqueId] = useState("");
@@ -85,7 +84,7 @@ const Page = () => {
         console.error("Error uploading file:", error.message);
       } else {
         console.log("File uploaded successfully:", data);
-        router.push("/dashboard");
+
         // The 'data' object will contain information about the uploaded file
       }
     } catch (error) {
@@ -96,18 +95,15 @@ const Page = () => {
   async function saveUserDetails() {
     try {
       const user_id = user.id;
-      const { data, error } = await supabase
-        .from("users")
-        .insert([
-          {
-            first_name: firstName,
-            last_name: lastName,
-            fingerprint_template: fingerprintTemplate,
-            admin_user: user_id,
-            arrival_time: new Date().toISOString(),
-          },
-        ])
-        .select();
+      const { data, error } = await supabase.from("users").insert([
+        {
+          first_name: firstName,
+          last_name: lastName,
+          fingerprintTemplate: fingerprintTemplate,
+          admin_user: user_id,
+          arrival_time: new Date().toISOString(),
+        },
+      ]);
 
       if (error) {
         throw new Error(error.message);
@@ -150,7 +146,6 @@ const Page = () => {
     return (
       <div className="flex flex-col items-center justify-center h-screen w-full mt-4">
         <ToastContainer />
-        <Header />
 
         <Card>
           <CardHeader>
@@ -223,94 +218,90 @@ const Page = () => {
   }
 
   return (
-    <>
-      <Header />
+    <div className="flex flex-col items-center justify-center h-screen w-full mt-4">
+      <ToastContainer />
 
-      <div className="flex flex-col items-center justify-center h-screen w-full mt-4">
-        <ToastContainer />
+      <h1 className="text-2xl font-bold m-4">Add User Details</h1>
 
-        <h1 className="text-2xl font-bold m-4">Add User Details</h1>
-
-        <Tabs defaultValue="form" className="w-[full]">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="form">Use Form</TabsTrigger>
-            <TabsTrigger value="qr-code">Use QR-CODE</TabsTrigger>
-          </TabsList>
-          <TabsContent value="form">
-            <Card>
-              <CardHeader>
-                <CardTitle>Add User Details</CardTitle>
-                <CardDescription>
-                  Kindly input the data as they appear on the national ID.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex space-x-2">
-                  <div className="space-y-1">
-                    <Label htmlFor="fname">First Name</Label>
-                    <Input
-                      id="fname"
-                      placeholder="John"
-                      onChange={(e) => {
-                        setFirstName(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="space-y-1">
-                    <Label htmlFor="lname">Last Name</Label>
-                    <Input
-                      id="lname"
-                      placeholder="Doe"
-                      onChange={(e) => {
-                        setLastName(e.target.value);
-                      }}
-                    />
-                  </div>
-                </div>
+      <Tabs defaultValue="form" className="w-[full]">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="form">Use Form</TabsTrigger>
+          <TabsTrigger value="qr-code">Use QR-CODE</TabsTrigger>
+        </TabsList>
+        <TabsContent value="form">
+          <Card>
+            <CardHeader>
+              <CardTitle>Add User Details</CardTitle>
+              <CardDescription>
+                Kindly input the data as they appear on the national ID.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="flex space-x-2">
                 <div className="space-y-1">
-                  <Label htmlFor="id_number">ID number</Label>
+                  <Label htmlFor="fname">First Name</Label>
                   <Input
-                    type="number"
-                    id="id_number"
-                    placeholder="12345678"
+                    id="fname"
+                    placeholder="John"
                     onChange={(e) => {
-                      setIdNumber(e.target.value);
+                      setFirstName(e.target.value);
                     }}
                   />
                 </div>
-              </CardContent>
-              <CardFooter>
-                <Button onClick={submitUserDetails}>Confirm</Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
-          <TabsContent value="qr-code">
-            <Card>
-              <CardHeader>
-                <CardTitle>qr-code</CardTitle>
-                <CardDescription>
-                  Open the mobile app and scan the QR-CODE to capture the data
-                  from the national ID.
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-2">
-                <div className="flex flex-col items-center justify-center bg-white p-4 rounded-md shadow-md">
-                  <QRCode
-                    size={150}
-                    style={{ height: "200", maxWidth: "100%", width: "100%" }}
-                    value={uniqueId}
-                    viewBox={`500 500 500 500`}
-                  />{" "}
+                <div className="space-y-1">
+                  <Label htmlFor="lname">Last Name</Label>
+                  <Input
+                    id="lname"
+                    placeholder="Doe"
+                    onChange={(e) => {
+                      setLastName(e.target.value);
+                    }}
+                  />
                 </div>
-              </CardContent>
-              <CardFooter>
-                <Button onClick={confirmEntry}>Confirm Entry</Button>
-              </CardFooter>
-            </Card>
-          </TabsContent>
-        </Tabs>
-      </div>
-    </>
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="id_number">ID number</Label>
+                <Input
+                  type="number"
+                  id="id_number"
+                  placeholder="12345678"
+                  onChange={(e) => {
+                    setIdNumber(e.target.value);
+                  }}
+                />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={submitUserDetails}>Confirm</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+        <TabsContent value="qr-code">
+          <Card>
+            <CardHeader>
+              <CardTitle>qr-code</CardTitle>
+              <CardDescription>
+                Open the mobile app and scan the QR-CODE to capture the data
+                from the national ID.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-2">
+              <div className="flex flex-col items-center justify-center bg-white p-4 rounded-md shadow-md">
+                <QRCode
+                  size={150}
+                  style={{ height: "200", maxWidth: "100%", width: "100%" }}
+                  value={uniqueId}
+                  viewBox={`500 500 500 500`}
+                />{" "}
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button onClick={confirmEntry}>Confirm Entry</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 };
 
