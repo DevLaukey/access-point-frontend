@@ -8,10 +8,12 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { supabase } from "../../../lib/supabase";
+
 const Page = () => {
   const router = useRouter();
-  const supabase = createClientComponentClient();
+  const user = supabase.auth.getUser();
+  console.log(user)
 
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
@@ -22,7 +24,7 @@ const Page = () => {
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
-  const [user, setUser] = useState([]);
+  const [comparisonResult, setComparisonResult] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,20 +32,6 @@ const Page = () => {
       compareFingerPrints(fingerprintTemplate1, fingerprintTemplate2);
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const getUser = async () => {
-    try {
-      const userObj = await supabase.auth.getUser();
-      const user = userObj?.data.user
-      setUser(user);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1);
@@ -65,6 +53,7 @@ const Page = () => {
       .then((response) => response.json())
       .then((result) => {
         if (result?.isMatch === true) {
+          setComparisonResult(true);
           toast.success("Fingerprints matched successfully!");
         } else {
           toast.error("Fingerprints do not match!");
@@ -148,7 +137,7 @@ const Page = () => {
     setData([]);
   };
   // Function to generate a unique file name based on user_id and timestamp
-  const generateFileName = async (user_id) => {
+  const generateFileName = (user_id) => {
     const timestamp = Date.now();
     return `${user_id}_${timestamp}`;
   };
@@ -170,7 +159,7 @@ const Page = () => {
 
       // Upload the file to Supabase storage
       const { data, error } = await supabase.storage
-        .from("fingerprints") // Replace "your-bucket-name" with your actual bucket name
+        .from("your-bucket-name") // Replace "your-bucket-name" with your actual bucket name
         .upload(fileName, blob);
 
       if (error) {

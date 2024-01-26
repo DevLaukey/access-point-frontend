@@ -37,9 +37,9 @@ const Page = () => {
 
   const getUser = async () => {
     try {
-      const userObj = await supabase.auth.getUser();
-      const user = userObj?.data.user
-      setUser(user);
+      const user = await supabase.auth.getUser();
+      const id = user.data.user.id;
+      return id;
     } catch (error) {
       console.log(error.message);
     }
@@ -170,8 +170,8 @@ const Page = () => {
 
       // Upload the file to Supabase storage
       const { data, error } = await supabase.storage
-        .from("fingerprints") // Replace "your-bucket-name" with your actual bucket name
-        .upload(fileName, blob);
+        .from("your-bucket-name") // Replace "your-bucket-name" with your actual bucket name
+        .upload(c, blob);
 
       if (error) {
         console.error("Error uploading file:", error.message);

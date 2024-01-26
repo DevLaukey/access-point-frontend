@@ -8,10 +8,9 @@ import { Button } from "../../../components/ui/button";
 import { Skeleton } from "../../../components/ui/skeleton";
 import Header from "../../../components/layout/header";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+
 const Page = () => {
   const router = useRouter();
-  const supabase = createClientComponentClient();
 
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
   const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
@@ -22,7 +21,7 @@ const Page = () => {
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [isloading, setIsLoading] = useState(false);
-  const [user, setUser] = useState([]);
+  const [comparisonResult, setComparisonResult] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -30,20 +29,6 @@ const Page = () => {
       compareFingerPrints(fingerprintTemplate1, fingerprintTemplate2);
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
-
-  useEffect(() => {
-    getUser();
-  }, []);
-
-  const getUser = async () => {
-    try {
-      const userObj = await supabase.auth.getUser();
-      const user = userObj?.data.user
-      setUser(user);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
 
   const compareFingerPrints = async (template1, template2) => {
     console.log(template1);
@@ -65,6 +50,7 @@ const Page = () => {
       .then((response) => response.json())
       .then((result) => {
         if (result?.isMatch === true) {
+          setComparisonResult(true);
           toast.success("Fingerprints matched successfully!");
         } else {
           toast.error("Fingerprints do not match!");
@@ -147,53 +133,14 @@ const Page = () => {
     setFingerprintTemplate2(null);
     setData([]);
   };
-  // Function to generate a unique file name based on user_id and timestamp
-  const generateFileName = async (user_id) => {
-    const timestamp = Date.now();
-    return `${user_id}_${timestamp}`;
-  };
-
-  // Function to upload a file in Base64 format to Supabase storage
-  const uploadFileToSupabase = async (user_id, base64Data) => {
-    try {
-      const fileName = generateFileName(user_id);
-
-      // Convert the Base64 string to Uint8Array
-      const uint8Array = new Uint8Array(
-        atob(base64Data)
-          .split("")
-          .map((char) => char.charCodeAt(0))
-      );
-
-      // Create a Blob from the Uint8Array
-      const blob = new Blob([uint8Array]);
-
-      // Upload the file to Supabase storage
-      const { data, error } = await supabase.storage
-        .from("fingerprints") // Replace "your-bucket-name" with your actual bucket name
-        .upload(fileName, blob);
-
-      if (error) {
-        console.error("Error uploading file:", error.message);
-      } else {
-        console.log("File uploaded successfully:", data);
-        // router.push("/add-user/capture");
-
-        // The 'data' object will contain information about the uploaded file
-      }
-    } catch (error) {
-      console.error("Error processing file:", error.message);
-    }
-  };
 
   const captureName = async () => {
-    try {
-      const user_id = user.id;
-      uploadFileToSupabase(user_id, fingerprintTemplate2);
-    } catch (e) {
+    try { }
+    catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");
     }
+    router.push("/add-user/capture");
   };
 
   if (isloading) {
@@ -257,11 +204,7 @@ const Page = () => {
         {/* Second fingerprint captured */}
         {firstFingerPrintCaptured && !secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button
-              onClick={() => redoCapture()}
-              className="mr-2"
-              variant="outline"
-            >
+            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button
@@ -277,11 +220,7 @@ const Page = () => {
 
         {secondFingerprintCaptured && (
           <div className="flex w-full justify-center items-center mt-3">
-            <Button
-              onClick={() => redoCapture()}
-              className="mr-2"
-              variant="outline"
-            >
+            <Button onClick={()=>redoCapture()} className="mr-2" variant="outline">
               Repeat
             </Button>
             <Button onClick={captureName}>Continue</Button>
