@@ -113,7 +113,7 @@ const Page = () => {
         throw new Error(error.message);
       }
       // uploadFileToSupabase(user_id, fingerprintTemplate);
-      router.push("/dashboard");
+        router.push("/dashboard");
 
       console.log(data);
     } catch (error) {

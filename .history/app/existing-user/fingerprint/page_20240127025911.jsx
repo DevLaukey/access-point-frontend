@@ -7,9 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../components/layout/header";
-import UserResult from "../../../components/fingerprint/user-result";
-import Skeleton from "../../../components/ui/skeleton";
 import ScannerResult from "../../../components/fingerprint/Scanner";
+import Skeleton from "../../../components/ui/skeleton";
 
 const Page = () => {
   const router = useRouter();
@@ -58,6 +57,7 @@ const Page = () => {
   };
 
   const compareFingerPrints = async (template1, user) => {
+    setSelectedUser(user);
     const template2 = user?.fingerprint_template;
     console.log("comparing fingerprints");
     var myHeaders = new Headers();
@@ -82,10 +82,10 @@ const Page = () => {
 
         if (result?.isMatch === true) {
           setIsMatch("success");
-          console.log(user)
-          setSelectedUser(user);
+          setSuccess(true);
         } else {
           setIsMatch("failure");
+          setFailure(true);
         }
       })
       .catch((error) => console.log("error", error));
@@ -144,22 +144,7 @@ const Page = () => {
             </p>
           )}
 
-          {fingerprintCaptured ? (
-            selectedUser ? (
-              <UserResult
-                first_name={selectedUser.first_name}
-                last_name={selectedUser.last_name}
-                arrival_time={selectedUser.arrival_time}
-                departure_time={selectedUser.departure_time}
-              />
-            ) : (
-              <ScannerResult
-                imgSrc={data.bmpBase64}
-                serialNumber={data.serialNumber}
-                imageQuality={data.imageQuality}
-              />
-            )
-          ) : (
+          {fingerprintCaptured ? <UserResult first_name={selectedUser.first_name } last_name={selectedUser.last_name} arrival_time={arrival_time} departure_time={departure_time} /> : (
             <iframe
               width={100}
               height={100}

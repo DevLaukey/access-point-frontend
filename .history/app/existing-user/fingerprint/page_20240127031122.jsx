@@ -82,10 +82,12 @@ const Page = () => {
 
         if (result?.isMatch === true) {
           setIsMatch("success");
+          setSuccess(true);
           console.log(user)
           setSelectedUser(user);
         } else {
           setIsMatch("failure");
+          setFailure(true);
         }
       })
       .catch((error) => console.log("error", error));

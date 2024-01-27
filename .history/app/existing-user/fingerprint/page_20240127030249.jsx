@@ -9,7 +9,6 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../components/layout/header";
 import UserResult from "../../../components/fingerprint/user-result";
 import Skeleton from "../../../components/ui/skeleton";
-import ScannerResult from "../../../components/fingerprint/Scanner";
 
 const Page = () => {
   const router = useRouter();
@@ -82,10 +81,11 @@ const Page = () => {
 
         if (result?.isMatch === true) {
           setIsMatch("success");
-          console.log(user)
+          setSuccess(true);
           setSelectedUser(user);
         } else {
           setIsMatch("failure");
+          setFailure(true);
         }
       })
       .catch((error) => console.log("error", error));
@@ -145,20 +145,12 @@ const Page = () => {
           )}
 
           {fingerprintCaptured ? (
-            selectedUser ? (
-              <UserResult
-                first_name={selectedUser.first_name}
-                last_name={selectedUser.last_name}
-                arrival_time={selectedUser.arrival_time}
-                departure_time={selectedUser.departure_time}
-              />
-            ) : (
-              <ScannerResult
-                imgSrc={data.bmpBase64}
-                serialNumber={data.serialNumber}
-                imageQuality={data.imageQuality}
-              />
-            )
+            <UserResult
+              first_name={selectedUser.first_name}
+              last_name={selectedUser.last_name}
+              arrival_time={arrival_time}
+              departure_time={departure_time}
+            />
           ) : (
             <iframe
               width={100}

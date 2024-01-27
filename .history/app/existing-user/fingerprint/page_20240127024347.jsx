@@ -7,9 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../components/layout/header";
-import UserResult from "../../../components/fingerprint/user-result";
-import Skeleton from "../../../components/ui/skeleton";
 import ScannerResult from "../../../components/fingerprint/Scanner";
+import Skeleton from "../../../components/ui/skeleton";
 
 const Page = () => {
   const router = useRouter();
@@ -23,8 +22,8 @@ const Page = () => {
   const [data, setData] = useState([]);
   const [isloading, setIsLoading] = useState(false);
   const [isMatch, setIsMatch] = useState(null);
-  const [fingerprintTemplate1, setFingerprintTemplate1] = useState(null);
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
+  const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
 
   useEffect(() => {
     getFingerprints();
@@ -33,7 +32,7 @@ const Page = () => {
   useEffect(() => {
     user.forEach((user) => {
       if (user.fingerprint_template !== null && fingerprintTemplate1) {
-        compareFingerPrints(fingerprintTemplate1, user);
+        compareFingerPrints(fingerprintTemplate1, user.fingerprint_template);
       }
     });
   }, [user, fingerprintTemplate1]);
@@ -57,8 +56,7 @@ const Page = () => {
     } catch (error) {}
   };
 
-  const compareFingerPrints = async (template1, user) => {
-    const template2 = user?.fingerprint_template;
+  const compareFingerPrints = async (template1, template2) => {
     console.log("comparing fingerprints");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -81,11 +79,13 @@ const Page = () => {
         setIsLoading(false);
 
         if (result?.isMatch === true) {
-          setIsMatch("success");
-          console.log(user)
-          setSelectedUser(user);
+          setIsMatch(true);
+          toast.success("Success, user found");
+          setSuccess(true);
         } else {
-          setIsMatch("failure");
+          setIsMatch(false);
+          toast.error("Error, user not found");
+          setFailure(true);
         }
       })
       .catch((error) => console.log("error", error));
@@ -135,30 +135,27 @@ const Page = () => {
           <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
           <h5 className="font-bold mb-4">Login an existing visitor</h5>
 
-          {fingerprintTemplate1 != null && isMatch && (
-            <ResponseMessage status={isMatch} />
+          {isMatch ? (
+            <ResponseMessage status="success" />
+          ) : (
+            <ResponseMessage status="failure" />
           )}
-          {data.length !== 0 && fingerprintCapturedError && (
-            <p className="text-red-500 mb-4">
-              Fingerprint capture failed. Please try again.
-            </p>
-          )}
-
-          {fingerprintCaptured ? (
-            selectedUser ? (
-              <UserResult
-                first_name={selectedUser.first_name}
-                last_name={selectedUser.last_name}
-                arrival_time={selectedUser.arrival_time}
-                departure_time={selectedUser.departure_time}
-              />
+          {data.length !== 0 &&
+            (!fingerprintCapturedError ? (
+              <p className="text-green-500 mb-4">
+                Fingerprint captured successfully!
+              </p>
             ) : (
-              <ScannerResult
-                imgSrc={data.bmpBase64}
-                serialNumber={data.serialNumber}
-                imageQuality={data.imageQuality}
-              />
-            )
+              <p className="text-red-500 mb-4">
+                Fingerprint capture failed. Please try again.
+              </p>
+            ))}
+          {fingerprintCaptured ? (
+            <ScannerResult
+              imgSrc={data.bmpBase64}
+              serialNumber={data.serialNumber}
+              imageQuality={data.imageQuality}
+            />
           ) : (
             <iframe
               width={100}

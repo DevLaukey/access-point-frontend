@@ -7,9 +7,8 @@ import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../components/layout/header";
-import UserResult from "../../../components/fingerprint/user-result";
-import Skeleton from "../../../components/ui/skeleton";
 import ScannerResult from "../../../components/fingerprint/Scanner";
+import Skeleton from "../../../components/ui/skeleton";
 
 const Page = () => {
   const router = useRouter();
@@ -33,7 +32,7 @@ const Page = () => {
   useEffect(() => {
     user.forEach((user) => {
       if (user.fingerprint_template !== null && fingerprintTemplate1) {
-        compareFingerPrints(fingerprintTemplate1, user);
+        compareFingerPrints(fingerprintTemplate1,  user);
       }
     });
   }, [user, fingerprintTemplate1]);
@@ -58,6 +57,7 @@ const Page = () => {
   };
 
   const compareFingerPrints = async (template1, user) => {
+    setSelectedUser(user);
     const template2 = user?.fingerprint_template;
     console.log("comparing fingerprints");
     var myHeaders = new Headers();
@@ -82,10 +82,10 @@ const Page = () => {
 
         if (result?.isMatch === true) {
           setIsMatch("success");
-          console.log(user)
-          setSelectedUser(user);
+          setSuccess(true);
         } else {
           setIsMatch("failure");
+          setFailure(true);
         }
       })
       .catch((error) => console.log("error", error));
@@ -138,27 +138,17 @@ const Page = () => {
           {fingerprintTemplate1 != null && isMatch && (
             <ResponseMessage status={isMatch} />
           )}
-          {data.length !== 0 && fingerprintCapturedError && (
-            <p className="text-red-500 mb-4">
-              Fingerprint capture failed. Please try again.
-            </p>
-          )}
-
-          {fingerprintCaptured ? (
-            selectedUser ? (
-              <UserResult
-                first_name={selectedUser.first_name}
-                last_name={selectedUser.last_name}
-                arrival_time={selectedUser.arrival_time}
-                departure_time={selectedUser.departure_time}
-              />
+          {data.length !== 0 &&
+            (!fingerprintCapturedError ? (
+              null
             ) : (
-              <ScannerResult
-                imgSrc={data.bmpBase64}
-                serialNumber={data.serialNumber}
-                imageQuality={data.imageQuality}
-              />
-            )
+              <p className="text-red-500 mb-4">
+                Fingerprint capture failed. Please try again.
+              </p>
+            ))}
+          
+          {fingerprintCaptured ? (
+            null
           ) : (
             <iframe
               width={100}
