@@ -125,6 +125,7 @@ const Page = () => {
     setfingerprintCapturedError(false);
     setIsMatch(null);
     setSelectedUser(null);
+    
   }
   if (isloading) {
     return <Skeleton color="#202020" highlightColor="#444" />;
@@ -175,23 +176,20 @@ const Page = () => {
           )}
           {fingerprintCaptured ? (
             <div className="flex w-full justify-center items-center mt-3">
-              {isMatch === "success" ? (
-                <Button
-                  onClick={() => {
-                    router.push("/dashboard");
-                  }}
-                >
-                  Continue
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => redoCapture()}
-                  className="mr-2"
-                  variant="outline"
-                >
-                  Repeat
-                </Button>
-              )}
+              <Button
+                onClick={() => redoCapture()}
+                className="mr-2"
+                variant="outline"
+              >
+                Repeat
+              </Button>
+              <Button
+                onClick={() => {
+                  router.push("/dashboard");
+                }}
+              >
+                Continue
+              </Button>
             </div>
           ) : (
             <Button onClick={handleCaptureFingerprint}>

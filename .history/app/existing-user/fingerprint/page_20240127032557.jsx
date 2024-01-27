@@ -117,15 +117,10 @@ const Page = () => {
       console.log(error.message);
     }
   };
+  const captureName = () => {
+    router.push("/dashboard   ");
+  };
 
-  function redoCapture() {
-    setData([]);
-    setFingerprintCaptured(false);
-    setFingerprintTemplate1(null);
-    setfingerprintCapturedError(false);
-    setIsMatch(null);
-    setSelectedUser(null);
-  }
   if (isloading) {
     return <Skeleton color="#202020" highlightColor="#444" />;
   }
@@ -174,25 +169,7 @@ const Page = () => {
             </p>
           )}
           {fingerprintCaptured ? (
-            <div className="flex w-full justify-center items-center mt-3">
-              {isMatch === "success" ? (
-                <Button
-                  onClick={() => {
-                    router.push("/dashboard");
-                  }}
-                >
-                  Continue
-                </Button>
-              ) : (
-                <Button
-                  onClick={() => redoCapture()}
-                  className="mr-2"
-                  variant="outline"
-                >
-                  Repeat
-                </Button>
-              )}
-            </div>
+            <Button onClick={captureName}>Continue</Button>
           ) : (
             <Button onClick={handleCaptureFingerprint}>
               Capture Fingerprint
