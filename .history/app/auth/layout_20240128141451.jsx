@@ -4,7 +4,7 @@ import  Footer  from '../../components/footer';
 
 const AuthLayout = ({ children }) => {
     return (
-        <div className='h-screen overflow-y-hidden'>
+        <div>
            <NavbarComponent />
             <main>
                 {children}
