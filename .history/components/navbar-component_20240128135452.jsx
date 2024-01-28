@@ -9,9 +9,9 @@ function NavbarComponent() {
   const[inAuth, setInAuth] = React.useState(false);
 
  
-  const redirectToLogin = () => {
-    router.push("/auth/login");
-  };
+  // const redirectToLogin = () => {
+  //   router.push("/auth/login");
+  // };
 
 
 
@@ -20,25 +20,14 @@ function NavbarComponent() {
       <div className="max-w-screen-xl flex md:flex-wrap items-center justify-between mx-auto p-4">
         <a
           href="/"
-          className="hidden md:flex justify-center items-center ml-2"
+          className="flex items-center space-x-3 rtl:space-x-reverse"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-6 w-6"
-          >
-            <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-          </svg>
-          <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white dm_serif_display-500">
+          <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white ">
             ACCESS IT.
           </span>
         </a>
         <div className="flex items-center space-x-6 rtl:space-x-reverse">
+         
           {!inAuth && (
             <button
               type="button"
@@ -48,7 +37,7 @@ function NavbarComponent() {
               Get started
             </button>
           )}
-
+          
           <ModeToggle />
         </div>
       </div>
