@@ -13,6 +13,7 @@ export async function middleware(req) {
   return res;
 }
 
+
 // Ensure the middleware is only called for relevant paths.
 export const config = {
   matcher: [
