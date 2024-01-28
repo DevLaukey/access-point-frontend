@@ -164,7 +164,7 @@ const Page = () => {
       }
       console.log(data);
 
-      router.push(`/add-user/capture/${data[0].id}`);
+      // router.push("/add-user/capture");
     } catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");

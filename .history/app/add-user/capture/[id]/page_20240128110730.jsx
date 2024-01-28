@@ -73,8 +73,6 @@ const Page = () => {
       if (error) {
         throw new Error(error.message);
       }
-      confirmEntry();
-
       toast.success("User details saved successfully");
     } catch (error) {
       console.log(error.message);
@@ -110,13 +108,8 @@ const Page = () => {
       }
       const { data, error } = await supabase
         .from("users")
-        .update({ 
-            first_name: firstName,
-            last_name: lastName,
-            id_number: idNumber,
-          
-         })
-        .eq("fingerprint_id", id)
+        .update({ other_column: "otherValue" })
+        .eq("some_column", "someValue")
         .select();
 
       if (error) {
@@ -149,7 +142,7 @@ const Page = () => {
           </CardHeader>
           <CardContent className="space-y-2">
             <form
-              onSubmit={updateUserDetails}
+              onSubmit={handleSubmit}
               className="flex items-center justify-center flex-col"
             >
               <div className="mb-4">
@@ -199,18 +192,11 @@ const Page = () => {
               </div>
             </form>
           </CardContent>
-          <CardFooter className="items-center justify-center w-full space-x-2">
+          <CardFooter className="items-center justify-center w-full">
             <Button
               type="submit"
               onClick={updateUserDetails}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md w-full"
-            >
-              Update
-            </Button>
-            <Button
-              type="submit"
-              onClick={() => router.push('users')}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
+              className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
             >
               Confirm
             </Button>

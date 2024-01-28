@@ -110,13 +110,8 @@ const Page = () => {
       }
       const { data, error } = await supabase
         .from("users")
-        .update({ 
-            first_name: firstName,
-            last_name: lastName,
-            id_number: idNumber,
-          
-         })
-        .eq("fingerprint_id", id)
+        .update({ other_column: "otherValue" })
+        .eq("some_column", "someValue")
         .select();
 
       if (error) {

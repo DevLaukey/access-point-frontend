@@ -6,12 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { Button } from "../../../components/ui/button";
 import Skeleton from "../../../components/ui/skeleton";
 import ScannerResult from "../../../components/fingerprint/Scanner";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-
 
 const Page = () => {
   const router = useRouter();
-  const supabase = createClientComponentClient();
 
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState({
     template: "",
@@ -143,7 +140,7 @@ const Page = () => {
     setData([]);
   };
 
-  const saveFingerPrint = async () => {
+  const captureName = async () => {
     try {
       let template;
       if (
@@ -159,12 +156,7 @@ const Page = () => {
         .insert([{ fingerprint_template: template }])
         .select();
 
-      if (error) {
-        throw new Error(error.message);
-      }
-      console.log(data);
-
-      router.push(`/add-user/capture/${data[0].id}`);
+      router.push("/add-user/capture");
     } catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");
@@ -258,7 +250,7 @@ const Page = () => {
             >
               Repeat
             </Button>
-            <Button onClick={saveFingerPrint}>Continue</Button>
+            <Button onClick={captureName}>Continue</Button>
           </div>
         )}
       </div>

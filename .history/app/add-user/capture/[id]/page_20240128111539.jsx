@@ -110,13 +110,8 @@ const Page = () => {
       }
       const { data, error } = await supabase
         .from("users")
-        .update({ 
-            first_name: firstName,
-            last_name: lastName,
-            id_number: idNumber,
-          
-         })
-        .eq("fingerprint_id", id)
+        .update({ other_column: "otherValue" })
+        .eq("some_column", "someValue")
         .select();
 
       if (error) {
@@ -210,7 +205,7 @@ const Page = () => {
             <Button
               type="submit"
               onClick={() => router.push('users')}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
+              className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
             >
               Confirm
             </Button>

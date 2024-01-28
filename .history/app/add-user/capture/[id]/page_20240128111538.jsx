@@ -7,8 +7,8 @@ import {
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "../../../components/ui/tabs";
-import { Button } from "../../../components/ui/button";
+} from "../../../../components/ui/tabs";
+import { Button } from "../../../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -16,15 +16,15 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../../../components/ui/card";
-import { Input } from "../../../components/ui/input";
-import { Label } from "../../../components/ui/label";
+} from "../../../../components/ui/card";
+import { Input } from "../../../../components/ui/input";
+import { Label } from "../../../../components/ui/label";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Header from "../../../components/layout/header";
+import Header from "../../../../components/layout/header";
 
 const Page = () => {
   const [uniqueId, setUniqueId] = useState("");
@@ -37,6 +37,7 @@ const Page = () => {
   const [confirmEntryValues, setConfirmEntryValues] = useState(false);
 
   const router = useRouter();
+  const { id } = useParams();
 
   useEffect(() => {
     getUserDetails();
@@ -46,64 +47,24 @@ const Page = () => {
     try {
       const userObj = await supabase.auth.getUser();
       const user = userObj?.data.user;
-      const fingerprint = localStorage.getItem("capture") || "";
-      setFingerprintTemplate(fingerprint);
-
       setUser(user);
     } catch (error) {
       console.log(error.message);
     }
   };
 
-  // Function to generate a unique file name based on user_id and timestamp
-  const generateFileName = async (user_id) => {
-    const timestamp = Date.now();
-    return `${user_id}_${timestamp}`;
-  };
-
-  // Function to upload a file in Base64 format to Supabase storage
-  const uploadFileToSupabase = async (user_id, base64Data) => {
-    try {
-      const fileName = generateFileName(user_id);
-
-      // Convert the Base64 string to Uint8Array
-      const uint8Array = new Uint8Array(
-        atob(base64Data)
-          .split("")
-          .map((char) => char.charCodeAt(0))
-      );
-
-      // Create a Blob from the Uint8Array
-      const blob = new Blob([uint8Array]);
-
-      // Upload the file to Supabase storage
-      const { data, error } = await supabase.storage
-        .from("fingerprints") // Replace "your-bucket-name" with your actual bucket name
-        .upload(fileName, blob);
-
-      if (error) {
-        console.error("Error uploading file:", error.message);
-      } else {
-        console.log("File uploaded successfully:", data);
-        router.push("/dashboard");
-        // The 'data' object will contain information about the uploaded file
-      }
-    } catch (error) {
-      console.error("Error processing file:", error.message);
-    }
-  };
-
   async function saveUserDetails() {
     try {
-      const user_id = user.id;
+      const admin_user_id = user.id;
       const { data, error } = await supabase
         .from("users")
         .insert([
           {
+            id_number: idNumber,
             first_name: firstName,
             last_name: lastName,
-            fingerprint_template: fingerprintTemplate,
-            admin_user: user_id,
+            fingerprint_id: id,
+            admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),
           },
         ])
@@ -112,10 +73,9 @@ const Page = () => {
       if (error) {
         throw new Error(error.message);
       }
-      // uploadFileToSupabase(user_id, fingerprintTemplate);
-      router.push("/dashboard");
+      confirmEntry();
 
-      console.log(data);
+      toast.success("User details saved successfully");
     } catch (error) {
       console.log(error.message);
     }
@@ -137,13 +97,38 @@ const Page = () => {
       toast.error("Please fill in all fields");
       return;
     }
-
     //   save user details
     await saveUserDetails();
   };
-  const generateUniqueId = () => {
+  const updateUserDetails = async () => {
+    //   save user details
+    try {
+      //   input validation
+      if (firstName === "" || lastName === "" || idNumber === "") {
+        toast.error("Please fill in all fields");
+        return;
+      }
+      const { data, error } = await supabase
+        .from("users")
+        .update({ other_column: "otherValue" })
+        .eq("some_column", "someValue")
+        .select();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      console.log(data);
+      toast.success("User details updated successfully");
+
+      router.push("/dashboard");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const generateUniqueId = (id) => {
     const route = `/add-user/capture/:${id}`;
-    
+
     return "uniqueId123";
   };
 
@@ -159,7 +144,7 @@ const Page = () => {
           </CardHeader>
           <CardContent className="space-y-2">
             <form
-              onSubmit={handleSubmit}
+              onSubmit={updateUserDetails}
               className="flex items-center justify-center flex-col"
             >
               <div className="mb-4">
@@ -209,10 +194,17 @@ const Page = () => {
               </div>
             </form>
           </CardContent>
-          <CardFooter className="items-center justify-center w-full">
+          <CardFooter className="items-center justify-center w-full space-x-2">
             <Button
               type="submit"
-              onClick={submitUserDetails}
+              onClick={updateUserDetails}
+              className="bg-gray-500 text-white px-4 py-2 rounded-md w-full"
+            >
+              Update
+            </Button>
+            <Button
+              type="submit"
+              onClick={() => router.push('users')}
               className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
             >
               Confirm
@@ -288,7 +280,7 @@ const Page = () => {
           <TabsContent value="qr-code">
             <Card>
               <CardHeader>
-                <CardTitle>qr-code</CardTitle>
+                <CardTitle>QR-CODE</CardTitle>
                 <CardDescription>
                   Open the mobile app and scan the QR-CODE to capture the data
                   from the national ID.

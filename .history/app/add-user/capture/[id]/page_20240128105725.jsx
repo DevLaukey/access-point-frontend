@@ -53,6 +53,7 @@ const Page = () => {
     }
   };
 
+
   async function saveUserDetails() {
     try {
       const admin_user_id = user.id;
@@ -73,9 +74,13 @@ const Page = () => {
       if (error) {
         throw new Error(error.message);
       }
-      confirmEntry();
 
-      toast.success("User details saved successfully");
+      console.log(data)
+      // toast.success("User details saved successfully");
+
+      router.push(`/confirm-entry/${idNumber}`);
+
+      console.log(data);
     } catch (error) {
       console.log(error.message);
     }
@@ -100,37 +105,6 @@ const Page = () => {
     //   save user details
     await saveUserDetails();
   };
-  const updateUserDetails = async () => {
-    //   save user details
-    try {
-      //   input validation
-      if (firstName === "" || lastName === "" || idNumber === "") {
-        toast.error("Please fill in all fields");
-        return;
-      }
-      const { data, error } = await supabase
-        .from("users")
-        .update({ 
-            first_name: firstName,
-            last_name: lastName,
-            id_number: idNumber,
-          
-         })
-        .eq("fingerprint_id", id)
-        .select();
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      console.log(data);
-      toast.success("User details updated successfully");
-
-      router.push("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
-  };
   const generateUniqueId = (id) => {
     const route = `/add-user/capture/:${id}`;
 
@@ -149,7 +123,7 @@ const Page = () => {
           </CardHeader>
           <CardContent className="space-y-2">
             <form
-              onSubmit={updateUserDetails}
+              onSubmit={handleSubmit}
               className="flex items-center justify-center flex-col"
             >
               <div className="mb-4">
@@ -199,18 +173,11 @@ const Page = () => {
               </div>
             </form>
           </CardContent>
-          <CardFooter className="items-center justify-center w-full space-x-2">
+          <CardFooter className="items-center justify-center w-full">
             <Button
               type="submit"
-              onClick={updateUserDetails}
-              className="bg-gray-500 text-white px-4 py-2 rounded-md w-full"
-            >
-              Update
-            </Button>
-            <Button
-              type="submit"
-              onClick={() => router.push('users')}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
+              onClick={submitUserDetails}
+              className="bg-green-500 text-white px-4 py-2 rounded-md w-full"
             >
               Confirm
             </Button>
