@@ -10,14 +10,8 @@ import ScannerResult from "../../../components/fingerprint/Scanner";
 const Page = () => {
   const router = useRouter();
 
-  const [fingerprintTemplate1, setFingerprintTemplate1] = useState({
-    template: "",
-    imageQuality: 0,
-  });
-  const [fingerprintTemplate2, setFingerprintTemplate2] = useState({
-    template: "",
-    imageQuality: 0,
-  });
+  const [fingerprintTemplate1, setFingerprintTemplate1] = useState({});
+  const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
   const [firstFingerPrintCaptured, setFirstFingerprintCaptured] =
     useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
@@ -29,10 +23,7 @@ const Page = () => {
 
   useEffect(() => {
     if (firstFingerPrintCaptured && secondFingerprintCaptured) {
-      compareFingerPrints(
-        fingerprintTemplate1.template,
-        fingerprintTemplate2.template
-      );
+      compareFingerPrints(fingerprintTemplate1.template, fingerprintTemplate2);
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
 
@@ -117,10 +108,7 @@ const Page = () => {
 
       data && setIsLoading(false);
 
-      setFingerprintTemplate2({
-        template: data.bmpBase64,
-        imageQuality: data.imageQuality,
-      });
+      setFingerprintTemplate2(data.bmpBase64);
 
       // Code to capture the second fingerprint goes here
       setSecondFingerprintCaptured(true);
@@ -145,10 +133,8 @@ const Page = () => {
       if (
         fingerprintTemplate1.imageQuality > fingerprintTemplate2.imageQuality
       ) {
-        console.log("Capture1");
         localStorage.setItem("capture", fingerprintTemplate1.template);
       } else {
-        console.log("Capture2");  
         localStorage.setItem("capture", fingerprintTemplate2.template);
       }
 

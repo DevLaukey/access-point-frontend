@@ -1,6 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button } from "../../../components/ui/button";
@@ -10,14 +11,8 @@ import ScannerResult from "../../../components/fingerprint/Scanner";
 const Page = () => {
   const router = useRouter();
 
-  const [fingerprintTemplate1, setFingerprintTemplate1] = useState({
-    template: "",
-    imageQuality: 0,
-  });
-  const [fingerprintTemplate2, setFingerprintTemplate2] = useState({
-    template: "",
-    imageQuality: 0,
-  });
+  const [fingerprintTemplate1, setFingerprintTemplate1] = useState("");
+  const [fingerprintTemplate2, setFingerprintTemplate2] = useState("");
   const [firstFingerPrintCaptured, setFirstFingerprintCaptured] =
     useState(false);
   const [secondFingerprintCaptured, setSecondFingerprintCaptured] =
@@ -29,10 +24,7 @@ const Page = () => {
 
   useEffect(() => {
     if (firstFingerPrintCaptured && secondFingerprintCaptured) {
-      compareFingerPrints(
-        fingerprintTemplate1.template,
-        fingerprintTemplate2.template
-      );
+      compareFingerPrints(fingerprintTemplate1, fingerprintTemplate2);
     }
   }, [secondFingerprintCaptured, fingerprintTemplate2]);
 
@@ -83,10 +75,7 @@ const Page = () => {
         setfingerprintCapturedError(true);
         throw new Error(data.message);
       }
-      setFingerprintTemplate1({
-        template: data.bmpBase64,
-        imageQuality: data.imageQuality,
-      });
+      setFingerprintTemplate1(data.bmpBase64);
       setFirstFingerprintCaptured(true);
 
       toast.success("First Fingerprint captured successfully!");
@@ -117,10 +106,7 @@ const Page = () => {
 
       data && setIsLoading(false);
 
-      setFingerprintTemplate2({
-        template: data.bmpBase64,
-        imageQuality: data.imageQuality,
-      });
+      setFingerprintTemplate2(data.bmpBase64);
 
       // Code to capture the second fingerprint goes here
       setSecondFingerprintCaptured(true);
@@ -142,15 +128,7 @@ const Page = () => {
 
   const captureName = () => {
     try {
-      if (
-        fingerprintTemplate1.imageQuality > fingerprintTemplate2.imageQuality
-      ) {
-        console.log("Capture1");
-        localStorage.setItem("capture", fingerprintTemplate1.template);
-      } else {
-        console.log("Capture2");  
-        localStorage.setItem("capture", fingerprintTemplate2.template);
-      }
+      localStorage.setItem("capture", fingerprintTemplate1);
 
       router.push("/add-user/capture");
     } catch (e) {

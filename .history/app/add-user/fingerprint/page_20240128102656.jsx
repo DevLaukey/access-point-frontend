@@ -148,7 +148,7 @@ const Page = () => {
         console.log("Capture1");
         localStorage.setItem("capture", fingerprintTemplate1.template);
       } else {
-        console.log("Capture2");  
+        console.log("Capture2");
         localStorage.setItem("capture", fingerprintTemplate2.template);
       }
 

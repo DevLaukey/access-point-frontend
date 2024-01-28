@@ -145,10 +145,8 @@ const Page = () => {
       if (
         fingerprintTemplate1.imageQuality > fingerprintTemplate2.imageQuality
       ) {
-        console.log("Capture1");
         localStorage.setItem("capture", fingerprintTemplate1.template);
       } else {
-        console.log("Capture2");  
         localStorage.setItem("capture", fingerprintTemplate2.template);
       }
 
