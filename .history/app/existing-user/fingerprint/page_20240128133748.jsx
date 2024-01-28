@@ -9,6 +9,8 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Link from 'next/link'
 import UserResult from "../../../components/fingerprint/user-result";
 import Skeleton from "../../../components/ui/skeleton";
+import ScannerResult from "../../../components/fingerprint/Scanner";
+import { get } from "http";
 
 const Page = () => {
   const router = useRouter();
