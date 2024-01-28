@@ -15,8 +15,10 @@ import { get } from "http";
 const Page = () => {
   const router = useRouter();
   const supabase = createClientComponentClient();
+
+  const [adminID, setAdminID] = useState(null);
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
-  const [fingerprints, setFingerPrints] = useState([]);
+  const [user, setUser] = useState([]);
   const [fingerprintCapturedError, setfingerprintCapturedError] =
     useState(false);
   const [data, setData] = useState([]);
@@ -30,53 +32,48 @@ const Page = () => {
   }, []);
 
   useEffect(() => {
-    fingerprints.forEach((fingerprint) => {
-      if (fingerprint.fingerprint_template !== null && fingerprintTemplate1) {
-        compareFingerPrints(fingerprintTemplate1, fingerprint);
+    user.forEach((user) => {
+      if (user.fingerprint_template !== null && fingerprintTemplate1) {
+        compareFingerPrints(fingerprintTemplate1, user);
       }
     });
-  }, [fingerprints, fingerprintTemplate1]);
+  }, [user, fingerprintTemplate1]);
 
-  const getUser = async (fingerprint_id) => {
+  const getUser = async () => {
     try {
       let { data: users, error } = await supabase
         .from("users")
         .select("*")
-        .eq("fingerprint_id", fingerprint_id)
-        .single ();
+        .eq("admin_user", adminID);
 
       if (error) {
         throw new Error(error.message);
       }
-
-      console.log(users);
-      setSelectedUser(users);
+      setUser(users);
     } catch (error) {
       console.log(error);
     }
   };
-
   const getFingerprints = async () => {
     try {
       const userObj = await supabase.auth.getUser();
       const id = userObj?.data.user.id;
+      setAdminID(id);
 
-      let { data: fingerprints, error } = await supabase
+      let { data: users, error } = await supabase
         .from("fingerprints")
         .select("*")
-        .eq("admin_id ", id);
+        .eq("admin_user", id);
 
       if (error) {
         throw new Error(error.message);
       }
-      setFingerPrints(fingerprints);
-    } catch (error) {
-      console.log(error);
-    }
+      getUser(users);
+    } catch (error) {}
   };
 
-  const compareFingerPrints = async (template1, fingerprint) => {
-    const template2 = fingerprint?.fingerprint_template;
+  const compareFingerPrints = async (template1, user) => {
+    const template2 = user?.fingerprint_template;
     console.log("comparing fingerprints");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -100,7 +97,8 @@ const Page = () => {
 
         if (result?.isMatch === true) {
           setIsMatch("success");
-          getUser(fingerprint.id);
+          console.log(user);
+          setSelectedUser(user);
         } else {
           setIsMatch("failure");
         }

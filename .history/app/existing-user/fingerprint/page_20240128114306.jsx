@@ -15,6 +15,8 @@ import { get } from "http";
 const Page = () => {
   const router = useRouter();
   const supabase = createClientComponentClient();
+
+  const [adminID, setAdminID] = useState(null);
   const [fingerprintCaptured, setFingerprintCaptured] = useState(false);
   const [fingerprints, setFingerPrints] = useState([]);
   const [fingerprintCapturedError, setfingerprintCapturedError] =
@@ -42,8 +44,7 @@ const Page = () => {
       let { data: users, error } = await supabase
         .from("users")
         .select("*")
-        .eq("fingerprint_id", fingerprint_id)
-        .single ();
+        .eq("fingerprint_id", fingerprint_id).single();
 
       if (error) {
         throw new Error(error.message);
@@ -60,11 +61,12 @@ const Page = () => {
     try {
       const userObj = await supabase.auth.getUser();
       const id = userObj?.data.user.id;
+      setAdminID(id);
 
       let { data: fingerprints, error } = await supabase
         .from("fingerprints")
         .select("*")
-        .eq("admin_id ", id);
+        .eq("admin_user", id);
 
       if (error) {
         throw new Error(error.message);
@@ -100,6 +102,7 @@ const Page = () => {
 
         if (result?.isMatch === true) {
           setIsMatch("success");
+          console.log(user);
           getUser(fingerprint.id);
         } else {
           setIsMatch("failure");

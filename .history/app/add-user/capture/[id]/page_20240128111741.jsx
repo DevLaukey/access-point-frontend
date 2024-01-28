@@ -209,7 +209,7 @@ const Page = () => {
             </Button>
             <Button
               type="submit"
-              onClick={() => router.push('/dashboard')}
+              onClick={() => router.push('users')}
               className="bg-blue-500 text-white px-4 py-2 rounded-md w-full"
             >
               Confirm
