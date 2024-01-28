@@ -36,30 +36,15 @@ const Page = () => {
       }
     });
   }, [fingerprints, fingerprintTemplate1]);
-  
 
-  const checkIfUserExistsForTheDay = () => {
-    const today = new Date().toISOString().slice(0, 10);
-    const arrival_time = selectedUser?.arrival_time;
-    const arrivalDate = new Date(arrival_time).toISOString().slice(0, 10);
 
-    if (today === arrivalDate) {
-      return true;
-    }
-    return false;
-   }
-
-  const updateUser = async () => {
+  const updateUser = async (user) => { 
     try {
-      console.log(selectedUser);
-      if (checkIfUserExistsForTheDay) {
-        toast.error("User already logged in for today");
-        return;
-       }
+      
       const { data, error } = await supabase
         .from("users")
-        .update({ arrival_time: new Date().toISOString() })
-        .eq("id", selectedUser.id);
+        .update({ arrival_time: new Date() })
+        .eq("id", user.id);
 
       if (error) {
         throw new Error(error.message);
@@ -70,14 +55,14 @@ const Page = () => {
     } catch (error) {
       console.error(error);
     }
-  };
+  }
   const getUser = async (fingerprint_id) => {
     try {
       let { data: users, error } = await supabase
         .from("users")
         .select("*")
         .eq("fingerprint_id", fingerprint_id)
-        .single();
+        .single ();
 
       if (error) {
         throw new Error(error.message);
@@ -228,7 +213,6 @@ const Page = () => {
               {isMatch === "success" ? (
                 <Button
                   onClick={() => {
-                    updateUser();
                     router.push("/dashboard");
                   }}
                 >

@@ -36,26 +36,10 @@ const Page = () => {
       }
     });
   }, [fingerprints, fingerprintTemplate1]);
-  
-
-  const checkIfUserExistsForTheDay = () => {
-    const today = new Date().toISOString().slice(0, 10);
-    const arrival_time = selectedUser?.arrival_time;
-    const arrivalDate = new Date(arrival_time).toISOString().slice(0, 10);
-
-    if (today === arrivalDate) {
-      return true;
-    }
-    return false;
-   }
 
   const updateUser = async () => {
     try {
       console.log(selectedUser);
-      if (checkIfUserExistsForTheDay) {
-        toast.error("User already logged in for today");
-        return;
-       }
       const { data, error } = await supabase
         .from("users")
         .update({ arrival_time: new Date().toISOString() })
