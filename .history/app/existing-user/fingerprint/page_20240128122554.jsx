@@ -42,7 +42,7 @@ const Page = () => {
     const arrival_time = selectedUser?.arrival_time;
     const arrivalDate = new Date(arrival_time).toISOString().slice(0, 10);
 
-    if (https://flowbite.com/today === arrivalDate) {
+    if (today === arrivalDate) {
       return true;
     }
     return false;

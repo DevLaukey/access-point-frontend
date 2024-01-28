@@ -42,7 +42,7 @@ const Page = () => {
     const arrival_time = selectedUser?.arrival_time;
     const arrivalDate = new Date(arrival_time).toISOString().slice(0, 10);
 
-    if (https://flowbite.com/today === arrivalDate) {
+    if (today === arrivalDate) {
       return true;
     }
     return false;
@@ -203,7 +203,7 @@ const Page = () => {
               <UserResult
                 first_name={selectedUser.first_name}
                 last_name={selectedUser.last_name}
-                arrival_time={new Date().toISOString()}
+                arrival_time={selectedUser.arrival_time}
                 departure_time={selectedUser.departure_time}
               />
             )
@@ -227,6 +227,7 @@ const Page = () => {
               {isMatch === "success" ? (
                 <Button
                   onClick={() => {
+                    updateUser();
                     router.push("/dashboard");
                   }}
                 >

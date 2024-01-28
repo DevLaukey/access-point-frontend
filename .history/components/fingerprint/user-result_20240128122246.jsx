@@ -5,7 +5,7 @@ const UserResult = ({
   arrival_time,
   departure_time,
 }) => {
-  function convertDate(timestamp) {
+  function convertDate() {
     const dateObj = new Date();
 
     const day = dateObj.getDate().toString().padStart(2, "0");

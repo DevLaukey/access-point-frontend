@@ -5,7 +5,7 @@ const UserResult = ({
   arrival_time,
   departure_time,
 }) => {
-  function convertDate(timestamp) {
+  function convertDate() {
     const dateObj = new Date();
 
     const day = dateObj.getDate().toString().padStart(2, "0");
@@ -29,7 +29,7 @@ const UserResult = ({
         <p className="font-bold">First Name: {first_name}</p>
         <p className="font-bold">Last Name: {last_name}</p>
       </div>
-      <p className="font-bold">Arrival Time: {convertDate(arrival_time).date} <span className="text-sm ml-1">{ convertDate(arrival_time).time}</span></p>
+      <p className="font-bold">Arrival Time: {convertDate().date} <span className="text-sm ml-1">{ convertDate(arrival_time).time}</span></p>
       {departure_time && (
         <p className="font-bold">
           Departure Time: {convertDate(departure_time)}

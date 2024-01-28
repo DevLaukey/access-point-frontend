@@ -6,7 +6,7 @@ const UserResult = ({
   departure_time,
 }) => {
   function convertDate(timestamp) {
-    const dateObj = new Date();
+    const dateObj = new Date(timestamp);
 
     const day = dateObj.getDate().toString().padStart(2, "0");
     const month = (dateObj.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based
@@ -23,8 +23,8 @@ const UserResult = ({
   }
 
   return (
-    <div className="flex flex-col space-y-2 my-2 items-start">
-      <p className="text-md items-center font-bold">WELCOME</p>
+    <div className="flex flex-col space-y-2 my-2 items-start text-gray-700">
+      <p className="text-md">WELCOME</p>
       <div className="flex justify-center items-center space-x-4 ">
         <p className="font-bold">First Name: {first_name}</p>
         <p className="font-bold">Last Name: {last_name}</p>

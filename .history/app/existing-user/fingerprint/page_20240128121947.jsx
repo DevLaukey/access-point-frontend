@@ -42,7 +42,7 @@ const Page = () => {
     const arrival_time = selectedUser?.arrival_time;
     const arrivalDate = new Date(arrival_time).toISOString().slice(0, 10);
 
-    if (https://flowbite.com/today === arrivalDate) {
+    if (today === arrivalDate) {
       return true;
     }
     return false;
@@ -203,7 +203,7 @@ const Page = () => {
               <UserResult
                 first_name={selectedUser.first_name}
                 last_name={selectedUser.last_name}
-                arrival_time={new Date().toISOString()}
+                arrival_time={selectedUser.arrival_time}
                 departure_time={selectedUser.departure_time}
               />
             )
@@ -227,6 +227,7 @@ const Page = () => {
               {isMatch === "success" ? (
                 <Button
                   onClick={() => {
+                    updateUser();
                     router.push("/dashboard");
                   }}
                 >
@@ -234,10 +235,10 @@ const Page = () => {
                 </Button>
               ) : (
                 <div className="flex flex-col space-y-2">
-                  <div className="flex space-x-2 justify-center items-center hover:underline">
+                  <div className="flex space-x-2 justify-center items-center">
                     <Link
                       href="/add-user/fingerprint"
-                      className="font-medium text-blue-600 dark:text-blue-500 "
+                      className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                     >
                       Register a new user
                     </Link>

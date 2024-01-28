@@ -6,7 +6,7 @@ const UserResult = ({
   departure_time,
 }) => {
   function convertDate(timestamp) {
-    const dateObj = new Date();
+    const dateObj = new Date(timestamp);
 
     const day = dateObj.getDate().toString().padStart(2, "0");
     const month = (dateObj.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based
