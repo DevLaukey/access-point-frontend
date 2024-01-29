@@ -1,9 +1,11 @@
-import BreadCrumb from "../../../components/breadcrumb";
-import UserClient from "../../../components/tables/user-tables/client";
+"use client";
 
-const breadcrumbItems = [{ title: "User", link: "/dashboard/user" }];
-export default function page() {
-  const users = [
+import { useRouter } from "next/navigation";
+import React from "react";
+import { Heading } from "../../ui/heading";
+
+const UserClient = ({ data }) => {
+  const User = [
     {
       id: 1,
       name: "Candice Schiner",
@@ -45,13 +47,25 @@ export default function page() {
       status: "Active",
     },
   ];
-
+  const router = useRouter();
   return (
     <>
-      <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
-        <BreadCrumb items={breadcrumbItems} />
-        <UserClient data={users} />
+      <div className="flex items-start justify-between">
+        <Heading
+          title={`Users (${data.length})`}
+          description="Manage users (Client side table functionalities.)"
+        />
+        <Button
+          className="text-xs md:text-sm"
+          onClick={() => router.push(`/dashboard/user/new`)}
+        >
+          <Plus className="mr-2 h-4 w-4" /> Add New
+        </Button>
       </div>
+      <Separator />
+      <DataTable searchKey="name" columns={columns} data={data} />
     </>
   );
-}
+};
+
+export default UserClient;

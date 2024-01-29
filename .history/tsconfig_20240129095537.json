@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx", "components/date-range-picker.jsx", "components/ui/calendar.jsx", "components/recent-sales.jsx", "app/not-found.jsx", "app/dashboard/layout.jsx", "components/tables/user-tables/cell-action.jsx", "components/tables/user-tables/client.jsx", "components/tables/user-tables/columns.jsx", "components/modal/alert-modal.jsx", "components/ui/data-table.jsx"  ],
+, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx", "components/date-range-picker.jsx", "components/ui/calendar.jsx", "components/recent-sales.jsx", "app/not-found.jsx", "app/dashboard/layout.jsx", "components/tables/user-tables/cell-action.jsx", "components/tables/user-tables/client.jsx", "components/tables/user-tables/columns.jsx", "components/modal/alert-modal.jsx"  ],
   "exclude": [
     "node_modules"
   ]
