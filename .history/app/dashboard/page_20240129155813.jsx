@@ -36,6 +36,7 @@ const DashboardPage = async () => {
   }
 
   const { data, error } = await supabase.from("users").select("*").eq("admin_user", user?.id);
+  console.log(data);
 
   if (error) {
     console.log(error);

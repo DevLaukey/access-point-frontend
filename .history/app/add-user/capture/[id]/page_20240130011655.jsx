@@ -27,9 +27,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../../components/layout/header";
 
 const Page = () => {
-  const router = useRouter();
-  const { id } = useParams();
-  const [uniqueId, setUniqueId] = useState();
+  const [uniqueId, setUniqueId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [idNumber, setIdNumber] = useState("");
@@ -38,6 +36,8 @@ const Page = () => {
   const [fingerprintTemplate, setFingerprintTemplate] = useState("");
   const [confirmEntryValues, setConfirmEntryValues] = useState(false);
 
+  const router = useRouter();
+  const { id } = useParams();
 
   useEffect(() => {
     getUserDetails();
@@ -130,7 +130,11 @@ const Page = () => {
       console.log(error);
     }
   };
-  
+  const generateUniqueId = (id) => {
+    const route = `/add-user/capture/:${id}`;
+
+    return route;
+  };
 
   if (confirmEntryValues) {
     return (

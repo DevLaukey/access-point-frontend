@@ -2,14 +2,13 @@
 
 import React from "react";
 import { Heading } from "../../ui/heading";
-import { useRouter } from "next/navigation";
+
 import { Separator } from "../../ui/separator";
 import { DataTable } from "../../ui/data-table";
 import { columns } from "./columns";
 import { Button } from "../../ui/button";
 
 const UserClient = ({ data }) => {
-  const router =useRouter();
   const User = [
     {
       id: 1,
@@ -59,7 +58,7 @@ const UserClient = ({ data }) => {
           title={`Users (${data.length})`}
           description="Manage users from all the access points"
         />
-        <Button onClick={()=>router.push("/dashboard/users/entrypoint-manager")}>
+        <Button>
           <svg
             className="w-5 h-5 mr-2"
             fill="currentColor"

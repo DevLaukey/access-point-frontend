@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import QRCode from "react-qr-code";
+// import QRCode from "react-qr-code";
 import {
   Tabs,
   TabsContent,
@@ -27,9 +27,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../../components/layout/header";
 
 const Page = () => {
-  const router = useRouter();
-  const { id } = useParams();
-  const [uniqueId, setUniqueId] = useState();
+  const [uniqueId, setUniqueId] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [idNumber, setIdNumber] = useState("");
@@ -38,6 +36,8 @@ const Page = () => {
   const [fingerprintTemplate, setFingerprintTemplate] = useState("");
   const [confirmEntryValues, setConfirmEntryValues] = useState(false);
 
+  const router = useRouter();
+  const { id } = useParams();
 
   useEffect(() => {
     getUserDetails();
@@ -83,7 +83,7 @@ const Page = () => {
 
   useEffect(() => {
     // Generate a unique ID here
-    const generatedId = id;
+    const generatedId = generateUniqueId();
     setUniqueId(generatedId);
   }, []);
 
@@ -130,7 +130,11 @@ const Page = () => {
       console.log(error);
     }
   };
-  
+  const generateUniqueId = (id) => {
+    const route = `/add-user/capture/:${id}`;
+
+    return id;
+  };
 
   if (confirmEntryValues) {
     return (

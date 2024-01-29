@@ -36,6 +36,7 @@ const DashboardPage = async () => {
   }
 
   const { data, error } = await supabase.from("users").select("*").eq("admin_user", user?.id);
+  console.log(data);
 
   if (error) {
     console.log(error);
@@ -80,7 +81,7 @@ const DashboardPage = async () => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{data ? data.length:0}</div>
+                  <div className="text-2xl font-bold">{data?.length}</div>
                   <p className="text-xs text-muted-foreground">
                     The total number of people who visited the premises
                   </p>
