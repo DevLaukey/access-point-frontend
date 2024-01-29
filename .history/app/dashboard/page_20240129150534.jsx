@@ -14,6 +14,7 @@ import {
 
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../../components/ui/scroll-area";
+import { CalendarDateRangePicker } from "../../components/date-range-picker";
 import {
   Tabs,
   TabsContent,
@@ -21,9 +22,15 @@ import {
   TabsTrigger,
 } from "../../components/ui/tabs";
 import { Overview } from "../../components/overview";
-import { RecentSales } from "../../components/recent-sales";
 
+import { RecentSales } from "../../components/recent-sales";
 const DashboardPage = async () => {
+  const users = [
+    { id: 1, name: "John Doe" },
+    { id: 2, name: "Jane Smith" },
+    { id: 3, name: "Bob Johnson" },
+  ];
+
   const cookieStore = cookies();
   const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
@@ -35,7 +42,8 @@ const DashboardPage = async () => {
     redirect("/sign-in");
   }
 
-  const { data, error } = await supabase.from("users").select("*").eq("id", user?.id);
+  const { data, error } = await supabase.from("users").select("*");
+  // .eq("id", user?.id);
   console.log(data);
 
   if (error) {
@@ -83,7 +91,7 @@ const DashboardPage = async () => {
                 <CardContent>
                   <div className="text-2xl font-bold">{data.length}</div>
                   <p className="text-xs text-muted-foreground">
-                    The total number of people who visited the premises
+                    +20.1% from last month
                   </p>
                 </CardContent>
               </Card>

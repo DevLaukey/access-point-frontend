@@ -35,7 +35,8 @@ const DashboardPage = async () => {
     redirect("/sign-in");
   }
 
-  const { data, error } = await supabase.from("users").select("*").eq("id", user?.id);
+  const { data, error } = await supabase.from("users").select("*");
+  // .eq("id", user?.id);
   console.log(data);
 
   if (error) {

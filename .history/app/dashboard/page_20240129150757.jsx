@@ -21,9 +21,11 @@ import {
   TabsTrigger,
 } from "../../components/ui/tabs";
 import { Overview } from "../../components/overview";
-import { RecentSales } from "../../components/recent-sales";
+import { RecentSales } from "../../components/recent-sales"; 
+
 
 const DashboardPage = async () => {
+
   const cookieStore = cookies();
   const supabase = createServerComponentClient({ cookies: () => cookieStore });
 
@@ -35,7 +37,8 @@ const DashboardPage = async () => {
     redirect("/sign-in");
   }
 
-  const { data, error } = await supabase.from("users").select("*").eq("id", user?.id);
+  const { data, error } = await supabase.from("users").select("*");
+  // .eq("id", user?.id);
   console.log(data);
 
   if (error) {
@@ -83,7 +86,7 @@ const DashboardPage = async () => {
                 <CardContent>
                   <div className="text-2xl font-bold">{data.length}</div>
                   <p className="text-xs text-muted-foreground">
-                    The total number of people who visited the premises
+                   The total number of people who visited the premises
                   </p>
                 </CardContent>
               </Card>
