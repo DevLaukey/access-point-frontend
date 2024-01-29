@@ -88,7 +88,7 @@ export default function AccountForm({ user }) {
           </div>
         </div>
       </div>
-      {/* <div className="form-widget">
+      <div className="form-widget">
         <Avatar
           uid={user.id}
           url={avatar_url}
@@ -140,7 +140,7 @@ export default function AccountForm({ user }) {
             </button>
           </form>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }

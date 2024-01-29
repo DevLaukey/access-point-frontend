@@ -66,9 +66,22 @@ export default function AccountForm({ user }) {
         <div className="container max-w-screen-md mx-auto md:px-0 px-4 flex justify-center items-center h-[85vh]">
           <div className="mt-5 bg-white  border-2 border-b-8 border-black rounded-xl grid grid-cols-12  justify-between duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 ">
             <div className="col-span-12 md:col-span-8 sm:pt-10 sm:px-8 p-5 flex ">
-              <div className="col-span-4 hidden md:inline m-4">
-                
-                <img
+              <div className="col-span-4 m-auto hidden md:inline ">
+                <Avatar
+                  uid={user.id}
+                  url={user?.user_metadata.avatar_url}
+                  size={150}
+                  onUpload={(url) => {
+                    setAvatarUrl(url);
+                    updateProfile({
+                      fullname,
+                      username,
+                      website,
+                      avatar_url: url,
+                    });
+                  }}
+                />
+                <Image
                   src={user?.user_metadata.avatar_url}
                   alt="Picture of the author"
                   width={200}
@@ -88,7 +101,7 @@ export default function AccountForm({ user }) {
           </div>
         </div>
       </div>
-      {/* <div className="form-widget">
+      <div className="form-widget">
         <Avatar
           uid={user.id}
           url={avatar_url}
@@ -140,7 +153,7 @@ export default function AccountForm({ user }) {
             </button>
           </form>
         </div>
-      </div> */}
+      </div>
     </>
   );
 }
