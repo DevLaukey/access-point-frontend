@@ -62,9 +62,9 @@ const UserClient = ({ data }) => {
         />
         <Button
           className="text-xs md:text-sm"
-          onClick={() => router.push(`/dashboard/users/add-manager`)}
+          onClick={() => router.push(`/dashboard/user/new`)}
         >
-          <Plus className="mr-2 h-4 w-4" /> Add Entry Manager New
+          <Plus className="mr-2 h-4 w-4" /> Add New
         </Button>
       </div>
       <Separator />
