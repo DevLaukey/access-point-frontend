@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Heading } from "../../ui/heading";
 import { useRouter } from "next/navigation";
 import { Separator } from "../../ui/separator";
@@ -12,10 +12,8 @@ import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -65,8 +63,6 @@ const UserClient = ({ data }) => {
       status: "Active",
     },
   ];
-  const [entryPoint, setEntryPoint] = useState("");
-
   return (
     <>
       <div className="flex items-start justify-between">
@@ -77,15 +73,18 @@ const UserClient = ({ data }) => {
         <div className="flex justify-center items-center space-x-4">
           <Dialog>
             <DialogTrigger asChild>
-              <Button className="text-xs md:text-sm">
+              <Button
+                className="text-xs md:text-sm"
+                onClick={() => router.push(`/dashboard/users/add-manager`)}
+              >
                 <Plus className="mr-2 h-4 w-4" /> Add Entry Point
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
               <DialogHeader>
-                <DialogTitle>Add Entry Point</DialogTitle>
+                <DialogTitle>Share link</DialogTitle>
                 <DialogDescription>
-                  This is an access point to the premises
+                  Anyone who has this link will be able to view this.
                 </DialogDescription>
               </DialogHeader>
               <div className="flex items-center space-x-2">
@@ -93,12 +92,14 @@ const UserClient = ({ data }) => {
                   <Label htmlFor="link" className="sr-only">
                     Link
                   </Label>
-
-                  <Input id="link" value={entryPoint} />
+                  <Input
+                    id="link"
+                    defaultValue="https://ui.shadcn.com/docs/installation"
+                    readOnly
+                  />
                 </div>
                 <Button type="submit" size="sm" className="px-3">
-                  <span className="sr-only">Add </span>
-                  <Plus className="h-4 w-4" />
+                  <span className="sr-only">Copy</span>
                 </Button>
               </div>
               <DialogFooter className="sm:justify-start">

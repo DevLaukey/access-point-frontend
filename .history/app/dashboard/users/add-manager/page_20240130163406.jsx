@@ -3,7 +3,7 @@ import BreadCrumb from "../../../../components/breadcrumb";
 import AddManager from "../../../../components/forms/add-manager";
 const page = () => {
   const breadcrumbItems = [
-    { title: "Users", link: "/dashboard/users" },
+    { title: "User", link: "/dashboard/users" },
     { title: "Add Manager", link: "/dashboard/users/add-manager" },
   ];
   return (
@@ -17,7 +17,11 @@ const page = () => {
           { _id: "GATE_B", name: "GATE B" },
           { _id: "GATE_C", name: "GATE C" },
         ]}
-       
+        initialData={
+          ({ _id: "GATE_A", name: "GATE A" },
+          { _id: "GATE_B", name: "GATE B" },
+          { _id: "GATE_C", name: "GATE C" })
+        }
       />
     </div>
   );

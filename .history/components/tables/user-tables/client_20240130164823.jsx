@@ -93,12 +93,12 @@ const UserClient = ({ data }) => {
                   <Label htmlFor="link" className="sr-only">
                     Link
                   </Label>
+                  <Plus className="h-4 w-4" />
 
                   <Input id="link" value={entryPoint} />
                 </div>
                 <Button type="submit" size="sm" className="px-3">
                   <span className="sr-only">Add </span>
-                  <Plus className="h-4 w-4" />
                 </Button>
               </div>
               <DialogFooter className="sm:justify-start">

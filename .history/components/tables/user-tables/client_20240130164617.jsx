@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { Heading } from "../../ui/heading";
 import { useRouter } from "next/navigation";
 import { Separator } from "../../ui/separator";
@@ -93,12 +93,10 @@ const UserClient = ({ data }) => {
                   <Label htmlFor="link" className="sr-only">
                     Link
                   </Label>
-
-                  <Input id="link" value={entryPoint} />
+                  <Input id="link" value={entryPoint} readOnly />
                 </div>
                 <Button type="submit" size="sm" className="px-3">
                   <span className="sr-only">Add </span>
-                  <Plus className="h-4 w-4" />
                 </Button>
               </div>
               <DialogFooter className="sm:justify-start">
