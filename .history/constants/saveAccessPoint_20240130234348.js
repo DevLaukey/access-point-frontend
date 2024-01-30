@@ -1,6 +1,6 @@
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-export default async function saveAccessPoint(entryPoint) {
+export default async function saveAccessPoint({ entryPoint }) {
   const supabase = createClientComponentClient();
   const user = await supabase.auth.getUser();
 

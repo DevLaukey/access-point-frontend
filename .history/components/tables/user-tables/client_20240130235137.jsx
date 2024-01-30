@@ -75,7 +75,7 @@ const UserClient = ({ data }) => {
     const response = await saveAccessPoint(entryPoint);
     if (response.length > 0) {
       setAdded(true);
-      toast("Access Point has been created.");
+      toast("Event has been created.");
 
       setEntryPoint("")
     }

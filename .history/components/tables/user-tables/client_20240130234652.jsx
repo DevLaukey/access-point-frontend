@@ -10,9 +10,6 @@ import { columns } from "./columns";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
-import { Toaster } from "../../ui/sonner";
-import { toast } from "sonner";
-
 import {
   Dialog,
   DialogClose,
@@ -70,21 +67,16 @@ const UserClient = ({ data }) => {
     },
   ];
   const [entryPoint, setEntryPoint] = useState("");
-  const [added, setAdded] = useState(false);
+const [added, removed] = useState(false)
   const saveEntryPoint = async () => {
     const response = await saveAccessPoint(entryPoint);
-    if (response.length > 0) {
-      setAdded(true);
-      toast("Access Point has been created.");
-
-      setEntryPoint("")
+    if (response.length > 0) { 
+      setAdded(true)
     }
   };
 
   return (
     <>
-      <Toaster />
-
       <div className="flex items-start justify-between">
         <Heading
           title={`Users (${data.length})`}

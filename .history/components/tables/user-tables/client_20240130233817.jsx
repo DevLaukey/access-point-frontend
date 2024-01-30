@@ -10,9 +10,6 @@ import { columns } from "./columns";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
-import { Toaster } from "../../ui/sonner";
-import { toast } from "sonner";
-
 import {
   Dialog,
   DialogClose,
@@ -70,21 +67,14 @@ const UserClient = ({ data }) => {
     },
   ];
   const [entryPoint, setEntryPoint] = useState("");
-  const [added, setAdded] = useState(false);
+
   const saveEntryPoint = async () => {
     const response = await saveAccessPoint(entryPoint);
-    if (response.length > 0) {
-      setAdded(true);
-      toast("Access Point has been created.");
-
-      setEntryPoint("")
-    }
+    console.log(response);
   };
 
   return (
     <>
-      <Toaster />
-
       <div className="flex items-start justify-between">
         <Heading
           title={`Users (${data.length})`}
@@ -116,19 +106,18 @@ const UserClient = ({ data }) => {
                     onChange={(e) => setEntryPoint(e.target.value)}
                   />
                 </div>
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="px-3"
-                  onClick={saveEntryPoint}
-                >
+                <Button type="submit" size="sm" className="px-3">
                   <span className="sr-only">Add </span>
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
               <DialogFooter className="sm:justify-start">
                 <DialogClose asChild>
-                  <Button type="button" variant="secondary">
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    onClick={saveEntryPoint}
+                  >
                     Close
                   </Button>
                 </DialogClose>

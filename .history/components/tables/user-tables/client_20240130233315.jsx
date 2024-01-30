@@ -10,9 +10,6 @@ import { columns } from "./columns";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
-import { Toaster } from "../../ui/sonner";
-import { toast } from "sonner";
-
 import {
   Dialog,
   DialogClose,
@@ -23,7 +20,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../../ui/dialog";
-import saveAccessPoint from "../../../constants/saveAccessPoint";
 
 const UserClient = ({ data }) => {
   const router = useRouter();
@@ -70,21 +66,12 @@ const UserClient = ({ data }) => {
     },
   ];
   const [entryPoint, setEntryPoint] = useState("");
-  const [added, setAdded] = useState(false);
-  const saveEntryPoint = async () => {
-    const response = await saveAccessPoint(entryPoint);
-    if (response.length > 0) {
-      setAdded(true);
-      toast("Access Point has been created.");
-
-      setEntryPoint("")
-    }
-  };
+  useEffect(() => {
+    console.log(entryPoint);
+  },[entryPoint, setEntryPoint])
 
   return (
     <>
-      <Toaster />
-
       <div className="flex items-start justify-between">
         <Heading
           title={`Users (${data.length})`}
@@ -110,18 +97,9 @@ const UserClient = ({ data }) => {
                     Link
                   </Label>
 
-                  <Input
-                    id="link"
-                    value={entryPoint}
-                    onChange={(e) => setEntryPoint(e.target.value)}
-                  />
+                  <Input id="link" value={entryPoint} onChange={(e)=> setEntryPoint(e.target.value)} />
                 </div>
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="px-3"
-                  onClick={saveEntryPoint}
-                >
+                <Button type="submit" size="sm" className="px-3">
                   <span className="sr-only">Add </span>
                   <Plus className="h-4 w-4" />
                 </Button>

@@ -14,7 +14,7 @@ const page = () => {
       <AddManager
         title="Add Entry Manager"
         description="Add a new manager to the system"
-        categories={accessPoints}
+        categories={}
        
       />
     </div>

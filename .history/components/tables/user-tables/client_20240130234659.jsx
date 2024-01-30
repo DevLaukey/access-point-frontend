@@ -10,9 +10,6 @@ import { columns } from "./columns";
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
 import { Input } from "../../ui/input";
-import { Toaster } from "../../ui/sonner";
-import { toast } from "sonner";
-
 import {
   Dialog,
   DialogClose,
@@ -75,16 +72,11 @@ const UserClient = ({ data }) => {
     const response = await saveAccessPoint(entryPoint);
     if (response.length > 0) {
       setAdded(true);
-      toast("Access Point has been created.");
-
-      setEntryPoint("")
     }
   };
 
   return (
     <>
-      <Toaster />
-
       <div className="flex items-start justify-between">
         <Heading
           title={`Users (${data.length})`}
