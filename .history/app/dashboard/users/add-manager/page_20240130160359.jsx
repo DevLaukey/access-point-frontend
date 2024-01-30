@@ -15,13 +15,8 @@ const page = () => {
         categories={[
           { _id: "GATE_A", name: "GATE A" },
           { _id: "GATE_B", name: "GATE B" },
-          { _id: "GATE_C", name: "GATE C" },
         ]}
-        initialData={
-          ({ _id: "GATE_A", name: "GATE A" },
-          { _id: "GATE_B", name: "GATE B" },
-          { _id: "GATE_C", name: "GATE C" })
-        }
+        initialData={null}
       />
     </div>
   );
