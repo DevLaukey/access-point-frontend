@@ -14,15 +14,9 @@ export default async function getEntryManagers() {
     if (error) {
       throw new Error(error.message);
     }
-    // get full name from first and last names
-    const newData = data.map((entryManager) => {
-      entryManager.name = `${entryManager.first_name} ${entryManager.last_name}`;
-      return entryManager;
-    });
-    
+
     console.log(data);
-    const result = [{ id: 0, name: "None" }, ...newData];
-    console.log(result);
+    const result = [{ id: 0, name: "None" }, ...data];
     return result;
   } catch (error) {
     console.error("Error fetching access managers:", error);

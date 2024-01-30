@@ -8,10 +8,8 @@ import { toast } from "sonner";
 import { Toaster } from "../ui/sonner";
 
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
 
 function AddManager({ title, description }) {
-  const router = useRouter();
   const supabase = createClientComponentClient();
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);

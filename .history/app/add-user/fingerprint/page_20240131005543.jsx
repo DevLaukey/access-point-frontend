@@ -203,7 +203,7 @@ const Page = () => {
 
         <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
         <h5 className="font-bold mb-4">Add a new visitor</h5>
-        {entryManagers.length != 0 && accessPoints.length != 0 && (
+        {entryManagers.length != 0 && accessPoints.length != 1 && (
           <div
             div
             className="flex flex-wrap space-x-2 justify-center items-center"
