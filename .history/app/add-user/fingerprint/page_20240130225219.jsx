@@ -15,12 +15,12 @@ import {
   SelectValue,
 } from "../../../components/ui/select";
 import getAccessPoints from "../../../constants/getAccessPoints";
-import getEntryManagers from "../../../constants/getAccessManagers";
 
 const Page = () => {
   const router = useRouter();
   const supabase = createClientComponentClient();
 
+  const accessPoints = getAccessPoints();
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState({
     template: "",
     imageQuality: 0,
@@ -37,19 +37,6 @@ const Page = () => {
     useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [data, setData] = useState([]);
-  const [accessPoints, setAccessPoints] = useState([]);
-  const [entryManagers, setEntryManagers] = useState([]);
-  useEffect(() => {
-    getAccessPoints().then((res) => {
-      console.log(res);
-      setAccessPoints(res);
-    });
-
-    getEntryManagers().then((res) => {
-      console.log(res);
-      setEntryManagers(res);
-    });
-  }, []);
 
   useEffect(() => {
     if (firstFingerPrintCaptured && secondFingerprintCaptured) {
@@ -192,6 +179,8 @@ const Page = () => {
     }
   };
 
+  
+
   if (isloading) {
     return <Skeleton color="#202020" highlightColor="#444" />;
   }
@@ -203,37 +192,19 @@ const Page = () => {
 
         <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
         <h5 className="font-bold mb-4">Add a new visitor</h5>
-        {entryManagers.length != 0 && entryManagers.length != 1 && (
-          <div
-            div
-            className="flex flex-wrap space-x-2 justify-center items-center"
-          >
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Access Points" />
-              </SelectTrigger>
-              <SelectContent>
-                {accessPoints.map((manager) => (
-                  <SelectItem key={manager.id} value={manager.id}>
-                    {manager.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Entry Manager" />
-              </SelectTrigger>
-              <SelectContent>
-                {entryManagers.map((manager) => (
-                  <SelectItem key={manager.id} value={manager.id}>
-                    {manager.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
+
+        <Select>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Entry Manager" />
+          </SelectTrigger>
+          <SelectContent>
+            {entryManagers.map((manager) => (
+              <SelectItem key={manager.id} value={manager.id}>
+                {manager.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         {data.length !== 0 &&
           (!fingerprintCapturedError ? (
             <p className="text-green-500 mb-4">

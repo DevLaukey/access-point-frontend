@@ -203,37 +203,33 @@ const Page = () => {
 
         <h1 className="text-4xl font-bold mb-4">Fingerprint Capture</h1>
         <h5 className="font-bold mb-4">Add a new visitor</h5>
-        {entryManagers.length != 0 && entryManagers.length != 1 && (
-          <div
-            div
-            className="flex flex-wrap space-x-2 justify-center items-center"
-          >
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Access Points" />
-              </SelectTrigger>
-              <SelectContent>
-                {accessPoints.map((manager) => (
-                  <SelectItem key={manager.id} value={manager.id}>
-                    {manager.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            <Select>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Entry Manager" />
-              </SelectTrigger>
-              <SelectContent>
-                {entryManagers.map((manager) => (
-                  <SelectItem key={manager.id} value={manager.id}>
-                    {manager.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        )}
+        <div className="flex flex-wrap  justify-center items-center">
+          <Select className="m-2">
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Entry Points" />
+            </SelectTrigger>
+            <SelectContent>
+              {entryManagers.map((manager) => (
+                <SelectItem key={manager.id} value={manager.id}>
+                  {manager.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder="Entry Points" />
+            </SelectTrigger>
+            <SelectContent>
+              {entryManagers.map((manager) => (
+                <SelectItem key={manager.id} value={manager.id}>
+                  {manager.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
         {data.length !== 0 &&
           (!fingerprintCapturedError ? (
             <p className="text-green-500 mb-4">
