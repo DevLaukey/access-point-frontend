@@ -7,7 +7,7 @@ export default async function getEntryManagers() {
   const id = user.data.user.id;
   try {
     const { data, error } = await supabase
-      .from("entry_manager")
+      .from("access-manager")
       .eq("admin_id", id)
       .select("*");
     if (error) {
