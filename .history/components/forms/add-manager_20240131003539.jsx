@@ -4,9 +4,7 @@ import { Heading } from "../ui/heading";
 import { Button } from "../ui/button";
 import { Trash } from "lucide-react";
 import { Separator } from "../ui/separator";
-import { toast } from "sonner";
-import { Toaster } from "../ui/sonner";
-
+import saveAccessManager from "../../constants/saveAccessManagers";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 function AddManager({ title, description }) {
@@ -55,7 +53,7 @@ function AddManager({ title, description }) {
 
       const user = await supabase.auth.getUser();
       const id = user.data.user?.id;
-      const { data, error } = await supabase.from("entry_manager").insert([
+      const { data, error } = await supabase.from("entry-manager").insert([
         {
           first_name,
           last_name,
@@ -69,8 +67,6 @@ function AddManager({ title, description }) {
         throw new Error(error.message);
       }
 
-      toast("Entry Manager has been added.");
-
       setData(data);
       setError(false);
       setFirstName("");
@@ -83,37 +79,20 @@ function AddManager({ title, description }) {
       setLoading(false);
     }
   };
-  const clearData = () => {
-    setData([]);
-    setFirstName("");
-    setLastName("");
-    setPhoneNumber("");
-    setEntryPointId("");
-  };
   return (
     <>
-      <Toaster />
-
-      {error && (
-        <div
-          className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
-          role="alert"
-        >
-          <strong className="font-bold">Error!</strong>
-          <span className="block sm:inline"> Please fill out all fields.</span>
-        </div>
-      )}
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
-
-        <Button
-          disabled={loading}
-          variant="destructive"
-          size="sm"
-          onClick={clearData}
-        >
-          <Trash className="h-4 w-4" />
-        </Button>
+        {data.length !== 0 && (
+          <Button
+            disabled={loading}
+            variant="destructive"
+            size="sm"
+            onClick={() => setOpen(true)}
+          >
+            <Trash className="h-4 w-4" />
+          </Button>
+        )}
       </div>
       <Separator />
       <div className="flex mt-8 justify-center items-center">
@@ -130,15 +109,14 @@ function AddManager({ title, description }) {
                 className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-red-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none "
                 id="grid-first-name"
                 type="text"
-                value={first_name}
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Jane"
               />
-              {/* {error && (
+              {error && (
                 <p className="text-red-500 text-xs italic">
                   Please fill out this field.
                 </p>
-              )} */}
+              )}
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
@@ -151,7 +129,6 @@ function AddManager({ title, description }) {
                 className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
                 id="grid-last-name"
                 type="text"
-                value={last_name}
                 onChange={(e) => setLastName(e.target.value)}
                 placeholder="Doe"
               />
@@ -170,7 +147,6 @@ function AddManager({ title, description }) {
                 className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"
                 id="grid-phone_number"
                 type="text"
-                value={phone_number}
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 placeholder="0707070707"
               />
@@ -186,7 +162,6 @@ function AddManager({ title, description }) {
                 <select
                   className="block appearance-none w-full  border border-gray-200 text-gray-700 dark:text-gray-300 py-3 px-4 pr-8 rounded leading-tight focus:outline-none  focus:border-gray-500"
                   id="grid-state"
-                  value={entry_point_id}
                   onChange={(e) => {
                     console.log(e.target.value),
                       setEntryPointId(e.target.value);
@@ -219,7 +194,7 @@ function AddManager({ title, description }) {
               type="submit"
               onClick={(e) => {
                 e.preventDefault();
-                addManager();
+                console.log("acdasd");
               }}
             >
               Add Manager

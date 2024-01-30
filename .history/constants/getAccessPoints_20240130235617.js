@@ -5,20 +5,17 @@ export default async function getAccessPoints() {
 
   const user = await supabase.auth.getUser();
 
-  console.log(user.data.user?.id);
+  console.log(user);
   const id = user.data.user?.id;
 
   try {
     const { data, error } = await supabase
       .from("access-point")
-      .select("*")
-      .eq("admin_id", id);
-
+      .eq("admin_id", id)
+      .select("*");
     if (error) {
       throw new Error(error.message);
     }
-
-    console.log(data);
     return data;
   } catch (error) {
     console.error("Error fetching access points:", error);

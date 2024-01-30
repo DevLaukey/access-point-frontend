@@ -69,7 +69,7 @@ function AddManager({ title, description }) {
         throw new Error(error.message);
       }
 
-      toast("Entry Manager has been added.");
+      data && toast("Entry Manager has been added.");
 
       setData(data);
       setError(false);

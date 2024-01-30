@@ -5,7 +5,7 @@ export default async function getAccessPoints() {
 
   const user = await supabase.auth.getUser();
 
-  console.log(user.data.user?.id);
+  console.log();
   const id = user.data.user?.id;
 
   try {

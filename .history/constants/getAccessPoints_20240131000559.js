@@ -5,7 +5,7 @@ export default async function getAccessPoints() {
 
   const user = await supabase.auth.getUser();
 
-  console.log(user.data.user?.id);
+  console.log(user);
   const id = user.data.user?.id;
 
   try {
@@ -18,7 +18,7 @@ export default async function getAccessPoints() {
       throw new Error(error.message);
     }
 
-    console.log(data);
+    console.
     return data;
   } catch (error) {
     console.error("Error fetching access points:", error);

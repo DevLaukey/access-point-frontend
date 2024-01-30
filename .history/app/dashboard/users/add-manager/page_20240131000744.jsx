@@ -8,13 +8,23 @@ const page = async () => {
     { title: "Add Manager", link: "/dashboard/users/add-manager" },
   ];
 
-
+  const accessPoints = await supabase
+    .from("access-point")
+    .select("*")
+    .eq("admin_id", id)
+    .then((accessPoints) => {
+      if (accessPoints.error) {
+        return [];
+      }
+      return accessPoints.data;
+    });
   return (
     <div className="flex-1 space-y-4 p-8">
       <BreadCrumb items={breadcrumbItems} />
       <AddManager
         title="Add Entry Manager"
         description="Add a new manager to the system"
+        accessPoints={accessPoints}
       />
     </div>
   );

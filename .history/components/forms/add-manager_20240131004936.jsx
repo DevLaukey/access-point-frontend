@@ -69,7 +69,7 @@ function AddManager({ title, description }) {
         throw new Error(error.message);
       }
 
-      toast("Entry Manager has been added.");
+      data && toast("Entry Manager has been added.");
 
       setData(data);
       setError(false);
@@ -92,8 +92,6 @@ function AddManager({ title, description }) {
   };
   return (
     <>
-      <Toaster />
-
       {error && (
         <div
           className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
