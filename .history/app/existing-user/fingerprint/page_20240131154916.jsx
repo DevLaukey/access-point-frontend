@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Link from "next/link";
+import Link from 'next/link'
 import UserResult from "../../../components/fingerprint/user-result";
 import Skeleton from "../../../components/ui/skeleton";
 
@@ -100,7 +100,7 @@ const Page = () => {
       if (error) {
         throw new Error(error.message);
       }
-      console.log(fingerprints);
+      console.log(fingerprints)
 
       setFingerPrints(fingerprints);
     } catch (error) {
@@ -130,7 +130,7 @@ const Page = () => {
       .then((response) => response.json())
       .then((result) => {
         setIsLoading(false);
-        console.log(result);
+        console.log(result)
 
         if (result?.isMatch === true) {
           setIsMatch("success");

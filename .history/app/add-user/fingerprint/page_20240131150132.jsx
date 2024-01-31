@@ -176,17 +176,13 @@ const Page = () => {
         template = fingerprintTemplate2.template;
       }
 
-      const user = await supabase.auth.getUser();
-
-      const id = user.data.user?.id;
       const { data, error } = await supabase
         .from("fingerprints")
         .insert([
           {
             fingerprint_template: template,
-            access_point: selectedAccessPoint,
+            access_id: selectedAccessPoint,
             entry_manager: selectedEntryManager,
-            admin_id: id,
           },
         ])
         .select();

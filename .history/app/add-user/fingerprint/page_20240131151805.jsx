@@ -167,7 +167,11 @@ const Page = () => {
 
   const saveFingerPrint = async () => {
     try {
+      const user = await supabase.auth.getUser();
+
+      const id = user.data.user?.id;
       let template;
+
       if (
         fingerprintTemplate1.imageQuality > fingerprintTemplate2.imageQuality
       ) {
@@ -176,9 +180,6 @@ const Page = () => {
         template = fingerprintTemplate2.template;
       }
 
-      const user = await supabase.auth.getUser();
-
-      const id = user.data.user?.id;
       const { data, error } = await supabase
         .from("fingerprints")
         .insert([

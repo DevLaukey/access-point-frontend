@@ -6,7 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Link from "next/link";
+import Link from 'next/link'
 import UserResult from "../../../components/fingerprint/user-result";
 import Skeleton from "../../../components/ui/skeleton";
 
@@ -25,7 +25,7 @@ const Page = () => {
 
   useEffect(() => {
     getFingerprints();
-  }, [fingerprintCaptured]);
+  }, []);
 
   useEffect(() => {
     fingerprints.forEach((fingerprint) => {
@@ -90,17 +90,17 @@ const Page = () => {
   const getFingerprints = async () => {
     try {
       const userObj = await supabase.auth.getUser();
-      const id = userObj.data.user.id;
+      const id = userObj?.data.user.id;
 
       let { data: fingerprints, error } = await supabase
         .from("fingerprints")
         .select("*")
-        .eq("admin_id ", id);
+        // .eq("admin_id ", id);
 
       if (error) {
         throw new Error(error.message);
       }
-      console.log(fingerprints);
+      console.log(fingerprints)
 
       setFingerPrints(fingerprints);
     } catch (error) {
@@ -130,7 +130,7 @@ const Page = () => {
       .then((response) => response.json())
       .then((result) => {
         setIsLoading(false);
-        console.log(result);
+        console.log(result)
 
         if (result?.isMatch === true) {
           setIsMatch("success");
