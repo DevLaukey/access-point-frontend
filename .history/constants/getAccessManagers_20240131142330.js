@@ -21,6 +21,7 @@ export default async function getEntryManagers() {
     });
     
     const result = [{ id: 0, name: "None" }, ...newData];
+    console.log(result);
     return result;
   } catch (error) {
     console.error("Error fetching access managers:", error);

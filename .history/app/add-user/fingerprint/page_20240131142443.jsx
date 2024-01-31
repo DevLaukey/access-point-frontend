@@ -39,8 +39,9 @@ const Page = () => {
   const [data, setData] = useState([]);
   const [accessPoints, setAccessPoints] = useState([]);
   const [entryManagers, setEntryManagers] = useState([]);
-  const [selectedAccessPoint, setSelectedAccessPoint] = useState(null);
-  const [selectedEntryManager, setSelectedEntryManager] = useState(null);
+ const [selectedAccessPoint, setSelectedAccessPoint] = useState(null);
+ const [selectedEntryManager, setSelectedEntryManager] = useState(null);
+
 
   useEffect(() => {
     getAccessPoints().then((res) => {
@@ -178,13 +179,7 @@ const Page = () => {
 
       const { data, error } = await supabase
         .from("fingerprints")
-        .insert([
-          {
-            fingerprint_template: template,
-            access_point_id: selectedAccessPoint,
-            entry_manager_id: selectedEntryManager,
-          },
-        ])
+        .insert([{ fingerprint_template: template,  }])
         .select();
 
       if (error) {
@@ -199,15 +194,16 @@ const Page = () => {
     }
   };
 
+
   const handleAccessPointChange = (value) => {
-    console.log(value);
-    setSelectedAccessPoint(value);
-  };
+      console.log(value);
+      setSelectedAccessPoint(value);
+    };
 
   const handleEntryManagerChange = (value) => {
-    console.log(value);
-    setSelectedEntryManager(value);
-  };
+      console.log(value); 
+      setSelectedEntryManager(value);
+    };  
   if (isloading) {
     return <Skeleton color="#202020" highlightColor="#444" />;
   }
