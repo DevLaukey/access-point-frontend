@@ -123,7 +123,7 @@ const DashboardPage = async () => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{ accessPoint.length}</div>
+                  <div className="text-2xl font-bold">4</div>
                   <p className="text-xs text-muted-foreground">
                     The number of places with the access system
                   </p>
@@ -150,7 +150,7 @@ const DashboardPage = async () => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{ accessManagers.length}</div>
+                  <div className="text-2xl font-bold">8</div>
                   <p className="text-xs text-muted-foreground">
                     The number of people who manage the access system.
                   </p>

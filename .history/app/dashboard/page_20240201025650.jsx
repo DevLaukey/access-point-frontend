@@ -43,19 +43,16 @@ const DashboardPage = async () => {
   const { data: accessPoint, error: accessPointError } = await supabase
     .from("access-point")
     .select("admin_id")
-    .eq("admin_id", user?.id);
+    .eq("admin_user", user?.id);
 
   // get access managers
   const { data: accessManagers, error: accessManagersError } = await supabase
     .from("entry_manager")
     .select("id")
-    .eq("admin_id", user?.id);
-  
-  if (error || accessPointError || accessManagersError) {
+    .eq("admin_user", user?.id);
+  if (error) {
     console.log(error);
-    console.log(accessPointError);
-    console.log(accessManagersError);
-    }
+  }
 
   return (
     <ScrollArea className="h-full mt-8">
@@ -123,7 +120,7 @@ const DashboardPage = async () => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{ accessPoint.length}</div>
+                  <div className="text-2xl font-bold">4</div>
                   <p className="text-xs text-muted-foreground">
                     The number of places with the access system
                   </p>
@@ -150,7 +147,7 @@ const DashboardPage = async () => {
                   </svg>
                 </CardHeader>
                 <CardContent>
-                  <div className="text-2xl font-bold">{ accessManagers.length}</div>
+                  <div className="text-2xl font-bold">8</div>
                   <p className="text-xs text-muted-foreground">
                     The number of people who manage the access system.
                   </p>
