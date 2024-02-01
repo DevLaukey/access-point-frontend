@@ -42,13 +42,13 @@ const DashboardPage = async () => {
   // get access point
   const { data: accessPoint, error: accessPointError } = await supabase
     .from("access-point")
-    .select("*")
+    .select("admin_id")
     .eq("admin_id", user?.id);
 
   // get access managers
   const { data: accessManagers, error: accessManagersError } = await supabase
     .from("entry_manager")
-    .select("*")
+    .select("id")
     .eq("admin_id", user?.id);
   
   if (error || accessPointError || accessManagersError) {
@@ -174,7 +174,7 @@ const DashboardPage = async () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <RecentSales users={data} entryPoint={accessPoint } entryManager={ accessManagers} />
+                  <RecentSales entryPoint={accessPoint } entryManager={ accessManagers} />
                 </CardContent>
               </Card>
             </div>

@@ -174,7 +174,7 @@ const DashboardPage = async () => {
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <RecentSales users={data} entryPoint={accessPoint } entryManager={ accessManagers} />
+                  <RecentSales users={data} entryPoints={accessPoint } entryManager={ accessManagers} />
                 </CardContent>
               </Card>
             </div>

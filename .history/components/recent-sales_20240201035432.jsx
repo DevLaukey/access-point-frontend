@@ -1,7 +1,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export function RecentSales({ users, entryPoint, entryManager }) {
-  console.log(users);
+  console.log(users, entryPoint, entryManager);
 
   //create an array from entryPoint which has the frequency of how many times the entryPoint has been visited
   //sort the array in descending order
@@ -46,14 +46,14 @@ export function RecentSales({ users, entryPoint, entryManager }) {
                 </AvatarFallback>
               </Avatar>
               <h2>{entryPoint.entry_point_name} : </h2>
+              <p className="ml-auto font-medium">
+                {entryPoint.entry_manager_name}
+              </p>
             </div>
-            <p className="ml-auto font-medium">
-              {entryPoint.entry_manager_name}
-            </p>
-            {/* <div className="ml-auto font-medium">
+            <div className="ml-auto font-medium">
               {getNumberOfUsers(entryPoint.entry_point_name)}
               <span className="font-small"> visitors</span>{" "}
-            </div>  */}
+            </div>
           </div>
         ))}
       </div>

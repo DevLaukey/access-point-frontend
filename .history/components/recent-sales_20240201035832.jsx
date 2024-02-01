@@ -47,9 +47,9 @@ export function RecentSales({ users, entryPoint, entryManager }) {
               </Avatar>
               <h2>{entryPoint.entry_point_name} : </h2>
             </div>
-            <p className="ml-auto font-medium">
-              {entryPoint.entry_manager_name}
-            </p>
+              <p className="ml-auto font-medium">
+                {entryPoint.entry_manager_name}
+              </p>
             {/* <div className="ml-auto font-medium">
               {getNumberOfUsers(entryPoint.entry_point_name)}
               <span className="font-small"> visitors</span>{" "}
