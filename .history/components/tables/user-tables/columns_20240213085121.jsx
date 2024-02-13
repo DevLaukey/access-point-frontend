@@ -25,18 +25,15 @@ export const columns = [
   },
   {
     accessorKey: "full_name",
-    header: "Name",
+    header: "NAME",
   },
   {
     accessorKey: "company",
     header: "INSTITUTION",
   },
   {
-    accessorKey: "arrival_time",
-    header: "Arrival Time",
-  }, {
-    accessorKey: "departure_time",
-    header: "Depature Time"
+    accessorKey: "role",
+    header: "DATE",
   },
   {
     accessorKey: "status",
