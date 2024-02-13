@@ -10,12 +10,13 @@ export default async function page() {
     cookies: () => cookieStore,
   });
 
-  let { data: userDetails, error: userError } = await supabase.from("users")
+  let { data: userDetails, error: userError } = await supabase
+    .from("users")
     .select(`
     *,
-   access-point: access-point(*)
+    access_point: access-point(*)
     `);
-
+  
   console.log(userDetails);
   if (userError) {
     console.log(userError);
@@ -26,7 +27,7 @@ export default async function page() {
   //     .from("access-point")
   //     .select("*")
   //     .eq("user_id", userDetails.id);
-
+ 
   //   if (error) {
   //     console.log(error);
   //   }

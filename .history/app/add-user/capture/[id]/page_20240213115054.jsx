@@ -22,14 +22,13 @@ import { Label } from "../../../../components/ui/label";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useParams, useRouter, usePathname,useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../../components/layout/header";
 
 const Page = () => {
   const router = useRouter();
-  const { id } = useParams();
-  const accessPointID = useParams().get('accessPointID');
+  const { id , accessPointID} = useParams();
   const [uniqueId, setUniqueId] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");

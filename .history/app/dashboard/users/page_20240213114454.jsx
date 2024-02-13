@@ -13,7 +13,9 @@ export default async function page() {
   let { data: userDetails, error: userError } = await supabase.from("users")
     .select(`
     *,
-   access-point: access-point(*)
+    fingerprints(
+      access_point
+    )
     `);
 
   console.log(userDetails);
