@@ -27,7 +27,48 @@ import saveAccessPoint from "../../../constants/saveAccessPoint";
 
 const UserClient = ({ data }) => {
   const router = useRouter();
-
+  const User = [
+    {
+      id: 1,
+      name: "Candice Schiner",
+      company: "Dell",
+      role: "Frontend Developer",
+      verified: false,
+      status: "Active",
+    },
+    {
+      id: 2,
+      name: "John Doe",
+      company: "TechCorp",
+      role: "Backend Developer",
+      verified: true,
+      status: "Active",
+    },
+    {
+      id: 3,
+      name: "Alice Johnson",
+      company: "WebTech",
+      role: "UI Designer",
+      verified: true,
+      status: "Active",
+    },
+    {
+      id: 4,
+      name: "David Smith",
+      company: "Innovate Inc.",
+      role: "Fullstack Developer",
+      verified: false,
+      status: "Inactive",
+    },
+    {
+      id: 5,
+      name: "Emma Wilson",
+      company: "TechGuru",
+      role: "Product Manager",
+      verified: true,
+      status: "Active",
+    },
+  ];
   const [entryPoint, setEntryPoint] = useState("");
   const saveEntryPoint = async () => {
     const response = await saveAccessPoint(entryPoint);

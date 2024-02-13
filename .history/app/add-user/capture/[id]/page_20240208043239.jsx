@@ -60,7 +60,8 @@ const Page = () => {
         .insert([
           {
             id_number: idNumber,
-            full_name: `${firstName} ${lastName}`,
+            first_name: firstName,
+            last_name: lastName,
             fingerprint_id: id,
             admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),
@@ -84,8 +85,8 @@ const Page = () => {
     const generatedId = id;
     user &&
       setUniqueId({
-        fingerPrintID: generatedId,
-        admin_user: user.id,
+        "fingerPrintID": generatedId,
+        "admin_user": user.id,
       });
   }, [id, user]);
 

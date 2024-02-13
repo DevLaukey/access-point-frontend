@@ -1,7 +1,7 @@
 import BreadCrumb from "../../../components/breadcrumb";
 import UserClient from "../../../components/tables/user-tables/client";
 
-const breadcrumbItems = [{ title: "Visitors", link: "/dashboard/visitors" }];
+const breadcrumbItems = [{ title: "User", link: "/dashboard/users" }];
 export default function page() {
   const users = [
     {
@@ -13,7 +13,7 @@ export default function page() {
       status: "Logged out",
     },
     {
-      id: 2,
+      id: 1,
       name: "Professor Joseph",
       company: "Dell",
       role: "5 Feb 2023",
@@ -21,7 +21,7 @@ export default function page() {
       status: "Logged out",
     },
     {
-      id: 3,
+      id: 1,
       name: "Professor Joseph",
       company: "Dell",
       role: "5 Feb 2023",
@@ -29,7 +29,7 @@ export default function page() {
       status: "Logged out",
     },
     {
-      id: 4,
+      id: 1,
       name: "Professor Joseph",
       company: "Dell",
       role: "5 Feb 2023",
@@ -37,7 +37,7 @@ export default function page() {
       status: "Logged out",
     },
     {
-      id: 5,
+      id: 1,
       name: "Professor Joseph",
       company: "Dell",
       role: "5 Feb 2023",

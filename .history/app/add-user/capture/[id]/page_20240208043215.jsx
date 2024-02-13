@@ -60,7 +60,8 @@ const Page = () => {
         .insert([
           {
             id_number: idNumber,
-            full_name: `${firstName} ${lastName}`,
+            first_name: firstName,
+            last_name: lastName,
             fingerprint_id: id,
             admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),

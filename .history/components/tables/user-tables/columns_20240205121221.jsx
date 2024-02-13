@@ -29,11 +29,11 @@ export const columns = [
   },
   {
     accessorKey: "company",
-    header: "INSTITUTION",
+    header: "Institution",
   },
   {
     accessorKey: "role",
-    header: "DATE",
+    header: "ROLE",
   },
   {
     accessorKey: "status",

@@ -60,7 +60,8 @@ const Page = () => {
         .insert([
           {
             id_number: idNumber,
-            full_name: `${firstName} ${lastName}`,
+            first_name: firstName,
+            last_name: lastName,
             fingerprint_id: id,
             admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),
@@ -79,17 +80,16 @@ const Page = () => {
     }
   }
 
-  useEffect(() => {
-    // Generate a unique ID here
-    const generatedId = id;
-    user &&
-      setUniqueId({
-        fingerPrintID: generatedId,
-        admin_user: user.id,
-      });
-  }, [id, user]);
+useEffect(() => {
+  // Generate a unique ID here
+  const generatedId = id;
+  user && setUniqueId({
+    fingerPrintID: generatedId,
+    admin_user: user.id,
+  });
+}, [id, user]);
 
-  console.log(JSON.stringify(uniqueId));
+  console.log(JSON.stringify(uniqueId)  );
 
   const confirmEntry = () => {
     setConfirmEntryValues(true);

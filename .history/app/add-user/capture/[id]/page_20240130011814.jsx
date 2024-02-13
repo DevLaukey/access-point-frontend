@@ -29,7 +29,7 @@ import Header from "../../../../components/layout/header";
 const Page = () => {
   const router = useRouter();
   const { id } = useParams();
-  const [uniqueId, setUniqueId] = useState({});
+  const [uniqueId, setUniqueId] = useState();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [idNumber, setIdNumber] = useState("");
@@ -37,6 +37,7 @@ const Page = () => {
   const supabase = createClientComponentClient();
   const [fingerprintTemplate, setFingerprintTemplate] = useState("");
   const [confirmEntryValues, setConfirmEntryValues] = useState(false);
+
 
   useEffect(() => {
     getUserDetails();
@@ -60,7 +61,8 @@ const Page = () => {
         .insert([
           {
             id_number: idNumber,
-            full_name: `${firstName} ${lastName}`,
+            first_name: firstName,
+            last_name: lastName,
             fingerprint_id: id,
             admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),
@@ -82,14 +84,8 @@ const Page = () => {
   useEffect(() => {
     // Generate a unique ID here
     const generatedId = id;
-    user &&
-      setUniqueId({
-        fingerPrintID: generatedId,
-        admin_user: user.id,
-      });
-  }, [id, user]);
-
-  console.log(JSON.stringify(uniqueId));
+    setUniqueId(generatedId);
+  }, []);
 
   const confirmEntry = () => {
     setConfirmEntryValues(true);
@@ -134,6 +130,7 @@ const Page = () => {
       console.log(error);
     }
   };
+  
 
   if (confirmEntryValues) {
     return (
@@ -294,7 +291,7 @@ const Page = () => {
                   <QRCode
                     size={150}
                     style={{ height: "200", maxWidth: "100%", width: "100%" }}
-                    value={JSON.stringify(uniqueId)} // Convert to JSON string
+                    value={uniqueId}
                     viewBox={`500 500 500 500`}
                   />
                 </div>
