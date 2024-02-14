@@ -22,20 +22,14 @@ import { Label } from "../../../../components/ui/label";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {
-  useParams,
-  useRouter,
-  usePathname,
-  useSearchParams,
-} from "next/navigation";
+import { useParams, useRouter, usePathname,useSearchParams } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../../components/layout/header";
 
 const Page = () => {
   const router = useRouter();
   const { id } = useParams();
-  const selectedAccessPoint = localStorage.getItem("access_point");
-  console.log(id, selectedAccessPoint);
+  const accessPointID = useParams().get('accessPointID');
   const [uniqueId, setUniqueId] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -70,8 +64,8 @@ const Page = () => {
             full_name: `${firstName} ${lastName}`,
             fingerprint_id: id,
             admin_user: admin_user_id,
-            arrival_time: new Date().toISOString(),
-            access_point_id: selectedAccessPoint,
+            arrival_time: new Date().toISOString(), 
+            access_point_id: accessPointID,
           },
         ])
         .select();

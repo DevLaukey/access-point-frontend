@@ -34,7 +34,7 @@ import Header from "../../../../components/layout/header";
 const Page = () => {
   const router = useRouter();
   const { id } = useParams();
-  const selectedAccessPoint = localStorage.getItem("access_point");
+  const selectedAccessPoint = localStorage.getItem("selectedAccessPoint");
   console.log(id, selectedAccessPoint);
   const [uniqueId, setUniqueId] = useState({});
   const [firstName, setFirstName] = useState("");

@@ -5,7 +5,8 @@ import React from "react";
 
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../../components/ui/scroll-area";
-import DashboardTabs from "../../components/dashboard-tabs";
+
+import { DashboardTabs } from "../../components/dashboardtabs";
 
 const DashboardPage = async () => {
   const cookieStore = cookies();

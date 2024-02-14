@@ -33,9 +33,8 @@ import Header from "../../../../components/layout/header";
 
 const Page = () => {
   const router = useRouter();
-  const { id } = useParams();
-  const selectedAccessPoint = localStorage.getItem("access_point");
-  console.log(id, selectedAccessPoint);
+  const fingerprintId = useParams().fingerprint_id;
+  const selectedAccessPoint = useParams().selectedAccessPoint;
   const [uniqueId, setUniqueId] = useState({});
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -68,7 +67,7 @@ const Page = () => {
           {
             id_number: idNumber,
             full_name: `${firstName} ${lastName}`,
-            fingerprint_id: id,
+            fingerprint_id: fingerprintId,
             admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),
             access_point_id: selectedAccessPoint,

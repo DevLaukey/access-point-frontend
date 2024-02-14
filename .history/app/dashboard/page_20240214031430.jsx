@@ -2,10 +2,27 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import React from "react";
+import { Button } from "../../components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
 
 import { redirect } from "next/navigation";
 import { ScrollArea } from "../../components/ui/scroll-area";
-import DashboardTabs from "../../components/dashboard-tabs";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "../../components/ui/tabs";
+import { Overview } from "../../components/overview";
+import { RecentSales } from "../../components/recent-sales";
+import { DashboardTabs } from "../../components/dashboardtabs";
 
 const DashboardPage = async () => {
   const cookieStore = cookies();
@@ -53,7 +70,7 @@ const DashboardPage = async () => {
             {/* <Button >Add new user</Button> */}
           </div>
         </div>
-        <DashboardTabs />
+<DashboardTabs/>
       </div>
     </ScrollArea>
   );

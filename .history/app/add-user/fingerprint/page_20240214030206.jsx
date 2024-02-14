@@ -195,9 +195,8 @@ const Page = () => {
         throw new Error(error.message);
       }
       console.log(data);
-      localStorage.setItem("access_point", selectedAccessPoint);
       // route to capture/[id] page and pass both the access point and the fingerprint id
-      router.push(`capture/${data[0].id}`);
+      router.push(`/capture/${data[0].id, selectedAccessPoint}`);
 
      
     } catch (e) {
