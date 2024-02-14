@@ -31,7 +31,7 @@ export default async function page() {
       const status = visitor.departure_time ? "Out of premise" : "In premise";
       const departureTime = visitor.departure_time
         ? new Date(visitor.departure_time)
-        : "-";
+        : null;
 
       return {
         id: visitor.id,

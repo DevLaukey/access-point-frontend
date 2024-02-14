@@ -132,6 +132,8 @@ const Page = () => {
       if (error) {
         throw new Error(error.message);
       }
+
+   
       toast.success("User details updated successfully");
 
       router.push("/dashboard");

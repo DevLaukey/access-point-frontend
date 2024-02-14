@@ -97,6 +97,7 @@ const Page = () => {
       });
   }, [id, user]);
 
+  console.log(JSON.stringify(uniqueId));
 
   const confirmEntry = () => {
     setConfirmEntryValues(true);
@@ -132,6 +133,8 @@ const Page = () => {
       if (error) {
         throw new Error(error.message);
       }
+
+      console.log(data);
       toast.success("User details updated successfully");
 
       router.push("/dashboard");

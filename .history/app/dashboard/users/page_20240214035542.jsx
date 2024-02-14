@@ -24,14 +24,14 @@ export default async function page() {
     return visitors.map((visitor) => {
       const arrivalTime = new Date(visitor.arrival_time);
       const formattedArrivalTime = arrivalTime
-        .toLocaleDateString()
+        .toLocaleTimeString()
         .replace(/:\d+ /, " ")
         .replace(/:\d+/, " ");
 
       const status = visitor.departure_time ? "Out of premise" : "In premise";
       const departureTime = visitor.departure_time
         ? new Date(visitor.departure_time)
-        : "-";
+        : null;
 
       return {
         id: visitor.id,

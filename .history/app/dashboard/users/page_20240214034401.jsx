@@ -16,36 +16,23 @@ export default async function page() {
     access_point_id: access-point(*)
     `);
 
+  console.log(userDetails);
   if (userError) {
     console.log(userError);
   }
 
-  const processVisitorData = (visitors) => {
-    return visitors.map((visitor) => {
-      const arrivalTime = new Date(visitor.arrival_time);
-      const formattedArrivalTime = arrivalTime
-        .toLocaleDateString()
-        .replace(/:\d+ /, " ")
-        .replace(/:\d+/, " ");
+  // if (userDetails) {
+  //   let { data: access_point, error } = await supabase
+  //     .from("access-point")
+  //     .select("*")
+  //     .eq("user_id", userDetails.id);
 
-      const status = visitor.departure_time ? "Out of premise" : "In premise";
-      const departureTime = visitor.departure_time
-        ? new Date(visitor.departure_time)
-        : "-";
+  //   if (error) {
+  //     console.log(error);
+  //   }
+  // }
+  // console.log(users);
 
-      return {
-        id: visitor.id,
-        full_name: visitor.full_name,
-        arrival_time: formattedArrivalTime,
-        access_point_name: visitor.access_point_id.name,
-        status: status,
-        departure_time: departureTime,
-      };
-    });
-  };
-
-  const processedData = processVisitorData(userDetails);
-  console.log(processedData);
   const users = [
     {
       id: 1,
@@ -93,7 +80,7 @@ export default async function page() {
     <>
       <div className="flex-1 space-y-4  p-4 md:p-8 pt-6">
         <BreadCrumb items={breadcrumbItems} />
-        <UserClient data={processedData} />
+        <UserClient data={users} />
       </div>
     </>
   );

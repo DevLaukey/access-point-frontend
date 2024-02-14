@@ -23,15 +23,14 @@ export default async function page() {
   const processVisitorData = (visitors) => {
     return visitors.map((visitor) => {
       const arrivalTime = new Date(visitor.arrival_time);
-      const formattedArrivalTime = arrivalTime
-        .toLocaleDateString()
-        .replace(/:\d+ /, " ")
-        .replace(/:\d+/, " ");
+      const formattedArrivalTime = `${arrivalTime.getDate()}${
+        arrivalTime.getMonth() + 1
+      }${arrivalTime.getFullYear() % 100}`;
 
       const status = visitor.departure_time ? "Out of premise" : "In premise";
       const departureTime = visitor.departure_time
         ? new Date(visitor.departure_time)
-        : "-";
+        : null;
 
       return {
         id: visitor.id,

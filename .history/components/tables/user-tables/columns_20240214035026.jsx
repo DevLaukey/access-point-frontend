@@ -28,7 +28,7 @@ export const columns = [
     header: "Name",
   },
   {
-    accessorKey: "access_point_name",
+    accessorKey: "entry_point",
     header: "Entry Point",
   },
   {
