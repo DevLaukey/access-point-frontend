@@ -62,7 +62,7 @@ export default function AccountForm({ user }) {
   return (
     <>
       <ToastContainer />
-      <div className=" bg-myBG min-h-screen py-5 mx-5 ">
+      <div className=" bg-myBG min-h-screen py- m5 ">
         <div className="container max-w-screen-md mx-auto md:px-0 px-4 flex justify-center items-center h-[85vh]">
           <div className="mt-5 bg-white  border-2 border-b-8 border-black rounded-xl grid grid-cols-12  justify-between duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 ">
             <div className="col-span-12 md:col-span-8 sm:pt-10 sm:px-8 p-5 flex ">

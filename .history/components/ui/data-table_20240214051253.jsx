@@ -42,7 +42,7 @@ export function DataTable({
      
         <Input
           placeholder={`Search ${searchKey}...`}
-          value={searchKey &&((table.getColumn(searchKey)?.getFilterValue() ) ?? "")}
+          value={searchKey &&(table.getColumn(searchKey)?.getFilterValue() ) ?? ""}
           onChange={(event) =>
             table.getColumn(searchKey)?.setFilterValue(event.target.value)
           }
