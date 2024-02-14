@@ -40,21 +40,21 @@ export function DataTable({
       // Handle access point search
       // You might need to adjust this based on your table library
       // For example, if your table has a function like setAccessPointFilterValue
-      table.getColumn("access").setFilterValue(event.target.value);
+      table.setAccessPointFilterValue(event.target.value);
     };
 
     const handleArrivalDateChange = (event) => {
       // Handle arrival date search
       // You might need to adjust this based on your table library
       // For example, if your table has a function like setArrivalDateFilterValue
-      table.getColumn("").setFilterValue(event.target.value);
+      table.setArrivalDateFilterValue(event.target.value);
     };
 
     const handleDepartureDateChange = (event) => {
       // Handle departure date search
       // You might need to adjust this based on your table library
       // For example, if your table has a function like setDepartureDateFilterValue
-      table.getColumn('').setFilterValue(event.target.value);
+      table.setDepartureDateFilterValue(event.target.value);
     };
 
   /* this can be used to get the selectedrows 
@@ -62,7 +62,7 @@ export function DataTable({
 
   return (
     <>
-      <div className="flex space-x-2 mx-4">
+      <div>
         <Input
           placeholder={`Search ${searchKey}...`}
           value={

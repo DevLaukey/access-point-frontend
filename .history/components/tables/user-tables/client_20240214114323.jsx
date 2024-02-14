@@ -102,7 +102,7 @@ const UserClient = ({ data }) => {
         </div>
       </div>
       <Separator />
-      <DataTable searchKey="full_name" columns={columns} data={data} />
+      <DataTable searchKey="Vic" columns={columns} data={data} />
     </>
   );
 };
