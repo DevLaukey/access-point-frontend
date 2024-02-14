@@ -4,20 +4,13 @@ import { Modal } from "../ui/modal";
 import { Button } from "../ui/button";
 
 export const AlertModal = ({ data, isOpen, onClose, onConfirm, loading }) => {
-
+  console.log(data)
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
-  function getCurrentTime() { 
-    let date = new Date();
-    let hours = date.getHours();
-    let minutes = date.getMinutes();
-    let seconds = date.getSeconds();
-    return `${hours}:${minutes}:${seconds}`;
-  }
   if (!isMounted) {
     return null;
   }
@@ -25,16 +18,17 @@ export const AlertModal = ({ data, isOpen, onClose, onConfirm, loading }) => {
   return (
     <Modal
       title="Thank you for visiting"
-      description={`Please confirm that you are leaving the premise at: ${getCurrentTime()}`}
+      description="This action cannot be undone."
       isOpen={isOpen}
       onClose={onClose}
     >
-    
-      <div className="pt-6 flex flex-col items-start">
+      {/* Show time in caps */}
+      <p>{ new Date()}</p>
+      <div className="pt-6 space-x-2 flex items-center justify-start w-full">
         <h2 className="font-semibold">
           Name: <span className="text-primary">{data?.full_name}</span>
         </h2>
-        <h2 className="font-semibold">
+        <h2 className="font-bold">
           Arrival Time: <span className="text-primary">{data?.arrival_time}</span>
         </h2>
       </div>

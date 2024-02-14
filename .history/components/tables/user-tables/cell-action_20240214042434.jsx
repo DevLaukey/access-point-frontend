@@ -12,12 +12,9 @@ import { LogOut, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export const CellAction = ({ data }) => {
   const id = data.id;
-  const departure_time = data.departure_time;
   const User = [
     {
       id: 1,
@@ -61,6 +58,7 @@ export const CellAction = ({ data }) => {
     },
   ];
   const [loading, setLoading] = useState(false);
+  const [userDetails, setUserDetails] = useState(null);
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const supabase = createClientComponentClient();
@@ -71,7 +69,7 @@ export const CellAction = ({ data }) => {
 
       const { data, error } = await supabase
         .from("users")
-        .update({ departure_time: new Date().toISOString() })
+        .update({  departure_time: new Date().toISOString() })
         .eq("id", id)
         .select();
 
@@ -79,22 +77,19 @@ export const CellAction = ({ data }) => {
         throw new Error(error.message);
       }
 
+      setUserDetails(data);
       setLoading(false);
       setOpen(false);
-      router.refresh();
       router.push("/dashboard/users");
     } catch (err) {
       console.log(err.message);
     }
   };
 
-
-  return departure_time == "-" ? (
+  return (
     <>
-      <ToastContainer />
-
       <AlertModal
-        data={data}
+        data={userDetails}
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={onConfirm}
@@ -119,5 +114,5 @@ export const CellAction = ({ data }) => {
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  ) : null;
+  );
 };

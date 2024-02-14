@@ -8,16 +8,12 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "../../ui/dropdown-menu";
-import { LogOut, MoreHorizontal, Trash } from "lucide-react";
+import { Edit, MoreHorizontal, Trash } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 
 export const CellAction = ({ data }) => {
-  const id = data.id;
-  const departure_time = data.departure_time;
   const User = [
     {
       id: 1,
@@ -63,38 +59,12 @@ export const CellAction = ({ data }) => {
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const supabase = createClientComponentClient();
 
-  const onConfirm = async () => {
-    try {
-      setLoading(true);
+  const onConfirm = async () => {};
 
-      const { data, error } = await supabase
-        .from("users")
-        .update({ departure_time: new Date().toISOString() })
-        .eq("id", id)
-        .select();
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      setLoading(false);
-      setOpen(false);
-      router.refresh();
-      router.push("/dashboard/users");
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
-
-
-  return departure_time == "-" ? (
+  return (
     <>
-      <ToastContainer />
-
       <AlertModal
-        data={data}
         isOpen={open}
         onClose={() => setOpen(false)}
         onConfirm={onConfirm}
@@ -110,14 +80,16 @@ export const CellAction = ({ data }) => {
         <DropdownMenuContent align="end">
           <DropdownMenuLabel>Actions</DropdownMenuLabel>
 
-          <DropdownMenuItem onClick={() => setOpen(true)}>
-            <LogOut className="mr-2 h-4 w-4" /> Exit Premise
+          <DropdownMenuItem
+            onClick={() => router.push(`/dashboard/user/${data.id}`)}
+          >
+            <Edit className="mr-2 h-4 w-4" /> Exit Premise
           </DropdownMenuItem>
-          {/* <DropdownMenuItem onClick={() => setOpen(true)}>
+          <DropdownMenuItem onClick={() => setOpen(true)}>
             <Trash className="mr-2 h-4 w-4" /> Delete
-          </DropdownMenuItem> */}
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </>
-  ) : null;
+  );
 };

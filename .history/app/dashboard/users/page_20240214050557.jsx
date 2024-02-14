@@ -7,13 +7,14 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 const breadcrumbItems = [{ title: "Visitors", link: "/dashboard/visitors" }];
 export default function page() {
   const supabase = createClientComponentClient();
-  const [processedData, setProcessedData] = useState([]);
+  const [processedData, setProcessedData] = useState({});
 
   useEffect(() => {
     getUserData();
-  }, [processedData, setProcessedData ]);
+  }, []);
 
   async function getUserData() {
+    // get user
     const user = await supabase.auth.getUser();
 
     const id = user.data.user?.id;
@@ -30,8 +31,9 @@ export default function page() {
     if (userError) {
       console.log(userError);
     }
+    console.log(userDetails)
 
-    setProcessedData(userDetails.map((visitor) => {
+    userDetails.map((visitor) => {
       const arrivalTime = new Date(visitor.arrival_time);
       const formattedArrivalTime = arrivalTime.toLocaleString();
 
@@ -40,18 +42,60 @@ export default function page() {
         ? new Date(visitor.departure_time).toLocaleString()
         : "-";
 
-      return {
+      setProcessedData({
         id: visitor.id,
         full_name: visitor.full_name,
         arrival_time: formattedArrivalTime,
         access_point_name: visitor.access_point_id.name,
         status: status,
         departure_time: departureTime,
-      };
-    }));
+      });
+    });
   }
 
-
+  console.log(processedData);
+  const users = [
+    {
+      id: 1,
+      name: "Professor Joseph",
+      company: "Dell",
+      role: "5 Feb 2023",
+      verified: false,
+      status: "Logged out",
+    },
+    {
+      id: 2,
+      name: "Professor Joseph",
+      company: "Dell",
+      role: "5 Feb 2023",
+      verified: false,
+      status: "Logged out",
+    },
+    {
+      id: 3,
+      name: "Professor Joseph",
+      company: "Dell",
+      role: "5 Feb 2023",
+      verified: false,
+      status: "Logged out",
+    },
+    {
+      id: 4,
+      name: "Professor Joseph",
+      company: "Dell",
+      role: "5 Feb 2023",
+      verified: false,
+      status: "Logged out",
+    },
+    {
+      id: 5,
+      name: "Professor Joseph",
+      company: "Dell",
+      role: "5 Feb 2023",
+      verified: false,
+      status: "Logged out",
+    },
+  ];
 
   return (
     <>

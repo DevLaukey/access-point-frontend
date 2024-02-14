@@ -81,7 +81,7 @@ export const CellAction = ({ data }) => {
 
       setLoading(false);
       setOpen(false);
-      router.refresh();
+      data && toast.sucess("User updated successfully");
       router.push("/dashboard/users");
     } catch (err) {
       console.log(err.message);
@@ -89,7 +89,7 @@ export const CellAction = ({ data }) => {
   };
 
 
-  return departure_time == "-" ? (
+  return departure_time != "-" ? (
     <>
       <ToastContainer />
 
