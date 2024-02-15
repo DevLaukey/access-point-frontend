@@ -22,22 +22,31 @@ const Page = () => {
   const [isMatch, setIsMatch] = useState(null);
   const [fingerprintTemplate1, setFingerprintTemplate1] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [isUserSaved, setIsUserSaved] = useState(false);
+  let isMatchFound = false;
 
   useEffect(() => {
     getFingerprints();
-  }, [fingerprintCaptured]);
+  }, []);
 
   useEffect(() => {
-  setIsMatch("success");
-   }, [selectedUser]);
+    // Flag to track if a match is found
 
-  useEffect(() => {
     fingerprints.forEach((fingerprint) => {
-      if (fingerprint.fingerprint_template !== null && fingerprintTemplate1) {
+      if (
+        fingerprint.fingerprint_template !== null &&
+        fingerprintTemplate1 &&
+        !isMatchFound
+      ) {
         compareFingerPrints(fingerprintTemplate1, fingerprint);
+
+        // Check if a match is found and update the flag
+        if (isMatch === "success") {
+          isMatchFound = true;
+        }
       }
     });
-  }, [fingerprints, fingerprintTemplate1]);
+  }, [fingerprints, fingerprintTemplate1, isMatch]);
 
   const checkIfUserExistsForTheDay = () => {
     const today = new Date().toISOString().slice(0, 10);
@@ -53,25 +62,28 @@ const Page = () => {
   const updateUser = async () => {
     try {
       console.log(selectedUser);
-      if (checkIfUserExistsForTheDay) {
+      if (checkIfUserExistsForTheDay && !isUserSaved) {
+        // check if the user is not saved yet
+        const { data, error } = await supabase
+          .from("users")
+          .update({ arrival_time: new Date().toISOString() })
+          .eq("id", selectedUser.id);
+
+        if (error) {
+          throw new Error(error.message);
+        }
+
+        console.log(data);
+        setIsUserSaved(true); // set the state to true after saving the user
+        return; // added return statement to prevent further execution
+      } else {
         toast.error("User already logged in for today");
-        return;
       }
-      const { data, error } = await supabase
-        .from("users")
-        .update({ arrival_time: new Date().toISOString() })
-        .eq("id", selectedUser.id);
-
-      if (error) {
-        throw new Error(error.message);
-      }
-
-      console.log(data);
-      setSelectedUser(data);
     } catch (error) {
       console.error(error);
     }
   };
+
   const getUser = async (fingerprint_id) => {
     try {
       let { data: users, error } = await supabase
@@ -85,10 +97,7 @@ const Page = () => {
       }
 
       console.log(users);
-
-      setIsLoading(true);
       setSelectedUser(users);
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -136,12 +145,12 @@ const Page = () => {
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setIsLoading(false);
         console.log(result);
 
         if (result?.isMatch === true) {
           setIsMatch("success");
           getUser(fingerprint.id);
+          setIsLoading(false);
         } else {
           setIsMatch("failure");
         }
@@ -209,7 +218,8 @@ const Page = () => {
           {fingerprintCaptured ? (
             selectedUser && (
               <UserResult
-                full_name={selectedUser.full_name}
+                first_name={selectedUser.first_name}
+                last_name={selectedUser.last_name}
                 arrival_time={new Date().toISOString()}
                 departure_time={selectedUser.departure_time}
               />
@@ -231,7 +241,7 @@ const Page = () => {
           )}
           {fingerprintCaptured ? (
             <div className="flex w-full justify-center items-center mt-3">
-              {isMatch === "success" && selectedUser ? (
+              {isMatch === "success" ? (
                 <Button
                   onClick={() => {
                     updateUser();

@@ -231,7 +231,7 @@ const Page = () => {
           )}
           {fingerprintCaptured ? (
             <div className="flex w-full justify-center items-center mt-3">
-              {isMatch === "success" && selectedUser ? (
+              {isMatch === "success" ? (
                 <Button
                   onClick={() => {
                     updateUser();

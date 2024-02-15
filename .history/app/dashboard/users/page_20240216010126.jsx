@@ -41,8 +41,7 @@ export default function page() {
     setProcessedData(
       userDetails.map((visitor) => {
         const arrivalTime = new Date(visitor.arrival_time);
-        const formattedArrivalTime = arrivalTime.toLocaleString();
-
+        const formattedArrivalTime = extractDateOnly(arrivalTime)
         const status = visitor.departure_time ? "Out of premise" : "In premise";
         const departureTime = visitor.departure_time
           ? new Date(visitor.departure_time).toLocaleString()
@@ -59,7 +58,8 @@ export default function page() {
       })
     );
   }
-function extractDateOnly(dateTimeString) {
+  function extractDateOnly(dateTimeString) {
+  console.log(dateTimeString)
   const [datePart] = dateTimeString.split(","); // Split at the comma
   return datePart.trim(); // Remove leading/trailing whitespaces
 }

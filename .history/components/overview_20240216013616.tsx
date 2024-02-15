@@ -2,7 +2,36 @@
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-
+const data = [
+  {
+    name: "Mon",
+    total: 20,
+  },
+  {
+    name: "Tue",
+    total: 20,
+  },
+  {
+    name: "Wed",
+    total: 20,
+  },
+  {
+    name: "Thur",
+    total: 20,
+  },
+  {
+    name: "Fri",
+    total: 20,
+  },
+  {
+    name: "Sat",
+    total: 20,
+  },
+  {
+    name: "Fri",
+    total: 10,
+  }
+];
 
 export function Overview({ chartDetails }) {
 

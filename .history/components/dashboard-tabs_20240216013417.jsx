@@ -18,7 +18,6 @@ export default function DashboardTabs() {
   const [data, setData] = useState([]);
   const [accessPoint, setAccessPoint] = useState([]);
   const [accessManagers, setAccessManagers] = useState([]);
-  const [chartDetails, setChartDetails] = useState([]);
   const supabase = createClientComponentClient();
 
   useEffect(() => {
@@ -181,7 +180,7 @@ function generateWeeklyData(arrivalData) {
               <CardTitle>Overview</CardTitle>
             </CardHeader>
             <CardContent className="pl-2">
-              <Overview chartDetails={chartDetails} />
+              <Overview users={data} />
             </CardContent>
           </Card>
           <Card className="col-span-4 md:col-span-3">

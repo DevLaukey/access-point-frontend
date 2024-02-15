@@ -13,7 +13,6 @@ export default function AccountForm({ user }) {
   const [website, setWebsite] = useState(null);
   const [avatar_url, setAvatarUrl] = useState(null);
 
-  console.log("user", user);
   // const getProfile = useCallback(async () => {
   //   try {
   //     setLoading(true);
@@ -40,7 +39,6 @@ export default function AccountForm({ user }) {
 
 
   async function updateProfile({ username, website, avatar_url }) {
-
     try {
       setLoading(true);
 

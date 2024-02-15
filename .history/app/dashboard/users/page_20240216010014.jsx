@@ -41,7 +41,7 @@ export default function page() {
     setProcessedData(
       userDetails.map((visitor) => {
         const arrivalTime = new Date(visitor.arrival_time);
-        const formattedArrivalTime = arrivalTime.toLocaleString();
+        const formattedArrivalTime = extractDateOnly(visitor.arrival_time);
 
         const status = visitor.departure_time ? "Out of premise" : "In premise";
         const departureTime = visitor.departure_time

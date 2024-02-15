@@ -30,16 +30,11 @@ import {
   SelectValue,
 } from "./select";
 import { CalendarIcon } from "@radix-ui/react-icons";
-import { Popover, PopoverTrigger, PopoverContent } from "./popover";
+import { Popover } from "./popover";
 import { format } from "date-fns";
 import { Calendar } from "./calendar";
-import { cn } from "../../lib/utils";
-import { useEffect, useState } from "react";
 
 export function DataTable({ columns, data, searchKey, accessPoints }) {
-  const [date, setDate] = useState(new Date());
-
-  // console.log(data);
   const table = useReactTable({
     data,
     columns,
@@ -51,14 +46,23 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
     table.getColumn("access_point_name").setFilterValue(accessPointName);
   };
 
-  const handleDateChange = (selectedDate) => {
-    setDate(selectedDate);
-    // You may need to adjust the following line based on your table library
-    // For example, if your table has a function like setFilterFunction
-    table
-      .getColumn("arrival_time")
-      .setFilterValue((value) => new Date(value) >= selectedDate);
+  const handleArrivalDateChange = (event) => {
+    // Handle arrival date search
+    // You might need to adjust this based on your table library
+    // For example, if your table has a function like setArrivalDateFilterValue
+    table.getColumn("").setFilterValue(event.target.value);
   };
+
+  const handleDepartureDateChange = (event) => {
+    // Handle departure date search
+    // You might need to adjust this based on your table library
+    // For example, if your table has a function like setDepartureDateFilterValue
+    table.getColumn("").setFilterValue(event.target.value);
+  };
+
+  /* this can be used to get the selectedrows 
+  console.log("value", table.getFilteredSelectedRowModel()); */
+
   return (
     <>
       <div className="flex space-x-2 mx-4">
@@ -89,29 +93,31 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* 
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              variant={"outline"}
-              className={cn(
-                "w-[240px] justify-start text-left font-normal",
-                !date && "text-muted-foreground"
-              )}
-            >
-              <CalendarIcon className="mr-2 h-4 w-4" />
-              {date ? format(date, "PPP") : <span>Search by date</span>}
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-0" align="start">
-            <Calendar
-              mode="single"
-              selected={date}
-              onSelect={(date) => handleDateChange(date)}
-              initialFocus
-            />
-          </PopoverContent>
-        </Popover> */}
+        <div className="flex space-x-2 justify-center items-center mx-2">
+          <p className="font-semibold"> Date</p>
+          <Popover>
+            <PopoverTrigger asChild>
+              <Button
+                variant={"outline"}
+                className={cn(
+                  "w-[240px] justify-start text-left font-normal",
+                  !date && "text-muted-foreground"
+                )}
+              >
+                <CalendarIcon className="mr-2 h-4 w-4" />
+                {date ? format(date, "PPP") : <span>Pick a date</span>}
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-auto p-0" align="start">
+              <Calendar
+                mode="single"
+                selected={date}
+                onSelect={setDate}
+                initialFocus
+              />
+            </PopoverContent>
+          </Popover>
+        </div>
       </div>
       <ScrollArea className="rounded-md border h-[50vh]">
         <Table className="relative">

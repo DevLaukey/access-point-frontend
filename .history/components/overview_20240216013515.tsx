@@ -2,13 +2,42 @@
 
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 
-
+const data = [
+  {
+    name: "Mon",
+    total: 20,
+  },
+  {
+    name: "Tue",
+    total: 20,
+  },
+  {
+    name: "Wed",
+    total: 20,
+  },
+  {
+    name: "Thur",
+    total: 20,
+  },
+  {
+    name: "Fri",
+    total: 20,
+  },
+  {
+    name: "Sat",
+    total: 20,
+  },
+  {
+    name: "Fri",
+    total: 10,
+  }
+];
 
 export function Overview({ chartDetails }) {
-
+  console.log(chartDetails);
   return (
     <ResponsiveContainer width="100%" height={350}>
-      <BarChart data={chartDetails}>
+      <BarChart data={data}>
         <XAxis
           dataKey="name"
           stroke="#888888"

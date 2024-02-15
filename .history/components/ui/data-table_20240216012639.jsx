@@ -39,7 +39,7 @@ import { useEffect, useState } from "react";
 export function DataTable({ columns, data, searchKey, accessPoints }) {
   const [date, setDate] = useState(new Date());
 
-  // console.log(data);
+  console.log(data);
   const table = useReactTable({
     data,
     columns,

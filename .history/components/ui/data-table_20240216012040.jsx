@@ -39,7 +39,7 @@ import { useEffect, useState } from "react";
 export function DataTable({ columns, data, searchKey, accessPoints }) {
   const [date, setDate] = useState(new Date());
 
-  // console.log(data);
+  console.log(data)
   const table = useReactTable({
     data,
     columns,
@@ -50,6 +50,8 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
   const handleAccessPointChange = (accessPointName) => {
     table.getColumn("access_point_name").setFilterValue(accessPointName);
   };
+
+
 
   const handleDateChange = (selectedDate) => {
     setDate(selectedDate);
@@ -89,7 +91,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* 
+
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -111,7 +113,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
               initialFocus
             />
           </PopoverContent>
-        </Popover> */}
+        </Popover>
       </div>
       <ScrollArea className="rounded-md border h-[50vh]">
         <Table className="relative">

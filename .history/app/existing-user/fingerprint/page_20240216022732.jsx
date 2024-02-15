@@ -28,10 +28,6 @@ const Page = () => {
   }, [fingerprintCaptured]);
 
   useEffect(() => {
-  setIsMatch("success");
-   }, [selectedUser]);
-
-  useEffect(() => {
     fingerprints.forEach((fingerprint) => {
       if (fingerprint.fingerprint_template !== null && fingerprintTemplate1) {
         compareFingerPrints(fingerprintTemplate1, fingerprint);
@@ -86,7 +82,7 @@ const Page = () => {
 
       console.log(users);
 
-      setIsLoading(true);
+        setIsLoading(true);
       setSelectedUser(users);
       setIsLoading(false);
     } catch (error) {
@@ -231,7 +227,7 @@ const Page = () => {
           )}
           {fingerprintCaptured ? (
             <div className="flex w-full justify-center items-center mt-3">
-              {isMatch === "success" && selectedUser ? (
+              {isMatch === "success" ? (
                 <Button
                   onClick={() => {
                     updateUser();

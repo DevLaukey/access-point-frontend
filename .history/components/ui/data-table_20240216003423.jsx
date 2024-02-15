@@ -37,9 +37,7 @@ import { cn } from "../../lib/utils";
 import { useEffect, useState } from "react";
 
 export function DataTable({ columns, data, searchKey, accessPoints }) {
-  const [date, setDate] = useState(new Date());
-
-  // console.log(data);
+  const [date, setDate] = useState(null);
   const table = useReactTable({
     data,
     columns,
@@ -47,18 +45,28 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
+
   const handleAccessPointChange = (accessPointName) => {
     table.getColumn("access_point_name").setFilterValue(accessPointName);
   };
 
-  const handleDateChange = (selectedDate) => {
-    setDate(selectedDate);
-    // You may need to adjust the following line based on your table library
-    // For example, if your table has a function like setFilterFunction
-    table
-      .getColumn("arrival_time")
-      .setFilterValue((value) => new Date(value) >= selectedDate);
+  const handleArrivalDateChange = (event) => {
+    // Handle arrival date search
+    // You might need to adjust this based on your table library
+    // For example, if your table has a function like setArrivalDateFilterValue
+    table.getColumn("").setFilterValue(event.target.value);
   };
+
+  const handleDepartureDateChange = (event) => {
+    // Handle departure date search
+    // You might need to adjust this based on your table library
+    // For example, if your table has a function like setDepartureDateFilterValue
+    table.getColumn("").setFilterValue(event.target.value);
+  };
+
+  /* this can be used to get the selectedrows 
+  console.log("value", table.getFilteredSelectedRowModel()); */
+
   return (
     <>
       <div className="flex space-x-2 mx-4">
@@ -89,7 +97,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* 
+
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -107,11 +115,15 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
             <Calendar
               mode="single"
               selected={date}
-              onSelect={(date) => handleDateChange(date)}
+              onSelect={(date) =>
+                table
+                  .getColumn("arrival_date")
+                  .setFilterValue(format(date, "yyyy-MM-dd"))
+              }
               initialFocus
             />
           </PopoverContent>
-        </Popover> */}
+        </Popover>
       </div>
       <ScrollArea className="rounded-md border h-[50vh]">
         <Table className="relative">

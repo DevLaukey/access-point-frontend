@@ -39,26 +39,25 @@ import { useEffect, useState } from "react";
 export function DataTable({ columns, data, searchKey, accessPoints }) {
   const [date, setDate] = useState(new Date());
 
-  // console.log(data);
+  console.log(data)
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
+    
   });
 
   const handleAccessPointChange = (accessPointName) => {
     table.getColumn("access_point_name").setFilterValue(accessPointName);
   };
 
-  const handleDateChange = (selectedDate) => {
-    setDate(selectedDate);
-    // You may need to adjust the following line based on your table library
-    // For example, if your table has a function like setFilterFunction
-    table
-      .getColumn("arrival_time")
-      .setFilterValue((value) => new Date(value) >= selectedDate);
-  };
+
+
+ const handleDateChange = (selectedDate) => {
+   setDate(selectedDate);
+   table.getColumn("access_point_name").setFilterValue((value) => new Date(value) >= selectedDate);
+ };
   return (
     <>
       <div className="flex space-x-2 mx-4">
@@ -89,7 +88,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
             </SelectGroup>
           </SelectContent>
         </Select>
-        {/* 
+
         <Popover>
           <PopoverTrigger asChild>
             <Button
@@ -111,7 +110,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
               initialFocus
             />
           </PopoverContent>
-        </Popover> */}
+        </Popover>
       </div>
       <ScrollArea className="rounded-md border h-[50vh]">
         <Table className="relative">

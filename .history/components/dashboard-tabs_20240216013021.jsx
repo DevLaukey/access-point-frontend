@@ -18,7 +18,6 @@ export default function DashboardTabs() {
   const [data, setData] = useState([]);
   const [accessPoint, setAccessPoint] = useState([]);
   const [accessManagers, setAccessManagers] = useState([]);
-  const [chartDetails, setChartDetails] = useState([]);
   const supabase = createClientComponentClient();
 
   useEffect(() => {
@@ -51,7 +50,7 @@ export default function DashboardTabs() {
         console.log(accessManagersError);
       }
 
-      setChartDetails(generateWeeklyData(data));
+      console.log(data)
       setData(data);
       setAccessManagers(accessManagers);
       setAccessPoint(accessPoint);
@@ -59,37 +58,6 @@ export default function DashboardTabs() {
       console.log(error.message);
     }
   };
-
-  
-function generateWeeklyData(arrivalData) {
-  // Create an array with days of the week
-  const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
-  // Initialize an object to store the count for each day
-  const dayCounts = {};
-
-  // Process each arrival record
-  arrivalData.forEach((record) => {
-    const arrivalDate = new Date(record.arrival_time);
-    const dayOfWeek = daysOfWeek[arrivalDate.getDay()];
-
-    // Increment the count for the specific day
-    if (dayCounts[dayOfWeek]) {
-      dayCounts[dayOfWeek]++;
-    } else {
-      dayCounts[dayOfWeek] = 1;
-    }
-  });
-
-  // Convert the object to the desired array format
-  const resultArray = daysOfWeek.map((day) => ({
-    name: day,
-    total: dayCounts[day] || 0,
-  }));
-
-  return resultArray;
-}
-
   return (
     <Tabs defaultValue="overview" className="space-y-4">
       <TabsList>
@@ -181,7 +149,7 @@ function generateWeeklyData(arrivalData) {
               <CardTitle>Overview</CardTitle>
             </CardHeader>
             <CardContent className="pl-2">
-              <Overview chartDetails={chartDetails} />
+              <Overview users={data} />
             </CardContent>
           </Card>
           <Card className="col-span-4 md:col-span-3">

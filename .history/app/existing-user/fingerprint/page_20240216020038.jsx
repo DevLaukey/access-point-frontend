@@ -25,11 +25,7 @@ const Page = () => {
 
   useEffect(() => {
     getFingerprints();
-  }, [fingerprintCaptured]);
-
-  useEffect(() => {
-  setIsMatch("success");
-   }, [selectedUser]);
+  }, []);
 
   useEffect(() => {
     fingerprints.forEach((fingerprint) => {
@@ -67,7 +63,7 @@ const Page = () => {
       }
 
       console.log(data);
-      setSelectedUser(data);
+      // setSelectedUser(data);
     } catch (error) {
       console.error(error);
     }
@@ -85,10 +81,7 @@ const Page = () => {
       }
 
       console.log(users);
-
-      setIsLoading(true);
       setSelectedUser(users);
-      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -136,12 +129,13 @@ const Page = () => {
     fetch("https://localhost:7030/api/Fingerprint/match", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setIsLoading(false);
         console.log(result);
-
+        
         if (result?.isMatch === true) {
           setIsMatch("success");
           getUser(fingerprint.id);
+          setIsLoading(false);
+          return
         } else {
           setIsMatch("failure");
         }
@@ -209,7 +203,8 @@ const Page = () => {
           {fingerprintCaptured ? (
             selectedUser && (
               <UserResult
-                full_name={selectedUser.full_name}
+                first_name={selectedUser.first_name}
+                last_name={selectedUser.last_name}
                 arrival_time={new Date().toISOString()}
                 departure_time={selectedUser.departure_time}
               />
@@ -231,7 +226,7 @@ const Page = () => {
           )}
           {fingerprintCaptured ? (
             <div className="flex w-full justify-center items-center mt-3">
-              {isMatch === "success" && selectedUser ? (
+              {isMatch === "success" ? (
                 <Button
                   onClick={() => {
                     updateUser();
