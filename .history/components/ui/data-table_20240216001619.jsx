@@ -74,7 +74,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
           className="w-full md:max-w-sm"
         />
 
-        <Select onValueChange={handleAccessPointChange}>
+        <Select>
           <SelectTrigger className="w-full md:max-w-sm">
             <SelectValue placeholder="Search by Entry Point" />
           </SelectTrigger>

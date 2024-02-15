@@ -39,7 +39,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
   });
 
   const handleAccessPointChange = (accessPointName) => {
-    console.log(accessPointName);
+    console.log(accessPointName)
     table.getColumn("access_point_name").setFilterValue(accessPointName);
   };
 
@@ -74,7 +74,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
           className="w-full md:max-w-sm"
         />
 
-        <Select onValueChange={handleAccessPointChange}>
+        <Select>
           <SelectTrigger className="w-full md:max-w-sm">
             <SelectValue placeholder="Search by Entry Point" />
           </SelectTrigger>
@@ -83,7 +83,17 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
               <SelectLabel>Entry Point</SelectLabel>
               {/* Map through accessPoints array and render SelectItem components */}
               {accessPoints.map((point) => (
-                <SelectItem key={point.id} value={point.name}>
+                <SelectItem
+                  key={point.id}
+                  value={point.id}
+                  onSelect={() =>
+                  {
+                    console.log(point.name)
+                    table
+                      .getColumn('access_point_name')
+                      ?.setFilterValue(point.name)}
+                  }
+                >
                   {point.name}
                 </SelectItem>
               ))}

@@ -30,7 +30,7 @@ import {
   SelectValue,
 } from "./select";
 
-export function DataTable({ columns, data, searchKey, accessPoints }) {
+export function DataTable({ columns, data, searchKey }) {
   const table = useReactTable({
     data,
     columns,
@@ -38,9 +38,11 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
     getFilteredRowModel: getFilteredRowModel(),
   });
 
-  const handleAccessPointChange = (accessPointName) => {
-    console.log(accessPointName);
-    table.getColumn("access_point_name").setFilterValue(accessPointName);
+  const handleAccessPointChange = (event) => {
+    // Handle access point search
+    // You might need to adjust this based on your table library
+    // For example, if your table has a function like setAccessPointFilterValue
+    table.getColumn("access").setFilterValue(event.target.value);
   };
 
   const handleArrivalDateChange = (event) => {
@@ -73,23 +75,38 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
           }
           className="w-full md:max-w-sm"
         />
-
-        <Select onValueChange={handleAccessPointChange}>
-          <SelectTrigger className="w-full md:max-w-sm">
+        <Select>
+          <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Search by Entry Point" />
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Entry Point</SelectLabel>
-              {/* Map through accessPoints array and render SelectItem components */}
-              {accessPoints.map((point) => (
-                <SelectItem key={point.id} value={point.name}>
-                  {point.name}
-                </SelectItem>
-              ))}
+              <SelectItem value="apple">Apple</SelectItem>
+              <SelectItem value="banana">Banana</SelectItem>
+              <SelectItem value="blueberry">Blueberry</SelectItem>
+              <SelectItem value="grapes">Grapes</SelectItem>
+              <SelectItem value="pineapple">Pineapple</SelectItem>
             </SelectGroup>
           </SelectContent>
         </Select>
+        <Input
+          placeholder="Access Point..."
+          onChange={handleAccessPointChange}
+          className="w-full md:max-w-sm"
+        />
+        <Input
+          type="date"
+          placeholder="Arrival Date..."
+          onChange={handleArrivalDateChange}
+          className="w-full md:max-w-sm"
+        />
+        <Input
+          type="date"
+          placeholder="Departure Date..."
+          onChange={handleDepartureDateChange}
+          className="w-full md:max-w-sm"
+        />
       </div>
 
       <ScrollArea className="rounded-md border h-[50vh]">

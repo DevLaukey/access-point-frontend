@@ -19,28 +19,22 @@ import {
 import { Input } from "./input";
 import { Button } from "./button";
 import { ScrollArea, ScrollBar } from "./scroll-area";
-import Skeleton from "./skeleton";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "./select";
+import Skeleton  from "./skeleton";
 
-export function DataTable({ columns, data, searchKey, accessPoints }) {
+export function DataTable({ columns, data, searchKey }) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+  console.log(data.length === 0 ? "No data" : "Data available");
 
-  const handleAccessPointChange = (accessPointName) => {
-    console.log(accessPointName);
-    table.getColumn("access_point_name").setFilterValue(accessPointName);
+  const handleAccessPointChange = (event) => {
+    // Handle access point search
+    // You might need to adjust this based on your table library
+    // For example, if your table has a function like setAccessPointFilterValue
+    table.getColumn("access").setFilterValue(event.target.value);
   };
 
   const handleArrivalDateChange = (event) => {
@@ -73,23 +67,23 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
           }
           className="w-full md:max-w-sm"
         />
-
-        <Select onValueChange={handleAccessPointChange}>
-          <SelectTrigger className="w-full md:max-w-sm">
-            <SelectValue placeholder="Search by Entry Point" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Entry Point</SelectLabel>
-              {/* Map through accessPoints array and render SelectItem components */}
-              {accessPoints.map((point) => (
-                <SelectItem key={point.id} value={point.name}>
-                  {point.name}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+        <Input
+          placeholder="Access Point..."
+          onChange={handleAccessPointChange}
+          className="w-full md:max-w-sm"
+        />
+        <Input
+          type="date"
+          placeholder="Arrival Date..."
+          onChange={handleArrivalDateChange}
+          className="w-full md:max-w-sm"
+        />
+        <Input
+          type="date"
+          placeholder="Departure Date..."
+          onChange={handleDepartureDateChange}
+          className="w-full md:max-w-sm"
+        />
       </div>
 
       <ScrollArea className="rounded-md border h-[50vh]">
@@ -114,13 +108,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
           </TableHeader>
           <TableBody>
             {data.length === 0 ? (
-              <TableRow>
-                {columns.map((column) => (
-                  <TableCell key={column.id}>
-                    <Skeleton className="h-24" />
-                  </TableCell>
-                ))}
-              </TableRow>
+              <Skeleton />
             ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow
