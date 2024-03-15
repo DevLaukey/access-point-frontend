@@ -52,7 +52,7 @@ export default function RegisterForm() {
     if (error?.message) { 
        toast({
          title: "You submitted the following values:",
-         variant: "destructive",
+         variant: "destructive"
          description: (
            <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
              <code className="text-white">

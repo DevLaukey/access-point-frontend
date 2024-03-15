@@ -13,8 +13,8 @@ export async function signUpWithEmailAndPassword(data: {
     email: data.email,
     password: data.password,
   });
-
-  return JSON.stringify(result);
+    
+    return JSON.stringify(result);
 }
 
 export async function signInWithEmailAndPassword(data: {
