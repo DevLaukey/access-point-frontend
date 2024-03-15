@@ -7,8 +7,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+interface TestimonialProps {
+  image: string;
+  name: string;
+  userName: string;
+  comment: string;
+}
 
-const testimonials= [
+const testimonials: TestimonialProps[] = [
   {
     image: "https://github.com/shadcn.png",
     name: "John Doe React",
@@ -72,7 +78,7 @@ export const Testimonials = () => {
 
       <div className="grid md:grid-cols-2 lg:grid-cols-4 sm:block columns-2  lg:columns-3 lg:gap-6 mx-auto space-y-4 lg:space-y-6">
         {testimonials.map(
-          ({ image, name, userName, comment }) => (
+          ({ image, name, userName, comment }: TestimonialProps) => (
             <Card
               key={userName}
               className="max-w-md md:break-inside-avoid overflow-hidden"
