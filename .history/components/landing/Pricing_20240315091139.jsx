@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import {
@@ -61,7 +60,6 @@ const pricingList = [
 ];
 
 export const Pricing = () => {
-  const [popularPlan, setPopularPlan] = useState(0)
   return (
     <section id="pricing" className="container py-24 sm:py-32">
       <h2 className="text-3xl md:text-4xl font-bold text-center">
@@ -88,7 +86,7 @@ export const Pricing = () => {
             <CardHeader>
               <CardTitle className="flex item-center justify-between">
                 {pricing.title}
-                {pricing.popular === popularPlan ? (
+                {pricing.popular === PopularPlanType.YES ? (
                   <Badge variant="secondary" className="text-sm text-primary">
                     Most popular
                   </Badge>

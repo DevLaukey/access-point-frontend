@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "./Icons";
+import { MedalIcon, MapIcon, PlaneIcon, GiftIcon } from "../Icons";
 
 
 

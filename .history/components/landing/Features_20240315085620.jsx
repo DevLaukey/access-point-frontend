@@ -1,4 +1,3 @@
-"use client"
 import { Badge } from "../ui/badge";
 import {
   Card,
@@ -7,9 +6,9 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
-import image from "../../assets/growth.png";
-import image3 from "../../assets/reflecting.png";
-import image4 from "../../assets/looking-ahead.png";
+import image from "../assets/growth.png";
+import image3 from "../assets/reflecting.png";
+import image4 from "../assets/looking-ahead.png";
 
 
 const features= [

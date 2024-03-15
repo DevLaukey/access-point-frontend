@@ -1,5 +1,4 @@
-"use client";
-import { useState } from "react";
+"use client"
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import {
@@ -11,6 +10,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Check } from "lucide-react";
+
 
 const pricingList = [
   {
@@ -61,12 +61,16 @@ const pricingList = [
 ];
 
 export const Pricing = () => {
-  const [popularPlan, setPopularPlan] = useState(0)
+
   return (
-    <section id="pricing" className="container py-24 sm:py-32">
+    <section
+      id="pricing"
+      className="container py-24 sm:py-32"
+    >
       <h2 className="text-3xl md:text-4xl font-bold text-center">
         Get
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
+          
           Unlimited
         </span>
         Access
@@ -88,8 +92,11 @@ export const Pricing = () => {
             <CardHeader>
               <CardTitle className="flex item-center justify-between">
                 {pricing.title}
-                {pricing.popular === popularPlan ? (
-                  <Badge variant="secondary" className="text-sm text-primary">
+                {pricing.popular === PopularPlanType.YES ? (
+                  <Badge
+                    variant="secondary"
+                    className="text-sm text-primary"
+                  >
                     Most popular
                   </Badge>
                 ) : null}
@@ -111,7 +118,10 @@ export const Pricing = () => {
             <CardFooter className="flex">
               <div className="space-y-4">
                 {pricing.benefitList.map((benefit) => (
-                  <span key={benefit} className="flex">
+                  <span
+                    key={benefit}
+                    className="flex"
+                  >
                     <Check className="text-green-500" />
                     <h3 className="ml-2">{benefit}</h3>
                   </span>

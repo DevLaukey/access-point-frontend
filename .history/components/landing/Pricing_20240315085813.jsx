@@ -1,7 +1,5 @@
-"use client";
-import { useState } from "react";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
@@ -9,8 +7,10 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "../ui/card";
+} from "../components/ui/card";
 import { Check } from "lucide-react";
+
+
 
 const pricingList = [
   {
@@ -61,13 +61,16 @@ const pricingList = [
 ];
 
 export const Pricing = () => {
-  const [popularPlan, setPopularPlan] = useState(0)
   return (
-    <section id="pricing" className="container py-24 sm:py-32">
+    <section
+      id="pricing"
+      className="container py-24 sm:py-32"
+    >
       <h2 className="text-3xl md:text-4xl font-bold text-center">
         Get
         <span className="bg-gradient-to-b from-primary/60 to-primary text-transparent bg-clip-text">
-          Unlimited
+          {" "}
+          Unlimited{" "}
         </span>
         Access
       </h2>
@@ -80,7 +83,7 @@ export const Pricing = () => {
           <Card
             key={pricing.title}
             className={
-              pricing.popular === popularPlan
+              pricing.popular === PopularPlanType.YES
                 ? "drop-shadow-xl shadow-black/10 dark:shadow-white/10"
                 : ""
             }
@@ -88,8 +91,11 @@ export const Pricing = () => {
             <CardHeader>
               <CardTitle className="flex item-center justify-between">
                 {pricing.title}
-                {pricing.popular === popularPlan ? (
-                  <Badge variant="secondary" className="text-sm text-primary">
+                {pricing.popular === PopularPlanType.YES ? (
+                  <Badge
+                    variant="secondary"
+                    className="text-sm text-primary"
+                  >
                     Most popular
                   </Badge>
                 ) : null}
@@ -111,8 +117,11 @@ export const Pricing = () => {
             <CardFooter className="flex">
               <div className="space-y-4">
                 {pricing.benefitList.map((benefit) => (
-                  <span key={benefit} className="flex">
-                    <Check className="text-green-500" />
+                  <span
+                    key={benefit}
+                    className="flex"
+                  >
+                    <Check className="text-green-500" />{" "}
                     <h3 className="ml-2">{benefit}</h3>
                   </span>
                 ))}
