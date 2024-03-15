@@ -42,7 +42,7 @@ export default function AuthForm() {
         },
       }}
       theme="dark"
-      providers={[]}
+      // providers={["google"]}
       redirectTo="http://localhost:3000/auth/callback"
     />
   );

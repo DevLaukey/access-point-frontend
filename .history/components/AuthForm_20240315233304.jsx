@@ -1,8 +1,8 @@
 "use client";
 
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 import SignInForm from "./auth/signin-form";
 import RegisterForm from "./auth/RegisterForm";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 export function AuthForm() {
   return (
@@ -19,6 +19,7 @@ export function AuthForm() {
           <RegisterForm />
         </TabsContent>
       </Tabs>
+      <OAuthForm />
     </div>
   );
 }
