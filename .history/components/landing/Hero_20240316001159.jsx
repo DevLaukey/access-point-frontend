@@ -1,8 +1,7 @@
 import { Button } from "../ui/button";
 import { buttonVariants } from "../ui/button";
 import { HeroCards } from "./HeroCards";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
-import Link from "next/link";
+import { Play } from "@radix-ui/react-icons";
 
 export const Hero = () => {
   return (
@@ -29,22 +28,18 @@ export const Hero = () => {
         </p>
 
         <div className="space-y-4 md:space-y-0 md:space-x-4">
-          <Link href="/auth/login">
-            <Button className="w-full md:w-1/3">Get Started</Button>
-          </Link>
+          <Button className="w-full md:w-1/3">Get Started</Button>
 
-          <button class="px-3 py-1.5 flex gap-2 items-center rounded-xl outline outline-2">
-            <div class="w-10">
-              <img
-                class="h-full w-full"
-                src="https://www.svgrepo.com/show/394180/google-play.svg"
-              />
-            </div>
-            <div class="">
-              <div class="text-sm font-extrabold">Download on the</div>
-              <div class="text-2xl">Google Play</div>
-            </div>
-          </button>
+          <a
+            href="https://github.com/leoMirandaa/shadcn-landing-page.git"
+            target="_blank"
+            className={`w-full md:w-1/3 ${buttonVariants({
+              variant: "outline",
+            })}`}
+          >
+            Play Store
+            <Play className="ml-2 w-5 h-5" />
+          </a>
         </div>
       </div>
 
