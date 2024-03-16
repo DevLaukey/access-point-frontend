@@ -34,7 +34,7 @@ export default function AnimatedPrimaryButton({
       >
         <span
           className="ease absolute inset-0 flex h-full w-full -translate-x-full
-        items-center justify-center text-black dark:text-white duration-300 group-hover:translate-x-0"
+        items-center justify-center text-white duration-300 group-hover:translate-x-0"
         >
           <svg
             className="h-6 w-6"
@@ -53,7 +53,7 @@ export default function AnimatedPrimaryButton({
         </span>
         <span
           className="ease absolute flex h-full w-full items-center 
-          justify-center text-black dark:text-white transition-all duration-300 group-hover:translate-x-full"
+          justify-center text-white transition-all duration-300 group-hover:translate-x-full"
         >
           {children}
         </span>

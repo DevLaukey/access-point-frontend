@@ -53,7 +53,7 @@ export default function AnimatedPrimaryButton({
         </span>
         <span
           className="ease absolute flex h-full w-full items-center 
-          justify-center text-black dark:text-white transition-all duration-300 group-hover:translate-x-full"
+          justify-center text-white transition-all duration-300 group-hover:translate-x-full"
         >
           {children}
         </span>
