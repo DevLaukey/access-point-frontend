@@ -1,11 +1,8 @@
-"use client"
-import { useRouter, } from "next/navigation"
+import { useRouter,  } from "next/navigation"
 import { useOnboardingStore } from "../../utils/onboarding-store";
 import { useEffect } from "react";
 import Headline from "../../components/onboarding/HeadLine";
 import Subheadline from "../../components/onboarding/SubHeadline";
-import ONBOARDING_STEPS from "../../utils/onboarding-pages.json";
-import AnimatedPrimaryButton from "../../components/onboarding/buttons/AnimatedPrimaryButton";
 
 export default function HomePage() {
   const router = useRouter();
@@ -31,9 +28,9 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center justify-center pt-24">
-      <Headline>Welcome To P.O.E.M.S</Headline>
+      <Headline>{("pages.home.headline")}</Headline>
 
-      <Subheadline className="mb-12"> Register as an Admin</Subheadline>
+      <Subheadline className="mb-12">{("pages.home.subheadline")}</Subheadline>
 
       <div className="flex max-w-xl flex-col items-center justify-center">
         <AnimatedPrimaryButton
@@ -41,11 +38,11 @@ export default function HomePage() {
           testId="homepage-cta"
           className="mb-4 px-10 py-4 text-xl md:w-auto"
         >
-         GET STARTED
+          {t("pages.home.cta")}
         </AnimatedPrimaryButton>
 
         <div className="text-xs text-stone-500">
-        press_enter_to_start_onboarding"
+          {t("pages.home.press_enter_to_start_onboarding")}
         </div>
       </div>
     </div>

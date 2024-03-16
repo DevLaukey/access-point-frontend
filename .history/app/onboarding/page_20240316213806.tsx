@@ -41,11 +41,11 @@ export default function HomePage() {
           testId="homepage-cta"
           className="mb-4 px-10 py-4 text-xl md:w-auto"
         >
-         GET STARTED
+          {("pages.home.cta")}
         </AnimatedPrimaryButton>
 
         <div className="text-xs text-stone-500">
-        press_enter_to_start_onboarding"
+          {("pages.home.press_enter_to_start_onboarding")}
         </div>
       </div>
     </div>

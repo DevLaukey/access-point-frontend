@@ -1,12 +1,12 @@
-import { Meta, StoryFn } from "@storybook/react";
-import Headline, { HeadlineProps } from "./HeadLine";
+import { Meta, Story } from "@storybook/react";
+import Headline, { HeadlineProps } from "./Headline";
 
 export default {
   component: Headline,
   title: "Components/Headline",
 } as Meta;
 
-const Template: StoryFn<HeadlineProps> = (args) => {
+const Template: Story<HeadlineProps> = (args) => {
   return <Headline {...args} />;
 };
 
