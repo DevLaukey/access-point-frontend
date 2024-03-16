@@ -29,10 +29,13 @@ export const Hero = () => {
         </p>
 
         <div className="space-y-4 md:space-y-0 md:space-x-4">
-         
+          <Link href="/auth/login">
+            <Button className="w-full md:w-1/3">Get Started</Button>
+          </Link>
+
           <button
             type="button"
-            className={`flex items-center justify-center w-48 mt-3 text-white bg-black rounded-lg h-14 md:w-1/3 ${buttonVariants(
+            className={`md:w-1/3 flex items-center justify-center w-48 mt-3 text-white bg-black rounded-lg h-14 ${buttonVariants(
               {
                 variant: "outline",
               }

@@ -29,14 +29,10 @@ export const Hero = () => {
         </p>
 
         <div className="space-y-4 md:space-y-0 md:space-x-4">
-         
+          
           <button
             type="button"
-            className={`flex items-center justify-center w-48 mt-3 text-white bg-black rounded-lg h-14 md:w-1/3 ${buttonVariants(
-              {
-                variant: "outline",
-              }
-            )}`}
+            class="flex items-center justify-center w-48 mt-3 text-white bg-black rounded-lg h-14"
           >
             <div class="mr-3">
               <svg viewBox="30 336.7 120.9 129.2" width="30">

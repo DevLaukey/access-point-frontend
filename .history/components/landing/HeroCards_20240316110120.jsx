@@ -42,23 +42,23 @@ export const HeroCards = () => {
             alt="user avatar"
             className="absolute grayscale-[0%] -top-12 rounded-full w-24 h-24 aspect-square object-cover"
           />
-          <CardTitle className="text-center">Victor Mwaura</CardTitle>
+          <CardTitle className="text-center">Leo Miranda</CardTitle>
           <CardDescription className="font-normal text-primary">
-            Chief Technology Officer
+            Frontend Developer
           </CardDescription>
         </CardHeader>
 
         <CardContent className="text-center pb-2">
           <p>
-            No more delays in the process of scanning and verifying identity
-            cards
+            I really enjoy transforming ideas into functional software that
+            exceeds expectations
           </p>
         </CardContent>
 
         <CardFooter>
           <div>
             <a
-              href="https://github.com/DevLaukey"
+              href="https://github.com/leoMirandaa"
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -69,7 +69,7 @@ export const HeroCards = () => {
               <GitHubLogoIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://twitter.com/DLaukey"
+              href="https://twitter.com/leo_mirand4"
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -89,7 +89,7 @@ export const HeroCards = () => {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/devlaukey/"
+              href="https://www.linkedin.com/"
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -107,18 +107,18 @@ export const HeroCards = () => {
       <Card className="absolute top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader>
           <CardTitle className="flex item-center justify-between">
-            Silver
+            Free
             <Badge variant="secondary" className="text-sm text-primary">
               Most popular
             </Badge>
           </CardTitle>
           <div>
-            <span className="text-3xl font-bold">Ksh. 5000</span>
+            <span className="text-3xl font-bold">$0</span>
             <span className="text-muted-foreground"> /month</span>
           </div>
 
           <CardDescription>
-            Get started with the basics and upgrade as you grow
+            Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.
           </CardDescription>
         </CardHeader>
 
@@ -130,7 +130,7 @@ export const HeroCards = () => {
 
         <CardFooter className="flex">
           <div className="space-y-4">
-            {["3 Entry Managers", "3 Entry Points", "Records backup", "Secure database", "Admin dashboard"].map(
+            {["4 Team member", "4 GB Storage", "Upto 6 pages"].map(
               (benefit) => (
                 <span key={benefit} className="flex">
                   <Check className="text-green-500" />{" "}
@@ -151,8 +151,7 @@ export const HeroCards = () => {
           <div>
             <CardTitle>Scanning Identity Card</CardTitle>
             <CardDescription className="text-md mt-2">
-              Uses Optical Character Recognition(OCR) to identify and extract
-              information from identity card
+             Uses Optical Character Recognition(OCR) to identify and extract information from identity card
             </CardDescription>
           </div>
         </CardHeader>
