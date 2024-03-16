@@ -26,7 +26,7 @@ const Page = () => {
         <HowItWorks />
         <Features />
         <Services />
-        {/* <Cta /> */}
+        <Cta />
         <Testimonials />
         <Team />
         <Pricing />

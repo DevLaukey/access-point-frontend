@@ -53,7 +53,8 @@
     "tailwindcss-animate": "^1.0.7",
     "uploadthing": "^6.3.1",
     "yup": "^1.4.0",
-    "zod": "^3.23.0-canary.20231004T224911"
+    "zod": "^3.23.0-canary.20231004T224911",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "20.11.5",

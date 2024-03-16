@@ -1,0 +1,7 @@
+[
+  { slug: "name", storeKey: "nameValid" },
+  { slug: "email", storeKey: "emailValid" },
+  { slug: "phone", storeKey: "phoneNumberValid" },
+  { slug: "income", storeKey: "incomeValid" },
+  { slug: "summary", storeKey: null },
+];
