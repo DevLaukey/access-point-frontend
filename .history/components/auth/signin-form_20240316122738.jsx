@@ -10,8 +10,8 @@ import { Eye, EyeOff } from "@radix-ui/react-icons";
 
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required Field"),
-  password: Yup.string().required("Required Field"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 const SignIn = () => {
@@ -64,7 +64,6 @@ const SignIn = () => {
               <Field
                 id="password"
                 name="password"
-                placeholder="******"
                 type="password"
                 className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
               />

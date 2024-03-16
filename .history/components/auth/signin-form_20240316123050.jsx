@@ -10,13 +10,14 @@ import { Eye, EyeOff } from "@radix-ui/react-icons";
 
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required Field"),
-  password: Yup.string().required("Required Field"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 const SignIn = () => {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
 
   async function signIn(formData) {
     const { error } = await supabase.auth.signInWithPassword({

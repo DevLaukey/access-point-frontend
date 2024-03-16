@@ -155,7 +155,8 @@ export const HeroCards = () => {
           <div>
             <CardTitle>Scanning Identity Card</CardTitle>
             <CardDescription className="text-md mt-2">
-              Uses Optical Character Recognition(OCR) 
+              Uses Optical Character Recognition(OCR) to identify and extract
+              information from identity card
             </CardDescription>
           </div>
         </CardHeader>

@@ -26,7 +26,7 @@ export const HeroCards = () => {
           </Avatar>
 
           <div className="flex flex-col">
-            <CardTitle className="text-lg">John Doe </CardTitle>
+            <CardTitle className="text-lg">John Doe React</CardTitle>
             <CardDescription>@john_doe</CardDescription>
           </div>
         </CardHeader>
@@ -147,7 +147,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className="absolute w-[350px] -right-[10px] bottom-[35px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="absolute w-[350px] -right-[10px] bottom-[35px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
           <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
             <LightBulbIcon />
@@ -155,7 +155,8 @@ export const HeroCards = () => {
           <div>
             <CardTitle>Scanning Identity Card</CardTitle>
             <CardDescription className="text-md mt-2">
-              Uses Optical Character Recognition(OCR) 
+              Uses Optical Character Recognition(OCR) to identify and extract
+              information from identity card
             </CardDescription>
           </div>
         </CardHeader>

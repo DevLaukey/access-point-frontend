@@ -10,8 +10,8 @@ import { Eye, EyeOff } from "@radix-ui/react-icons";
 
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required Field"),
-  password: Yup.string().required("Required Field"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 const SignIn = () => {

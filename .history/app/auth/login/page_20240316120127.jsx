@@ -1,22 +1,20 @@
+import { Metadata } from "next";
+import Link from "next/link";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Icons } from "../../../components/icons";
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-import SignInForm from "../../../components/auth/signin-form";
-
+import AuthForm from "../../../components/auth/auth-form";
 
 export const metadata = {
-  title: "Sign in to your account",
-  description: "Sign in to your account to continue",
+  title: "POEMS|Login",
+  description: "Login to your account",
 };
-
 
 export default async function LoginPage() {
   const supabase = createServerComponentClient({ cookies });
   const { data } = await supabase.auth.getSession();
 
   if (data?.session) {
-    redirect("/dashboard");
+    redirect("/");
   }
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">
@@ -30,7 +28,7 @@ export default async function LoginPage() {
             Enter your email to sign in to your account
           </p>
         </div>
-        <SignInForm />
+        <AuthForm />
       </div>
     </div>
   );

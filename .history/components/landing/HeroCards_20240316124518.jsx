@@ -22,43 +22,43 @@ export const HeroCards = () => {
         <CardHeader className="flex flex-row items-center gap-4 pb-2">
           <Avatar>
             <AvatarImage alt="" src="https://github.com/shadcn.png" />
-            <AvatarFallback>DK</AvatarFallback>
+            <AvatarFallback>SH</AvatarFallback>
           </Avatar>
 
           <div className="flex flex-col">
-            <CardTitle className="text-lg">John Doe </CardTitle>
+            <CardTitle className="text-lg">John Doe React</CardTitle>
             <CardDescription>@john_doe</CardDescription>
           </div>
         </CardHeader>
 
-        <CardContent>The data is secure and private!</CardContent>
+        <CardContent>This landig page is awesome!</CardContent>
       </Card>
 
       {/* Team */}
       <Card className="absolute right-[20px] top-4 w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="mt-8 flex justify-center items-center pb-2">
           <img
-            src="https://avatars.githubusercontent.com/u/63729244?s=400&u=e2bde62a1ba395f12dba8fe5ff52ba5f15a8755e&v=4"
+            src="https://i.pravatar.cc/150?img=58"
             alt="user avatar"
             className="absolute grayscale-[0%] -top-12 rounded-full w-24 h-24 aspect-square object-cover"
           />
-          <CardTitle className="text-center">Victor Mwaura</CardTitle>
+          <CardTitle className="text-center">Leo Miranda</CardTitle>
           <CardDescription className="font-normal text-primary">
-            Chief Technology Officer
+            Frontend Developer
           </CardDescription>
         </CardHeader>
 
         <CardContent className="text-center pb-2">
           <p>
-            No more delays in the process of scanning and verifying identity
-            cards
+            I really enjoy transforming ideas into functional software that
+            exceeds expectations
           </p>
         </CardContent>
 
         <CardFooter>
           <div>
             <a
-              href="https://github.com/DevLaukey"
+              href="https://github.com/leoMirandaa"
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -69,7 +69,7 @@ export const HeroCards = () => {
               <GitHubLogoIcon className="w-5 h-5" />
             </a>
             <a
-              href="https://twitter.com/DLaukey"
+              href="https://twitter.com/leo_mirand4"
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -89,7 +89,7 @@ export const HeroCards = () => {
             </a>
 
             <a
-              href="https://www.linkedin.com/in/devlaukey/"
+              href="https://www.linkedin.com/"
               target="_blank"
               className={buttonVariants({
                 variant: "ghost",
@@ -107,18 +107,18 @@ export const HeroCards = () => {
       <Card className="absolute top-[150px] left-[50px] w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader>
           <CardTitle className="flex item-center justify-between">
-            Silver
+            Free
             <Badge variant="secondary" className="text-sm text-primary">
               Most popular
             </Badge>
           </CardTitle>
           <div>
-            <span className="text-3xl font-bold">Ksh. 5000</span>
+            <span className="text-3xl font-bold">$0</span>
             <span className="text-muted-foreground"> /month</span>
           </div>
 
           <CardDescription>
-            Get started with the basics and upgrade as you grow
+            Lorem ipsum dolor sit, amet ipsum consectetur adipisicing elit.
           </CardDescription>
         </CardHeader>
 
@@ -130,32 +130,29 @@ export const HeroCards = () => {
 
         <CardFooter className="flex">
           <div className="space-y-4">
-            {[
-              "3 Entry Managers",
-              "3 Entry Points",
-              "Records backup",
-              "Secure database",
-              "Admin dashboard",
-            ].map((benefit) => (
-              <span key={benefit} className="flex">
-                <Check className="text-green-500" />{" "}
-                <h3 className="ml-2">{benefit}</h3>
-              </span>
-            ))}
+            {["4 Team member", "4 GB Storage", "Upto 6 pages"].map(
+              (benefit) => (
+                <span key={benefit} className="flex">
+                  <Check className="text-green-500" />{" "}
+                  <h3 className="ml-2">{benefit}</h3>
+                </span>
+              )
+            )}
           </div>
         </CardFooter>
       </Card>
 
       {/* Service */}
-      <Card className="absolute w-[350px] -right-[10px] bottom-[35px] drop-shadow-xl shadow-black/10 dark:shadow-white/10">
+      <Card className="absolute w-[350px] -right-[10px] bottom-[35px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10">
         <CardHeader className="space-y-1 flex md:flex-row justify-start items-start gap-4">
           <div className="mt-1 bg-primary/20 p-1 rounded-2xl">
             <LightBulbIcon />
           </div>
           <div>
-            <CardTitle>Scanning Identity Card</CardTitle>
+            <CardTitle>Light & dark mode</CardTitle>
             <CardDescription className="text-md mt-2">
-              Uses Optical Character Recognition(OCR) 
+              Lorem ipsum dolor sit amet consect adipisicing elit. Consectetur
+              natusm.
             </CardDescription>
           </div>
         </CardHeader>

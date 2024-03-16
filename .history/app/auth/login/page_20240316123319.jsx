@@ -13,10 +13,13 @@ export const metadata = {
 
 export default async function LoginPage() {
   const supabase = createServerComponentClient({ cookies });
-  const { data } = await supabase.auth.getSession();
+  const { data , error} = await supabase.auth.getUser();
 
-  if (data?.session) {
-    redirect("/dashboard");
+  if (error) { 
+    console.error(error);
+  }
+  if (data?.user) {
+    redirect("/dashbaord");
   }
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">

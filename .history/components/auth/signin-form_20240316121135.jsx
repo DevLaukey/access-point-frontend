@@ -5,13 +5,10 @@ import { Field, Form, Formik } from "formik";
 import Link from "next/link";
 import * as Yup from "yup";
 import { Label } from "../ui/label";
-import { Button } from "../ui/button";
-import { Eye, EyeOff } from "@radix-ui/react-icons";
-
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required Field"),
-  password: Yup.string().required("Required Field"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 const SignIn = () => {
@@ -31,6 +28,7 @@ const SignIn = () => {
 
   return (
     <div className="max-w-md mx-auto mt-8">
+      <h2 className="text-2xl font-bold mb-4">Sign In</h2>
       <Formik
         initialValues={{
           email: "",
@@ -48,9 +46,9 @@ const SignIn = () => {
               <Field
                 id="email"
                 name="email"
-                placeholder="jane@doe.com"
+                placeholder="jane@acme.com"
                 type="email"
-                className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               {errors.email && touched.email ? (
                 <div className="text-red-600 text-sm">{errors.email}</div>
@@ -58,15 +56,14 @@ const SignIn = () => {
             </div>
 
             <div>
-              <Label htmlFor="password" className="block text-sm font-medium">
+              <label htmlFor="password" className="block text-sm font-medium">
                 Password
-              </Label>
+              </label>
               <Field
                 id="password"
                 name="password"
-                placeholder="******"
                 type="password"
-                className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
+                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
               />
               {errors.password && touched.password ? (
                 <div className="text-red-600 text-sm">{errors.password}</div>
@@ -79,12 +76,12 @@ const SignIn = () => {
               </p>
             </Link>
 
-            <Button
+            <button
               type="submit"
               className="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
               Submit
-            </Button>
+            </button>
           </Form>
         )}
       </Formik>

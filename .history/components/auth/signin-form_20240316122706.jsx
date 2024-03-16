@@ -1,4 +1,5 @@
-"use client";
+"use client"
+
 import { useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Field, Form, Formik } from "formik";
@@ -8,15 +9,15 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { Eye, EyeOff } from "@radix-ui/react-icons";
 
-
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required Field"),
-  password: Yup.string().required("Required Field"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 const SignIn = () => {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
+  const [showPassword, setShowPassword] = useState(false); // State to manage password visibility
 
   async function signIn(formData) {
     const { error } = await supabase.auth.signInWithPassword({
@@ -61,13 +62,21 @@ const SignIn = () => {
               <Label htmlFor="password" className="block text-sm font-medium">
                 Password
               </Label>
-              <Field
-                id="password"
-                name="password"
-                placeholder="******"
-                type="password"
-                className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
-              />
+              <div className="relative">
+                <Field
+                  id="password"
+                  name="password"
+                  type={showPassword ? "text" : "password"} // Toggle password visibility
+                  className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3 pr-10"
+                />
+                <button
+                  type="button"
+                  className="absolute inset-y-0 right-0 px-3 py-1 focus:outline-none flex items-center"
+                  onClick={() => setShowPassword(!showPassword)} // Toggle show/hide password
+                >
+                  {showPassword ? <EyeOff /> : <Eye />}
+                </button>
+              </div>
               {errors.password && touched.password ? (
                 <div className="text-red-600 text-sm">{errors.password}</div>
               ) : null}

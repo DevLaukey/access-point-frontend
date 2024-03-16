@@ -16,7 +16,7 @@ export default async function LoginPage() {
   const { data } = await supabase.auth.getSession();
 
   if (data?.session) {
-    redirect("/dashboard");
+    redirect("/dashbaord");
   }
   return (
     <div className="container flex h-screen w-screen flex-col items-center justify-center">

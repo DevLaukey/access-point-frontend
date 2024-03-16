@@ -6,12 +6,10 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { Eye, EyeOff } from "@radix-ui/react-icons";
-
 
 const SignInSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Required Field"),
-  password: Yup.string().required("Required Field"),
+  email: Yup.string().email("Invalid email").required("Required"),
+  password: Yup.string().required("Required"),
 });
 
 const SignIn = () => {
@@ -30,7 +28,8 @@ const SignIn = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8">
+    <div className=" mx-auto mt-8">
+      <h2 className="text-2xl font-bold mb-4">Sign In</h2>
       <Formik
         initialValues={{
           email: "",
@@ -64,7 +63,6 @@ const SignIn = () => {
               <Field
                 id="password"
                 name="password"
-                placeholder="******"
                 type="password"
                 className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
               />

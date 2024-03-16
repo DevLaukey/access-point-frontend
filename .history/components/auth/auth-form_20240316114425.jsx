@@ -22,7 +22,6 @@ export default function AuthForm() {
         },
       }}
       theme="dark"
-      providers={[]}
       redirectTo="http://localhost:3000/auth/callback"
     />
   );
