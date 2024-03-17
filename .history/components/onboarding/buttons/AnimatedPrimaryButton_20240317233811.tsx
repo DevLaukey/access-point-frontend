@@ -13,8 +13,8 @@ export interface AnimatedPrimaryButtonProps {
 export default function AnimatedPrimaryButton({
   link,
   testId,
-  className = "",
-  disabled = false,
+  className,
+  disabled,
   children,
   onClick,
 }: AnimatedPrimaryButtonProps) {
@@ -25,8 +25,8 @@ export default function AnimatedPrimaryButton({
       onClick={onClick}
       // className="flex items-center justify-center space-x-2 relative w-full"
     >
-      <button className="flex items-center justify-center space-x-2 relative w-full border px-4 py-2 border-zinc-800 rounded-md ">
-        <span className="relative  text-black">{children}</span>
+      <button className="flex items-center justify-center space-x-2 relative w-full border">
+        <span className="relative text-sm text-black">{children}</span>
         <div className="flex items-center -space-x-3 translate-x-3">
           <div className="w-2.5 h-[1.6px] rounded bg-white origin-left scale-x-0 transition duration-300 group-hover:scale-x-100"></div>
           <svg
@@ -45,7 +45,6 @@ export default function AnimatedPrimaryButton({
           </svg>
         </div>
       </button>
-      <span className="invisible relative">{children}</span>
     </Link>
   );
 }

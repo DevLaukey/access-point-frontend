@@ -25,6 +25,8 @@ export default function AnimatedPrimaryButton({
       onClick={onClick}
       // className="flex items-center justify-center space-x-2 relative w-full"
     >
+   
+
       <button className="flex items-center justify-center space-x-2 relative w-full border px-4 py-2 border-zinc-800 rounded-md ">
         <span className="relative  text-black">{children}</span>
         <div className="flex items-center -space-x-3 translate-x-3">
@@ -45,7 +47,6 @@ export default function AnimatedPrimaryButton({
           </svg>
         </div>
       </button>
-      <span className="invisible relative">{children}</span>
     </Link>
   );
 }
