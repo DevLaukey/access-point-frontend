@@ -1,6 +1,5 @@
-import SubscriptionCards from "../../components/onboarding/SubscriptionCards";
-import SideInfo from "../../components/onboarding/SideInfo";
-
+import SubscriptionCards from "../../../components/onboarding/SubscriptionCards";
+import SideInfo from "../../../components/onboarding/SideInfo";
 
 function page() {
   return (
@@ -63,10 +62,9 @@ function page() {
           </div>
         </div>
       </div>
-    <SideInfo/>
+      <SideInfo />
     </div>
   );
 }
 
 export default page;
-

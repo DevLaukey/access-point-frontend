@@ -35,7 +35,7 @@ function page() {
                   <li className="text-left">
                     <a
                       className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
-                      href="/onboarding/email-step"
+                      href="/onboarding/email"
                     >
                       2
                     </a>
@@ -69,4 +69,3 @@ function page() {
 }
 
 export default page;
-

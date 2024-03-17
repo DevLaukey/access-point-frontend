@@ -1,7 +1,6 @@
 import SubscriptionCards from "../../components/onboarding/SubscriptionCards";
 import SideInfo from "../../components/onboarding/SideInfo";
 
-
 function page() {
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
@@ -63,10 +62,9 @@ function page() {
           </div>
         </div>
       </div>
-    <SideInfo/>
+      <SideInfo />
     </div>
   );
 }
 
 export default page;
-
