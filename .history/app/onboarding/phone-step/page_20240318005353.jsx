@@ -1,9 +1,9 @@
-
 import OnboardingSlider from "../../../components/onboarding/OnboardingSlider";
+
 
 function page() {
   return (
-   <OnboardingSlider/>
+    <OnboardingSlider/>
   );
 }
 
