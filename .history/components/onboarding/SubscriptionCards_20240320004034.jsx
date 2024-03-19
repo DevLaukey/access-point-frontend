@@ -32,8 +32,10 @@ function SubscriptionCards() {
   const handleContinue = () => {
     if (selectedTier) {
       // Redirect to /onboarding/email-step route with selectedTier as query parameter
-      router.push("/onboarding/email-step", { query: { tier: selectedTier } });
-     
+      router.push({
+        pathname: "/onboarding/email-step",
+        query: { tier: selectedTier },
+      });
     } else {
       // Handle case where no tier is selected
       alert("Please select a subscription tier.");
