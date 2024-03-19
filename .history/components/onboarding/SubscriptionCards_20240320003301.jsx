@@ -1,7 +1,5 @@
-"use client"
-import React, { useState } from "react";
+import React from "react";
 import RadioSelector from "./RadioSelector";
-
 function SubscriptionCards() {
   const tiers = [
     {
@@ -20,27 +18,18 @@ function SubscriptionCards() {
         "Get access to all the features and tools that you need to get your business off the ground. We will send you a free book as a welcome gift.",
     },
   ];
-
-  const [selectedTier, setSelectedTier] = useState(null);
-
-  const handleRadioChange = (tier) => {
-    setSelectedTier(tier);
-  };
-
   return (
     <>
       <h2 className="font-serif text-2xl font-semibold text-gray-700 ">
         Choose Subscription Plan
       </h2>
       <div className="mt-8 flex w-full flex-col pb-8">
-        <div className="flex flex-col space-y-4 h-64 overflow-y-auto">
+        <div className="flex flex-col space-y-4">
           {tiers.map((tier, index) => (
             <RadioSelector
               key={index}
               tier={tier.tier}
               description={tier.description}
-              isSelected={selectedTier === tier.tier}
-              onRadioChange={() => handleRadioChange(tier.tier)}
             />
           ))}
         </div>

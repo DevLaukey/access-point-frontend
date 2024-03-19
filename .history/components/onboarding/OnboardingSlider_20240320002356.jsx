@@ -51,7 +51,7 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-            <SubscriptionCards />
+            {/* <SubscriptionCards /> */}
           </div>
         </div>
       </div>

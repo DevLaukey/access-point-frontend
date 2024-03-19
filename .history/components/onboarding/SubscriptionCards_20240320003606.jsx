@@ -33,7 +33,7 @@ function SubscriptionCards() {
         Choose Subscription Plan
       </h2>
       <div className="mt-8 flex w-full flex-col pb-8">
-        <div className="flex flex-col space-y-4 h-64 overflow-y-auto">
+        <div className="flex flex-col space-y-4">
           {tiers.map((tier, index) => (
             <RadioSelector
               key={index}
