@@ -2,22 +2,22 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { useRouter } from "next/navigation";
 
 function InfoCard() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [institution, setInstitution] = useState("");
   const [errors, setErrors] = useState({});
-  const router = useRouter();
 
   const tier = localStorage.getItem("tier");
 
-  // change this to get the logged in user
+  // change this to get the logged in user 
   const email = "admin_test@access.com";
 
-  console.log(tier);
+
+  console.log(tier)
   const supabase = createClientComponentClient();
+
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -56,22 +56,14 @@ function InfoCard() {
     try {
       const { data, error } = await supabase
         .from("admin_users")
-        .insert([
-          {
-            admin_name: firstName + lastName,
-            institution_name: institution,
-            tier,
-            email,
-          },
-        ])
-        .select()
-        .single();
+        .insert([{ admin_name: firstName + lastName, institution_name: institution, tier, email }])
+        .select();
 
       if (error) {
         throw error;
       }
-      console.log(data);
-      router.push(`/onboarding/managers/${data.id}`);
+
+      router.push('onboarding/complete')
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {
@@ -84,6 +76,7 @@ function InfoCard() {
   };
 
   return (
+
     <form className="w-full max-w-lg" onSubmit={handleSubmit}>
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">

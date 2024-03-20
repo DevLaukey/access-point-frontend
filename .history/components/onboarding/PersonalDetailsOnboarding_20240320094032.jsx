@@ -50,10 +50,10 @@ function PersonalDetailsOnboarding() {
                   </li>
                 </ul>
               </div>
-            <h2 className="font-serif text-2xl font-semibold text-gray-700 pt-4">
-             Personal Details
-            </h2>
+            <h2 className="font-serif text-2xl font-semibold text-gray-700 ">
             </div>
+              Choose Subscription Plan
+            </h2>
             <InfoCard />
           </div>
         </div>

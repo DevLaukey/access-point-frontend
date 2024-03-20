@@ -49,10 +49,10 @@ function PersonalDetailsOnboarding() {
                     </a>
                   </li>
                 </ul>
+                <h2 className="font-serif text-2xl font-semibold text-gray-700 ">
+                  Choose Subscription Plan
+                </h2>
               </div>
-            <h2 className="font-serif text-2xl font-semibold text-gray-700 pt-4">
-             Personal Details
-            </h2>
             </div>
             <InfoCard />
           </div>

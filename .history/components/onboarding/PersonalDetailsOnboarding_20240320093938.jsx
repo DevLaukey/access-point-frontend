@@ -12,7 +12,7 @@ function PersonalDetailsOnboarding() {
           </a>
         </div>
 
-        <div className="my-auto mx-auto flex flex-col justify-center py-4 md:justify-start lg:w-[34rem]">
+        <div className="my-auto mx-auto flex flex-col justify-center pt-8 md:justify-start lg:w-[34rem]">
           <div className="flex w-full flex-col  px-2 sm:px-14">
             <div className="mx-auto w-full max-w-md pb-20 px-8 sm:px-0">
               <div className="relative">
@@ -49,10 +49,10 @@ function PersonalDetailsOnboarding() {
                     </a>
                   </li>
                 </ul>
+                <h2 className="font-serif text-2xl font-semibold text-gray-700 ">
+                  Choose Subscription Plan
+                </h2>
               </div>
-            <h2 className="font-serif text-2xl font-semibold text-gray-700 pt-4">
-             Personal Details
-            </h2>
             </div>
             <InfoCard />
           </div>

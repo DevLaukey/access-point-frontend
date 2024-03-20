@@ -51,7 +51,7 @@ function PersonalDetailsOnboarding() {
                 </ul>
               </div>
             <h2 className="font-serif text-2xl font-semibold text-gray-700 pt-4">
-             Personal Details
+              Choose Subscription Plan
             </h2>
             </div>
             <InfoCard />

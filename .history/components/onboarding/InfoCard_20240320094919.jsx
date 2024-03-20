@@ -71,7 +71,7 @@ function InfoCard() {
         throw error;
       }
       console.log(data);
-      router.push(`/onboarding/managers/${data.id}`);
+      router.push(`onboarding/managers/${data.id}`);
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {
