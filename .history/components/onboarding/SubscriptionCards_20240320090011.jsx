@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import RadioSelector from "./RadioSelector";
@@ -32,8 +32,8 @@ function SubscriptionCards() {
   const handleContinue = () => {
     if (selectedTier) {
       // Redirect to /onboarding/email-step route with selectedTier as query parameter
-      localStorage.setItem('tier', selectedTier);
-      router.push("/onboarding/email-step");
+      router.push("/onboarding/email-step", { params: { tier: selectedTier } });
+     
     } else {
       // Handle case where no tier is selected
       alert("Please select a subscription tier.");
@@ -45,8 +45,8 @@ function SubscriptionCards() {
       <h2 className="font-serif text-2xl font-semibold text-gray-700 ">
         Choose Subscription Plan
       </h2>
-      <div className="mt-4 flex w-full flex-col pb-4">
-        <div className="flex flex-col space-y-4 h-80 overflow-y-auto">
+      <div className="mt-8 flex w-full flex-col pb-8">
+        <div className="flex flex-col space-y-4 h-64 overflow-y-auto">
           {tiers.map((tier, index) => (
             <RadioSelector
               key={index}

@@ -53,7 +53,26 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-          
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <Label
+                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              >
+                First Name
+              </Label>
+              <Input
+                className={`appearance-none block w-full bg-gray-200 text-gray-700 borderrounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white`}
+                id="grid-first-name"
+                type="email"
+                placeholder="joe@xyz.com"
+                value={firstName}
+                onChange={handleFirstNameChange}
+              />
+              {errors.firstName && (
+                <p className="text-red-500 text-xs italic">
+                  {errors.firstName}
+                </p>
+              )}
+            </div>
             <SubscriptionCards />
           </div>
         </div>

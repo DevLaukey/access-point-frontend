@@ -63,7 +63,7 @@ function InfoCard() {
         throw error;
       }
 
-      router.push('onboarding/complete')
+      console.log("admin_users", admin_users);
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {

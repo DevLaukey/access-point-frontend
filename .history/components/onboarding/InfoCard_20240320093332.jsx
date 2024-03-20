@@ -56,14 +56,14 @@ function InfoCard() {
     try {
       const { data, error } = await supabase
         .from("admin_users")
-        .insert([{ admin_name: firstName + lastName, institution_name: institution, tier, email }])
+        .insert([{ admin_name: firstName + lastName, institution_name: institution, tier, email: }])
         .select();
 
       if (error) {
         throw error;
       }
 
-      router.push('onboarding/complete')
+      console.log("admin_users", admin_users);
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {

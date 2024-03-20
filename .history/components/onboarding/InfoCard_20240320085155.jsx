@@ -1,23 +1,14 @@
 "use client";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { createClient } from "@supabase/supabase-js";
 
 function InfoCard() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [institution, setInstitution] = useState("");
   const [errors, setErrors] = useState({});
-
-  const tier = localStorage.getItem("tier");
-
-  // change this to get the logged in user 
-  const email = "admin_test@access.com";
-
-
-  console.log(tier)
-  const supabase = createClientComponentClient();
-
+  const supabase = createClient()
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -54,16 +45,15 @@ function InfoCard() {
   };
   const submitDetails = async (firstName, lastName, institution) => {
     try {
-      const { data, error } = await supabase
+      let { data: admin_users, error } = await supabase
         .from("admin_users")
-        .insert([{ admin_name: firstName + lastName, institution_name: institution, tier, email }])
-        .select();
+        .select("admin_id");
 
       if (error) {
         throw error;
       }
 
-      router.push('onboarding/complete')
+      console.log("admin_users", admin_users);
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {

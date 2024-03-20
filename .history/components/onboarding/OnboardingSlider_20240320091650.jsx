@@ -2,7 +2,6 @@ import React from 'react'
 import SubscriptionCards from './SubscriptionCards';
 import SideInfo from './SideInfo';
 import { Label } from '../ui/label';
-import { Input } from '../ui/input';
 
 const OnboardingSlider = () => {
   return (
@@ -53,7 +52,14 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-          
+            <div className='text-center'>
+              <Label className="font-serif text-2xl font-semibold text-gray-700 ">
+                Choose Subscription Plan
+              </Label>
+              <p className="text-gray-600 text-sm">
+                Choose a plan that best suits your needs
+              </p>
+            </div>
             <SubscriptionCards />
           </div>
         </div>

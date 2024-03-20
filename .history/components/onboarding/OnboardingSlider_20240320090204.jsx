@@ -1,8 +1,6 @@
 import React from 'react'
 import SubscriptionCards from './SubscriptionCards';
 import SideInfo from './SideInfo';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
 
 const OnboardingSlider = () => {
   return (
@@ -53,7 +51,6 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-          
             <SubscriptionCards />
           </div>
         </div>

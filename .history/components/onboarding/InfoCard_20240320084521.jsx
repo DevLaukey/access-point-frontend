@@ -1,23 +1,11 @@
-"use client";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 function InfoCard() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [institution, setInstitution] = useState("");
   const [errors, setErrors] = useState({});
-
-  const tier = localStorage.getItem("tier");
-
-  // change this to get the logged in user 
-  const email = "admin_test@access.com";
-
-
-  console.log(tier)
-  const supabase = createClientComponentClient();
-
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -49,24 +37,8 @@ function InfoCard() {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      submitDetails(firstName, lastName, institution);
-    }
-  };
-  const submitDetails = async (firstName, lastName, institution) => {
-    try {
-      const { data, error } = await supabase
-        .from("admin_users")
-        .insert([{ admin_name: firstName + lastName, institution_name: institution, tier, email }])
-        .select();
-
-      if (error) {
-        throw error;
-      }
-
-      router.push('onboarding/complete')
-    } catch (error) {
-      console.log("Error while submitting details:", error);
-    } finally {
+      // If no errors, submit the form (you can add your logic here)
+      console.log("Form submitted:", { firstName, lastName, institution });
       // Reset the form
       setFirstName("");
       setLastName("");
@@ -79,10 +51,7 @@ function InfoCard() {
     <form className="w-full max-w-lg" onSubmit={handleSubmit}>
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-first-name"
-          >
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
             First Name
           </label>
           <input
@@ -95,15 +64,10 @@ function InfoCard() {
             value={firstName}
             onChange={handleFirstNameChange}
           />
-          {errors.firstName && (
-            <p className="text-red-500 text-xs italic">{errors.firstName}</p>
-          )}
+          {errors.firstName && <p className="text-red-500 text-xs italic">{errors.firstName}</p>}
         </div>
         <div className="w-full md:w-1/2 px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-last-name"
-          >
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
             Last Name
           </label>
           <input
@@ -116,17 +80,12 @@ function InfoCard() {
             value={lastName}
             onChange={handleLastNameChange}
           />
-          {errors.lastName && (
-            <p className="text-red-500 text-xs italic">{errors.lastName}</p>
-          )}
+          {errors.lastName && <p className="text-red-500 text-xs italic">{errors.lastName}</p>}
         </div>
       </div>
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
-          <label
-            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            htmlFor="grid-institution"
-          >
+          <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-institution">
             Institution
           </label>
           <input
@@ -139,15 +98,11 @@ function InfoCard() {
             value={institution}
             onChange={handleInstitutionChange}
           />
-          {errors.institution && (
-            <p className="text-red-500 text-xs italic">{errors.institution}</p>
-          )}
+          {errors.institution && <p className="text-red-500 text-xs italic">{errors.institution}</p>}
         </div>
       </div>
 
-      <Button className="w-full mt-2" type="submit">
-        Submit
-      </Button>
+      <Button className="w-full mt-2" type="submit">Submit</Button>
     </form>
   );
 }

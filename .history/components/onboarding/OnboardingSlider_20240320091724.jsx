@@ -53,7 +53,12 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-          
+            <div className='text-center'>
+              <Label className="font-serif text-2xl font-semibold text-gray-700 ">
+                Email
+              </Label>
+              <Input className="text-gray-600 text-sm"/>
+            </div>
             <SubscriptionCards />
           </div>
         </div>

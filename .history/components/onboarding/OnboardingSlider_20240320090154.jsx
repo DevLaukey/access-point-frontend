@@ -1,14 +1,12 @@
 import React from 'react'
 import SubscriptionCards from './SubscriptionCards';
 import SideInfo from './SideInfo';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
 
 const OnboardingSlider = () => {
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
       <div className="flex w-full flex-col md:w-1/2">
-        <div className="flex justify-center pt-12 md:justify-start md:pl-12">
+        <div className="flex justify-center py-12 md:justify-start md:pl-12">
           <a href="#" className="text-2xl font-bold text-blue-600">
             Welcome to P.O.E.M.S
           </a>
@@ -53,7 +51,6 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-          
             <SubscriptionCards />
           </div>
         </div>

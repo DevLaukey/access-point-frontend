@@ -1,23 +1,12 @@
 "use client";
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 function InfoCard() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [institution, setInstitution] = useState("");
   const [errors, setErrors] = useState({});
-
-  const tier = localStorage.getItem("tier");
-
-  // change this to get the logged in user 
-  const email = "admin_test@access.com";
-
-
-  console.log(tier)
-  const supabase = createClientComponentClient();
-
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -49,21 +38,16 @@ function InfoCard() {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      submitDetails(firstName, lastName, institution);
-    }
+      // If no errors, submit the form (you can add your logic here)
+      console.log("Form submitted:", { firstName, lastName, institution });
+    
   };
+
   const submitDetails = async (firstName, lastName, institution) => {
     try {
-      const { data, error } = await supabase
+      let { data: admin_users, error } = await supabase
         .from("admin_users")
-        .insert([{ admin_name: firstName + lastName, institution_name: institution, tier, email }])
-        .select();
-
-      if (error) {
-        throw error;
-      }
-
-      router.push('onboarding/complete')
+        .select("admin_id");
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {
@@ -72,6 +56,7 @@ function InfoCard() {
       setLastName("");
       setInstitution("");
       setErrors({});
+    }
     }
   };
 
