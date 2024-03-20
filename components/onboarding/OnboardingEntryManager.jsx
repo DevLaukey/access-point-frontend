@@ -1,8 +1,8 @@
 import React from 'react'
 import SubscriptionCards from './SubscriptionCards';
 import SideInfo from './SideInfo';
-import { Label } from '../ui/label';
-import { Input } from '../ui/input';
+
+import AddEntryManager from './AddentryManager';
 
 const OnboardingSlider = () => {
   return (
@@ -28,7 +28,7 @@ const OnboardingSlider = () => {
                 <ul className="relative flex w-full justify-between">
                   <li className="text-left">
                     <a
-                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2"
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
                       href="/onboarding"
                     >
                       1
@@ -43,17 +43,15 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a
-                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-white"
-                    >
+                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
                       3
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-          
-            <SubscriptionCards />
+
+            <AddEntryManager />
           </div>
         </div>
       </div>

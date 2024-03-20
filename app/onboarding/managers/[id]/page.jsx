@@ -1,9 +1,7 @@
-import React from 'react'
+import OnboardingEntryManager from "../../../../components/onboarding/OnboardingEntryManager";
 
 function page() {
-  return (
-    <div>page</div>
-  )
+  return <OnboardingEntryManager />;
 }
 
-export default page
+export default page;

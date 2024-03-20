@@ -43,7 +43,6 @@ function PersonalDetailsOnboarding() {
                   <li className="text-left">
                     <a
                       className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-white"
-                      href="/onboarding/phone-step"
                     >
                       3
                     </a>

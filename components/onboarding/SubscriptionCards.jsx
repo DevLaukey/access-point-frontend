@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import RadioSelector from "./RadioSelector";
-
+import  Link from "next/link";
 function SubscriptionCards() {
   const tiers = [
     {
@@ -32,7 +32,7 @@ function SubscriptionCards() {
   const handleContinue = () => {
     if (selectedTier) {
       // Redirect to /onboarding/email-step route with selectedTier as query parameter
-      localStorage.setItem('tier', selectedTier);
+      localStorage.setItem("tier", selectedTier);
       router.push("/onboarding/email-step");
     } else {
       // Handle case where no tier is selected
@@ -69,9 +69,13 @@ function SubscriptionCards() {
             />
             <span id="terms-description" className="text-sm text-gray-600">
               I agree to the
-              <a className="underline" href="#">
+              <Link
+                className="underline"
+                href="https://www.poems.starjabu.co.ke/poems-privacy-policy/"
+                target="_blank"
+              >
                 Terms and Conditions
-              </a>
+              </Link>
               . Learn about our Privacy Policy and our measures to keep your
               data safe and secure.
             </span>
