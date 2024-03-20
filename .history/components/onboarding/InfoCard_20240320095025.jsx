@@ -88,7 +88,7 @@ function InfoCard() {
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
           <label
-            className="block uppercase tracking-wide text-gray-700 dark:text-gray-100 text-xs font-bold mb-2"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="grid-first-name"
           >
             First Name
@@ -109,7 +109,7 @@ function InfoCard() {
         </div>
         <div className="w-full md:w-1/2 px-3">
           <label
-            className="block uppercase tracking-wide text-gray-700  dark:text-gray-100  text-xs font-bold mb-2"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="grid-last-name"
           >
             Last Name
@@ -132,7 +132,7 @@ function InfoCard() {
       <div className="flex flex-wrap -mx-3 mb-6">
         <div className="w-full px-3">
           <label
-            className="block uppercase tracking-wide text-gray-700  dark:text-gray-100  text-xs font-bold mb-2"
+            className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
             htmlFor="grid-institution"
           >
             Institution

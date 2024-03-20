@@ -15,7 +15,7 @@ const EntryManagerEmailAdd = () => {
         <div className="flex justify-center items-center gap-2 my-2">
           <label
             htmlFor="email"
-            className="font-semibold text-slate-800 dark:text-slate-50 text-md"
+            className="text-sm font-semibold text-slate-800 dark:text-slate-50"
           >
             Email
           </label>

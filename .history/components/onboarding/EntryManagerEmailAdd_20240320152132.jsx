@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 const EntryManagerEmailAdd = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50 mt-10">
+      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50">
         Add Entry Manager Emails
       </h1>
       <p className="text-slate-800 dark:text-slate-50 mt-2">
@@ -15,7 +15,7 @@ const EntryManagerEmailAdd = () => {
         <div className="flex justify-center items-center gap-2 my-2">
           <label
             htmlFor="email"
-            className="font-semibold text-slate-800 dark:text-slate-50 text-md"
+            className="text-sm font-semibold text-slate-800 dark:text-slate-50"
           >
             Email
           </label>

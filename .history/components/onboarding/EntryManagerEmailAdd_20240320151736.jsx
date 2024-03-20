@@ -1,13 +1,13 @@
 import React from "react";
-import { ChevronRight } from "lucide-react";
+import { ArrowRightIcon } from "@radix-ui/react-icons";
 
 const EntryManagerEmailAdd = () => {
   return (
     <div>
-      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50 mt-10">
+      <h1 className="text-2xl font-bold text-slate-800">
         Add Entry Manager Emails
       </h1>
-      <p className="text-slate-800 dark:text-slate-50 mt-2">
+      <p className="text-slate-800 mt-2">
         Add the email addresses of the people who will be responsible for
         managing the entries.
       </p>
@@ -15,7 +15,7 @@ const EntryManagerEmailAdd = () => {
         <div className="flex justify-center items-center gap-2 my-2">
           <label
             htmlFor="email"
-            className="font-semibold text-slate-800 dark:text-slate-50 text-md"
+            className="text-sm font-semibold text-slate-800"
           >
             Email
           </label>
@@ -25,9 +25,15 @@ const EntryManagerEmailAdd = () => {
             name="email"
             className="border border-gray-300 rounded-md p-2"
           />
-          <button className="bg-gray-300 hover:bg-gray-400 text-gray-800  dark:text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center">
+          <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
             <span>Continue</span>
-            <ChevronRight className="h-4 w-4 mx-2" />
+            <svg
+              class="fill-current w-4 h-4 mr-2"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+            >
+              <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
+            </svg>
           </button>
         </div>
       </form>
