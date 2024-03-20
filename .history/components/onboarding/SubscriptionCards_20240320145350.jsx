@@ -67,7 +67,7 @@ function SubscriptionCards() {
               className="h-6 w-6 shrink-0 accent-gray-900"
               checked
             />
-            <span id="terms-description" className="text-sm text-gray-600 dark:text-gray-50">
+            <span id="terms-description" className="text-sm text-gray-600">
               I agree to the
               <Link
                 className="underline"

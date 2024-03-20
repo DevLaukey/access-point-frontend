@@ -42,7 +42,7 @@ function SubscriptionCards() {
 
   return (
     <>
-      <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      <h2 className="font-serif text-2xl font-semibold text-gray-700 ">
         Choose Subscription Plan
       </h2>
       <div className="mt-4 flex w-full flex-col pb-4">
@@ -67,7 +67,7 @@ function SubscriptionCards() {
               className="h-6 w-6 shrink-0 accent-gray-900"
               checked
             />
-            <span id="terms-description" className="text-sm text-gray-600 dark:text-gray-50">
+            <span id="terms-description" className="text-sm text-gray-600">
               I agree to the
               <Link
                 className="underline"
