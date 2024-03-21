@@ -22,7 +22,9 @@ const SignIn = () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
-     
+      options: {
+        emailRedirectTo: `${loaction.origin}/auth/callback`
+      }
     });
 
     if (error) {

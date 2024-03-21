@@ -22,7 +22,6 @@ const SignIn = () => {
     const { error } = await supabase.auth.signInWithPassword({
       email: formData.email,
       password: formData.password,
-     
     });
 
     if (error) {
