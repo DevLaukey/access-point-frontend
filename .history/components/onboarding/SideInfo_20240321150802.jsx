@@ -1,10 +1,7 @@
 import React from 'react'
-import Image from "next/image";
-import Dashboard from "../../assets/dashboard.png";
-
-
-
-
+import Image from 'next/image'
+import Dashboard from '../../assets/dashboard.png'
+import OnboardingImageSlider from "./OnboardingImageSlider";
 function SideInfo() {
   return (
     <div className="relative hidden h-screen select-none flex-col justify-center bg-blue-600 bg-gradient-to-br md:flex md:w-1/2">
@@ -30,12 +27,8 @@ function SideInfo() {
           Learn More
         </a>
       </div>
-      <Image
-        height={400}
-        width={800}
-        className="ml-8 w-11/12 max-w-lg rounded-lg object-cover"
-        src={Dashboard}
-      />
+      <OnboardingImageSlider/>
+     
     </div>
   );
 }
