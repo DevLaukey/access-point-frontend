@@ -10,7 +10,7 @@ const EntryManagerEmailAdd = ({
   return (
     <div className="flex flex-col justify-center items-center ">
       <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50 mt-10">
-        Add Entry Points
+        Add Entry Manager Emails
       </h1>
       <p className="text-slate-800 dark:text-slate-50 mt-2 text-wrap">
         Add the email addresses of the people who will be responsible for

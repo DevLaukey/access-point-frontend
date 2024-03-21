@@ -6,7 +6,7 @@ import EntryManagersTable from "./EntryManagersTable";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
 
-const OnboardingSlider = () => {
+const OnboardingManager = () => {
   const [managerEmail, setManagerEmail] = useState();
   const [managerEmails, setManagerEmails] = useState([]);
   const id = useParams().id;
@@ -82,13 +82,8 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white">
-                      3
-                    </a>
-                  </li>
-                  <li className="text-left">
                     <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
-                      4
+                      3
                     </a>
                   </li>
                 </ul>
@@ -103,7 +98,7 @@ const OnboardingSlider = () => {
 
           <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
             <EntryManagersTable managerEmails={managerEmails} />
-          </div>
+            </div>
         </div>
       </div>
       <SideInfo />
@@ -111,4 +106,4 @@ const OnboardingSlider = () => {
   );
 };
 
-export default OnboardingSlider;
+export default OnboardingManager;

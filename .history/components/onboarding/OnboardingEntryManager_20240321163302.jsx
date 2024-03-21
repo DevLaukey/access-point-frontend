@@ -82,7 +82,7 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white">
+                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
                       3
                     </a>
                   </li>

@@ -1,11 +1,33 @@
-import React from 'react'
-import SubscriptionCards from './SubscriptionCards';
-import SideInfo from './SideInfo';
-
+"use client";
+import React, { useState } from "react";
+import SideInfo from "./SideInfo";
+import EntryManagerEmailAdd from "./EntryManagerEmailAdd";
+import EntryManagersTable from "./EntryManagersTable";
+import { toast } from "sonner";
 
 const OnboardingSlider = () => {
+  const [managerEmail, setManagerEmail] = useState();
+  const [managerEmails, setManagerEmails] = useState([]);
+
+  const addEntryManagerEmail = async () => {
+    try {
+      // supabase
+      const { data, error } = await supabase
+        .from("entry_manager")
+        .insert([{ email: managerEmail }]);
+
+      if (error) throw error;
+
+      toast("Added Entry Manager Email", {
+        description: "The email has been added successfully",
+      });
+     
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="flex w-screen flex-wrap text-slate-800 dark:text-slate-100 mt-6">
+    <div className="flex w-screen flex-wrap text-slate-800 mt-6">
       <div className="flex w-full flex-col md:w-1/2">
         <div className="flex justify-center pt-12 md:justify-start md:pl-12">
           <a href="#" className="text-2xl font-bold text-blue-600">
@@ -21,13 +43,13 @@ const OnboardingSlider = () => {
                   className="absolute left-0 top-2 h-0.5 w-full"
                   aria-hidden="true"
                 >
-                  <div className="absolute h-full w-1/3 bg-gray-900 dark:bg-gray-50"></div>
-                  <div className="left absolute left-1/3 h-full w-1/3 bg-gradient-to-r from-gray-900 dark:from-gray-50"></div>
+                  <div className="absolute h-full w-1/3 bg-gray-900"></div>
+                  <div className="left absolute left-1/3 h-full w-1/3 bg-gradient-to-r from-gray-900"></div>
                 </div>
-                <ul className="relative flex w-full justify-between">
+                <ul className="relative flex w-full justify-between ">
                   <li className="text-left">
                     <a
-                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600  text-xs font-semibold text-white ring ring-gray-600 ring-offset-2"
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
                       href="/onboarding"
                     >
                       1
@@ -42,26 +64,21 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-white">
+                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
                       3
-                    </a>
-                  </li>
-                  <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-white">
-                      4
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-
-            <SubscriptionCards />
+            <EntryManagerEmailAdd addEntryManagerEmail={addEntryManagerEmail} />
           </div>
+          {managerEmails && <EntryManagersTable />}
         </div>
       </div>
       <SideInfo />
     </div>
   );
-}
+};
 
-export default OnboardingSlider
+export default OnboardingSlider;

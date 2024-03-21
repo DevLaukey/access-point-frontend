@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
-import EntryManagerEmailAdd from "./EntryManagerEmailAdd";
+import EntryPointAdd from "./EntryPointAdd";
 import EntryManagersTable from "./EntryManagersTable";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
 
-const OnboardingSlider = () => {
+const OnboardingEntryPoint = () => {
   const [managerEmail, setManagerEmail] = useState();
   const [managerEmails, setManagerEmails] = useState([]);
   const id = useParams().id;
@@ -82,19 +82,22 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white">
+                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
                       3
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
-                      4
+                    <a
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
+                      href="/onboarding/email-step"
+                    >
+                      2
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-            <EntryManagerEmailAdd
+            <EntryPointAdd
               addEntryManagerEmail={addEntryManagerEmail}
               managerEmail={managerEmail}
               setManagerEmail={managerEmail}
@@ -111,4 +114,4 @@ const OnboardingSlider = () => {
   );
 };
 
-export default OnboardingSlider;
+export default OnboardingEntryPoint;

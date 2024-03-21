@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
-const EntryManagerEmailAdd = ({
+const EntryPointAdd = ({
   managerEmail,
   setManagerEmail,
   addEntryManagerEmail,
@@ -12,18 +12,20 @@ const EntryManagerEmailAdd = ({
       <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50 mt-10">
         Add Entry Points
       </h1>
-      <p className="text-slate-800 dark:text-slate-50 mt-2 text-wrap">
-        Add the email addresses of the people who will be responsible for
-        managing the entries.
+      <p className="text-slate-800 dark:text-slate-50 my-2 text-wrap">
+        Add the entry points which will be assigned an entry manager.
+      </p>
+      <p className="text-sm text-slate-500 dark:text-slate-50 mt-2 text-wrap">
+        You can add upto 3 entry points for the free tier.
       </p>
       <form>
         <div className="flex flex-col sm:flex-row  px-2 justify-center items-center gap-2 my-2">
           <div className="flex justify-center items-center gap-2 my-2">
             <label
-              htmlFor="email"
+              htmlFor="point"
               className="font-semibold text-slate-800 dark:text-slate-50 text-lg"
             >
-              Email
+              Entry Point
             </label>
             <input
               type="email"
@@ -47,4 +49,4 @@ const EntryManagerEmailAdd = ({
   );
 };
 
-export default EntryManagerEmailAdd;
+export default EntryPointAdd;

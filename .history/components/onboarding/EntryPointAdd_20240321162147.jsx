@@ -2,7 +2,7 @@ import React from "react";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
-const EntryManagerEmailAdd = ({
+const EntryPointAdd = ({
   managerEmail,
   setManagerEmail,
   addEntryManagerEmail,
@@ -47,4 +47,4 @@ const EntryManagerEmailAdd = ({
   );
 };
 
-export default EntryManagerEmailAdd;
+export default EntryPointAdd;

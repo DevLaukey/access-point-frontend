@@ -1,8 +1,9 @@
 import React from 'react'
-import InfoCard from './InfoCard'
+import SubscriptionCards from './SubscriptionCards';
 import SideInfo from './SideInfo';
 
-function PersonalDetailsOnboarding() {
+
+const OnboardingSlider = () => {
   return (
     <div className="flex w-screen flex-wrap text-slate-800 dark:text-slate-100 mt-6">
       <div className="flex w-full flex-col md:w-1/2">
@@ -26,7 +27,7 @@ function PersonalDetailsOnboarding() {
                 <ul className="relative flex w-full justify-between">
                   <li className="text-left">
                     <a
-                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600  text-xs font-semibold text-white ring ring-gray-600 ring-offset-2"
                       href="/onboarding"
                     >
                       1
@@ -34,7 +35,7 @@ function PersonalDetailsOnboarding() {
                   </li>
                   <li className="text-left">
                     <a
-                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600  text-xs font-semibold text-white ring ring-gray-600 ring-offset-2"
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
                       href="/onboarding/email-step"
                     >
                       2
@@ -47,16 +48,14 @@ function PersonalDetailsOnboarding() {
                   </li>
                   <li className="text-left">
                     <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-semibold text-white">
-                      4
+                      3
                     </a>
                   </li>
                 </ul>
               </div>
-              <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-50 pt-4">
-                Personal Details
-              </h2>
             </div>
-            <InfoCard />
+
+            <SubscriptionCards />
           </div>
         </div>
       </div>
@@ -65,4 +64,4 @@ function PersonalDetailsOnboarding() {
   );
 }
 
-export default PersonalDetailsOnboarding
+export default OnboardingSlider

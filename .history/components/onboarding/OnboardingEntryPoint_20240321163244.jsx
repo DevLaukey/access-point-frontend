@@ -1,19 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
-import EntryManagerEmailAdd from "./EntryManagerEmailAdd";
-import EntryManagersTable from "./EntryManagersTable";
+import EntryPointAdd from "./EntryPointAdd";
+import EntryPointTable from "./EntryPointTable";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
 
-const OnboardingSlider = () => {
-  const [managerEmail, setManagerEmail] = useState();
-  const [managerEmails, setManagerEmails] = useState([]);
+const OnboardingEntryPoint = () => {
+  const [entryPoint, setEntryPoint] = useState();
+  const [entryPoints, setEntryPoints] = useState([]);
   const id = useParams().id;
 
   console.log("id", id);
 
-  const addEntryManagerEmail = async () => {
+  const addEntryPoint = async () => {
     try {
       // supabase
       const { data, error } = await supabase
@@ -22,23 +22,23 @@ const OnboardingSlider = () => {
 
       if (error) throw error;
 
-      toast("Added Entry Manager Email", {
-        description: "The email has been added successfully",
+      toast("Added Entry Point ✅", {
+        description: "The entry point has been added successfully",
       });
 
-      getEntryManagerEmails();
+      getEntryPoints();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getEntryManagerEmails = async () => {
+  const getEntryPoints = async () => {
     try {
       const { data, error } = await supabase.from("entry_manager").select("*");
 
       if (error) throw error;
 
-      setManagerEmails(data);
+      setEntryPoints(data);
     } catch (error) {
       console.log(error);
     }
@@ -82,27 +82,32 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white">
+                    <a
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2"
+                    >
                       3
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
+                    <a
+                      className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white"
+                      href="/onboarding/email-step"
+                    >
                       4
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-            <EntryManagerEmailAdd
-              addEntryManagerEmail={addEntryManagerEmail}
-              managerEmail={managerEmail}
-              setManagerEmail={managerEmail}
+            <EntryPointAdd
+              entryPoint={entryPoint}
+              setEntryPoint={setEntryPoint}
+              addEntryPoints={addEntryPoint}
             />
           </div>
 
           <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
-            <EntryManagersTable managerEmails={managerEmails} />
+            <EntryPointTable entryPoints={entryPoints} />
           </div>
         </div>
       </div>
@@ -111,4 +116,4 @@ const OnboardingSlider = () => {
   );
 };
 
-export default OnboardingSlider;
+export default OnboardingEntryPoint;
