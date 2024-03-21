@@ -59,8 +59,8 @@ export default function Header() {
           <Image
             src={Logo}
             alt="POEMS Logo"
-            width={40}
-            height={40}
+            width={50}
+            height={50}
             className="rounded-full"
           />
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white dm_serif_display-500">

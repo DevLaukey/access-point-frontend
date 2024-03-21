@@ -15,7 +15,6 @@ import {
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
 
-
 export function UserNav() {
   const supabase = createClientComponentClient();
   const router = useRouter();

@@ -20,7 +20,7 @@ function SideInfo() {
           that offers real time entry and exit management.
         </p>
         <a
-          href="/"
+          href=""
           className="font-semibold tracking-wide text-white underline underline-offset-4"
         >
           Learn More

@@ -14,6 +14,7 @@ import {
 } from "../ui/dropdown-menu";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useEffect, useState } from "react";
+import Logo from "../../assets/adaptive-icon.png";
 
 
 export function UserNav() {

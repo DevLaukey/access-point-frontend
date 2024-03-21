@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import RadioSelector from "./RadioSelector";
 import Link from "next/link";
 import pricingList from "../../lib/pricinglist";
-import { toast } from "sonner";
+import { ToastContainer, toast } from "react-toastify";
 
 function SubscriptionCards() {
   const [selectedTier, setSelectedTier] = useState(null);
@@ -23,8 +23,10 @@ function SubscriptionCards() {
       localStorage.setItem("tier", selectedTier);
       router.push("/onboarding/email-step");
     } else {
-      toast("Please select a payment plan to continue", {
-        description: "You are not allowed to continue without selecting a plan",
+      toast.error("Please select a payment plan to continue", {
+        duration: 4000,
+        position: 'top-center',
+
       })
   
     }
@@ -32,6 +34,7 @@ function SubscriptionCards() {
 
   return (
     <>
+      <ToastContainer/>
       <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Choose Subscription Plan
       </h2>

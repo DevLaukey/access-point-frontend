@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import Dashboard from '../../assets/dashboard.png'
 function SideInfo() {
   return (
     <div className="relative hidden h-screen select-none flex-col justify-center bg-blue-600 bg-gradient-to-br md:flex md:w-1/2">
@@ -9,28 +8,26 @@ function SideInfo() {
           New Feature
         </span>
         <p className="my-6 text-3xl font-semibold leading-10">
-          Access summarized data with
+          Create animations with
           <span className="whitespace-nowrap py-2 text-cyan-300">
-            Charts and Graphs
+            drag and drop
           </span>
           .
         </p>
         <p className="mb-4">
-          We provide our clients with a unified and secure entry and exit system
-          that offers real time entry and exit management.
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
+          necessitatibus nostrum repellendus ab totam.
         </p>
         <a
-          href="/"
+          href="#"
           className="font-semibold tracking-wide text-white underline underline-offset-4"
         >
           Learn More
         </a>
       </div>
       <Image
-        height={400}
-        width={800}
         className="ml-8 w-11/12 max-w-lg rounded-lg object-cover"
-        src={Dashboard}
+        src="/images/SoOmmtD2P6rjV76JvJTc6.png"
       />
     </div>
   );

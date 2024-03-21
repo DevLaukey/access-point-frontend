@@ -10,7 +10,6 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import Logo from "../../assets/adaptive-icon.png";
-import Image from "next/image"
 
 export const dm_serif_display = DM_Serif_Display({
   subsets: ["latin"],
@@ -58,13 +57,13 @@ export default function Header() {
         >
           <Image
             src={Logo}
-            alt="POEMS Logo"
-            width={40}
-            height={40}
+            alt="Access It Logo"
+            width={30}
+            height={30}
             className="rounded-full"
           />
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white dm_serif_display-500">
-            P.O.E.M.S
+            ACCESS IT.
           </span>
         </a>
         <div className={cn("block sm:!hidden")}>

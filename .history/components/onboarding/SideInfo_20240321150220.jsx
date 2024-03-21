@@ -11,16 +11,16 @@ function SideInfo() {
         <p className="my-6 text-3xl font-semibold leading-10">
           Access summarized data with
           <span className="whitespace-nowrap py-2 text-cyan-300">
-            Charts and Graphs
+           Charts and Graphs
           </span>
           .
         </p>
         <p className="mb-4">
-          We provide our clients with a unified and secure entry and exit system
-          that offers real time entry and exit management.
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Incidunt
+          necessitatibus nostrum repellendus ab totam.
         </p>
         <a
-          href="/"
+          href="#"
           className="font-semibold tracking-wide text-white underline underline-offset-4"
         >
           Learn More
