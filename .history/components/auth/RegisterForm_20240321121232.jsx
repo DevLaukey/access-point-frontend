@@ -32,7 +32,9 @@ const Register = () => {
       },
     });
 
-    data && router.push('/onboarding')
+    console.log(data)
+
+    router.refresh();
 
     if (error) {
       setErrorMsg(error.message);

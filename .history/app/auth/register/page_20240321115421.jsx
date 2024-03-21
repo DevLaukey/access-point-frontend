@@ -11,7 +11,7 @@ const page = () => {
         <div className="flex flex-col space-y-2 text-center">
           <Icons.logo className="mx-auto h-6 w-6" />
           <h1 className="text-2xl font-semibold tracking-tight">
-            Welcome to Point Of Entry Management System (P.O.E.M.S.)
+            Welcome to Point Of Entry Management System (P.O.E.S.)
           </h1>
 
           <p className="text-sm text-muted-foreground">

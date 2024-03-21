@@ -8,6 +8,7 @@ import { Label } from "../ui/label";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
+
 const registrationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required Field"),
   password: Yup.string().required("Required Field"),
@@ -19,20 +20,18 @@ const registrationSchema = Yup.object().shape({
 const Register = () => {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false); 
 
   async function register(formData) {
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
 
       options: {
-        redirectTo: "/onboarding",
+        redirectTo: "/dashboard",
       },
     });
-
-    data && router.push('/onboarding')
+    router.refresh()
 
     if (error) {
       setErrorMsg(error.message);
@@ -78,6 +77,8 @@ const Register = () => {
                     type={showPassword ? "text" : "password"}
                     className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
                   />
+
+                 
                 </div>
                 {errors.password && touched.password ? (
                   <div className="text-red-600 text-sm">{errors.password}</div>

@@ -23,16 +23,18 @@ const Register = () => {
   const router = useRouter();
 
   async function register(formData) {
-    const { data, error } = await supabase.auth.signUp({
+    const {data, error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
 
       options: {
         redirectTo: "/onboarding",
       },
+
+  
     });
 
-    data && router.push('/onboarding')
+    router.refresh();
 
     if (error) {
       setErrorMsg(error.message);

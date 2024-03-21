@@ -6,7 +6,7 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { Label } from "../ui/label";
 import { Button } from "../ui/button";
-import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "@radix-ui/react-icons";
 
 const registrationSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required Field"),
@@ -19,20 +19,15 @@ const registrationSchema = Yup.object().shape({
 const Register = () => {
   const supabase = createClientComponentClient();
   const [errorMsg, setErrorMsg] = useState(null);
-  const [showPassword, setShowPassword] = useState(false);
-  const router = useRouter();
 
   async function register(formData) {
-    const { data, error } = await supabase.auth.signUp({
+    const { error } = await supabase.auth.signUp({
       email: formData.email,
       password: formData.password,
-
       options: {
-        redirectTo: "/onboarding",
-      },
+        redirectTo: "/dashboard",
+      }
     });
-
-    data && router.push('/onboarding')
 
     if (error) {
       setErrorMsg(error.message);
@@ -67,37 +62,20 @@ const Register = () => {
               ) : null}
             </div>
 
-            <div className="flex flex-col gap-3">
-              <div>
-                <Label className="block text-sm font-medium">Password</Label>
-                <div className="relative">
-                  <Field
-                    id="password"
-                    name="password"
-                    placeholder="******"
-                    type={showPassword ? "text" : "password"}
-                    className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
-                  />
-                </div>
-                {errors.password && touched.password ? (
-                  <div className="text-red-600 text-sm">{errors.password}</div>
-                ) : null}
-              </div>
-              <div>
-                <Label className="block text-sm font-medium">
-                  Confirm Password
-                </Label>
-                <Field
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  placeholder="******"
-                  type="password"
-                  className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
-                />
-                {errors.confirmPassword && touched.password ? (
-                  <div className="text-red-600 text-sm">{errors.password}</div>
-                ) : null}
-              </div>
+            <div>
+              <Label htmlFor="password" className="block text-sm font-medium">
+                Password
+              </Label>
+              <Field
+                id="password"
+                name="password"
+                placeholder="******"
+                type="password"
+                className="border-gray-800 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm p-3"
+              />
+              {errors.password && touched.password ? (
+                <div className="text-red-600 text-sm">{errors.password}</div>
+              ) : null}
             </div>
 
             <Link href="/reset-password">
@@ -116,9 +94,9 @@ const Register = () => {
         )}
       </Formik>
       {errorMsg && <div className="text-red-600 mt-2">{errorMsg}</div>}
-      <Link href="/auth/login">
+      <Link href="/sign-up">
         <p className="text-sm text-gray-600 mt-2 block">
-          Already have an account? Sign In.
+          Don't have an account? Sign Up.
         </p>
       </Link>
     </div>
