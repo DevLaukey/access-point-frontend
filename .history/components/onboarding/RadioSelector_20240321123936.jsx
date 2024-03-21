@@ -23,9 +23,9 @@ function RadioSelector({
         className="flex cursor-pointer flex-col rounded-2xl border border-gray-300 bg-slate-100/80 dark:border-gray-700 dark:bg-slate-700 p-4 pr-8 sm:pr-16"
         htmlFor={title}
       >
-        <div className="flex flex-col mb-2">
+        <div className="flex justify-around items-center mb-2">
           <span className="text-lg font-semibold">{title}</span>
-          {price && <span className="text-lg ml-3 font-semibold">Ksh. {price}</span>}
+          {price && <span className="text-lg">{price}</span>}
         </div>
         <p className="text-sm sm:text-base">{description}</p>
       </label>

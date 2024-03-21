@@ -24,7 +24,7 @@ function SubscriptionCards() {
       router.push("/onboarding/email-step");
     } else {
       // Handle case where no tier is selected
-     alert("Please select a subscription plan")
+     alert("Please select a subscription plan",{})
     }
   };
 

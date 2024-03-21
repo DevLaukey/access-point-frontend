@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import RadioSelector from "./RadioSelector";
 import Link from "next/link";
 import pricingList from "../../lib/pricinglist";
-import { ToastContainer, toast } from "react-toastify";
 
 function SubscriptionCards() {
   const [selectedTier, setSelectedTier] = useState(null);
@@ -24,14 +23,12 @@ function SubscriptionCards() {
       router.push("/onboarding/email-step");
     } else {
       // Handle case where no tier is selected
-     alert("Please select a subscription plan")
+      alert("Please select a subscription tier.");
     }
   };
 
   return (
     <>
-      <ToastContainer />
-
       <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Choose Subscription Plan
       </h2>
@@ -56,10 +53,8 @@ function SubscriptionCards() {
               name="terms"
               type="checkbox"
               className="h-6 w-6 shrink-0 accent-gray-900"
-              checked={termsChecked}
-              onChange={() => setTermsChecked(!termsChecked)}
+              checked
             />
-
             <span
               id="terms-description"
               className="text-sm text-gray-600 dark:text-gray-50"
@@ -80,10 +75,7 @@ function SubscriptionCards() {
 
         <button
           onClick={handleContinue}
-          disabled={!termsChecked}
-          className={`my-2 flex items-center justify-center rounded-md ${
-            !termsChecked ? "bg-gray-400 cursor-not-allowed" : "bg-gray-900"
-          } py-3 font-medium text-white`}
+          className="my-2 flex items-center justify-center rounded-md bg-gray-900 py-3 font-medium text-white"
         >
           Continue
           <svg

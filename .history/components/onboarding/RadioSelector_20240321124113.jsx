@@ -25,7 +25,7 @@ function RadioSelector({
       >
         <div className="flex flex-col mb-2">
           <span className="text-lg font-semibold">{title}</span>
-          {price && <span className="text-lg ml-3 font-semibold">Ksh. {price}</span>}
+          {price && <span className="text-lg ml-3">Ksh. {price}</span>}
         </div>
         <p className="text-sm sm:text-base">{description}</p>
       </label>

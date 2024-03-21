@@ -24,14 +24,12 @@ function SubscriptionCards() {
       router.push("/onboarding/email-step");
     } else {
       // Handle case where no tier is selected
-     alert("Please select a subscription plan")
+     toast.error("Please select a subscription plan");
     }
   };
 
   return (
     <>
-      <ToastContainer />
-
       <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Choose Subscription Plan
       </h2>
