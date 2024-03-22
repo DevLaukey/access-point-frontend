@@ -27,7 +27,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx", "components/date-range-picker.jsx", "components/ui/calendar.jsx", "components/recent-sales.jsx", "app/not-found.jsx", "app/dashboard/layout.jsx", "components/tables/user-tables/cell-action.jsx", "components/tables/user-tables/client.jsx", "components/tables/user-tables/columns.jsx", "components/modal/alert-modal.jsx", "components/ui/data-table.jsx", "components/file-upload.tsx", "components/ui/button.jsx", "components/forms/add-manager.jsx", "components/overview.tsx", "components/dashboard-tabs.jsx", "components/landing/Hero.jsx", "components/auth/RegisterForm.jsx"  ],
+, "components/ui/sheet.jsx", "components/layout/user-nav.jsx", "components/layout/header.jsx", "components/layout/header.jsx", "components/layout/mobile-sidebar.jsx", "components/date-range-picker.jsx", "components/ui/calendar.jsx", "components/recent-sales.jsx", "app/not-found.jsx", "app/dashboard/layout.jsx", "components/tables/user-tables/cell-action.jsx", "components/tables/user-tables/client.jsx", "components/tables/user-tables/columns.jsx", "components/modal/alert-modal.jsx", "components/ui/data-table.jsx", "components/file-upload.tsx", "components/ui/button.jsx", "components/forms/add-manager.jsx", "components/overview.tsx", "components/dashboard-tabs.jsx", "components/landing/Hero.jsx", "components/auth/RegisterForm.jsx", "app/onboarding/page.jsx", "components/onboarding/InfoCard.jsx"  ],
   "exclude": [
     "node_modules"
   ]

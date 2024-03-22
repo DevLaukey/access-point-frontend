@@ -5,7 +5,7 @@ import Sponsors from "../components/landing/Sponsors";
 import { About } from "../components/landing/About";
 import { HowItWorks } from "../components/landing/HowItWorks";
 import {Features} from "../components/landing/Features";
-import { Cta } from "../components/landing/Cta";
+// import { Cta } from "../components/landing/Cta";
 import { Services } from "../components/landing/Services";
 import { Testimonials } from "../components/landing/Testimonials";
 import { Team } from "../components/landing/Team";
@@ -26,7 +26,7 @@ const Page = () => {
         <HowItWorks />
         <Features />
         <Services />
-        <Cta />
+        {/* <Cta /> */}
         <Testimonials />
         <Team />
         <Pricing />
