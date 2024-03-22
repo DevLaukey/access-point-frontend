@@ -1,20 +1,22 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
-import EntryManagerEmailAdd from "./EntryManagerEmailAdd";
-import EntryManagersTable from "./EntryManagersTable";
+import EntryPointAdd from "./EntryPointAdd";
+import EntryPointTable from "./EntryPointTable";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
-import Link from "next/link"
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
+import { Button } from "../ui/button";
 
-const OnboardingSlider = () => {
-  const [managerEmail, setManagerEmail] = useState();
-  const [managerEmails, setManagerEmails] = useState([]);
+const OnboardingEntryPoint = () => {
+  const [entryPoint, setEntryPoint] = useState();
+  const [entryPoints, setEntryPoints] = useState([]);
   const id = useParams().id;
 
   console.log("id", id);
 
-  const addEntryManagerEmail = async () => {
+  const addEntryPoint = async () => {
     try {
       // supabase
       const { data, error } = await supabase
@@ -23,23 +25,23 @@ const OnboardingSlider = () => {
 
       if (error) throw error;
 
-      toast("Added Entry Manager Email", {
-        description: "The email has been added successfully",
+      toast("Added Entry Point ✅", {
+        description: "The entry point has been added successfully",
       });
 
-      getEntryManagerEmails();
+      getEntryPoints();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const getEntryManagerEmails = async () => {
+  const getEntryPoints = async () => {
     try {
       const { data, error } = await supabase.from("entry_manager").select("*");
 
       if (error) throw error;
 
-      setManagerEmails(data);
+      setEntryPoints(data);
     } catch (error) {
       console.log(error);
     }
@@ -62,10 +64,8 @@ const OnboardingSlider = () => {
                   className="absolute left-0 top-2 h-0.5 w-full"
                   aria-hidden="true"
                 >
-                  <div className="absolute h-full w-1/4 bg-gray-900"></div>
-                  <div className="absolute h-full w-2/4 bg-gray-900"></div>
-
-                  <div className="left absolute left-1/3 h-full w-3/4 bg-gradient-to-r from-gray-900"></div>
+                  <div className="absolute h-full w-1/3 bg-gray-900"></div>
+                  <div className="left absolute left-1/3 h-full w-1/3 bg-gradient-to-r from-gray-900"></div>
                 </div>
                 <ul className="relative flex w-full justify-between ">
                   <li className="text-left">
@@ -85,35 +85,45 @@ const OnboardingSlider = () => {
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white">
+                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
                       3
                     </a>
                   </li>
                   <li className="text-left">
-                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white ring ring-gray-600 ring-offset-2">
+                    <a className="flex h-5 w-5 items-center justify-center rounded-full bg-gray-600 text-xs font-semibold text-white">
                       4
                     </a>
                   </li>
                 </ul>
               </div>
             </div>
-            <EntryManagerEmailAdd
-              addEntryManagerEmail={addEntryManagerEmail}
-              managerEmail={managerEmail}
-              setManagerEmail={managerEmail}
+            <EntryPointAdd
+              entryPoint={entryPoint}
+              setEntryPoint={setEntryPoint}
+              addEntryPoints={addEntryPoint}
             />
-
-            {/* link to / */}
-            <Link
-              href="/"
-              className="text-blue-500 dark:text-gray-400 text-md  underline"
-            >
-              Add Details Later
-            </Link>
+            <div className="flex flex-col justify-center items-center gap-2">
+              <Link href="/">
+                
+              <Button
+                className="text-white dark:text-gray-400 text-md w-full"
+              >
+                Add Details Later
+              </Button>
+              </Link>
+              <Button
+                variant="primary"
+                onClick={addEntryPoint}
+                className="w-full justify-center bg-blue-300 hover:bg-gray-400 text-gray-800  dark:text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center"
+              >
+                <span>Continue</span>
+                <ChevronRight className="h-4 w-4 mx-2" />
+              </Button>
+            </div>
           </div>
 
           <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
-            <EntryManagersTable managerEmails={managerEmails} />
+            <EntryPointTable entryPoints={entryPoints} />
           </div>
         </div>
       </div>
@@ -122,4 +132,4 @@ const OnboardingSlider = () => {
   );
 };
 
-export default OnboardingSlider;
+export default OnboardingEntryPoint;

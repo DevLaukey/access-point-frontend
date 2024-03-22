@@ -62,10 +62,8 @@ const OnboardingSlider = () => {
                   className="absolute left-0 top-2 h-0.5 w-full"
                   aria-hidden="true"
                 >
-                  <div className="absolute h-full w-1/4 bg-gray-900"></div>
-                  <div className="absolute h-full w-2/4 bg-gray-900"></div>
-
-                  <div className="left absolute left-1/3 h-full w-3/4 bg-gradient-to-r from-gray-900"></div>
+                  <div className="absolute h-full w-1/3 bg-gray-900"></div>
+                  <div className="left absolute left-1/3 h-full w-1/3 bg-gradient-to-r from-gray-900"></div>
                 </div>
                 <ul className="relative flex w-full justify-between ">
                   <li className="text-left">
@@ -102,11 +100,11 @@ const OnboardingSlider = () => {
               managerEmail={managerEmail}
               setManagerEmail={managerEmail}
             />
-
+           
             {/* link to / */}
             <Link
               href="/"
-              className="text-blue-500 dark:text-gray-400 text-md  underline"
+              className="text-gray-500 dark:text-gray-400 text-xs text-center"
             >
               Add Details Later
             </Link>

@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 const EntryPointAdd = ({

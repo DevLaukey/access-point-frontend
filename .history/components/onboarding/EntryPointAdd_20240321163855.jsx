@@ -1,4 +1,5 @@
 import React from "react";
+import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 const EntryPointAdd = ({
@@ -40,9 +41,9 @@ const EntryPointAdd = ({
             className="w-full justify-center bg-gray-300 hover:bg-gray-400 text-gray-800  dark:text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center"
           >
             <span>Save</span>
+            <ChevronRight className="h-4 w-4 mx-2" />
           </Button>
         </div>
-        
       </form>
     </div>
   );
