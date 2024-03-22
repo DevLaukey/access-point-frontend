@@ -3,9 +3,6 @@ import React, { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-
 
 const EntryPointAdd = () => {
   const [entryPoint, setEntryPoint] = useState("");
@@ -13,7 +10,6 @@ const EntryPointAdd = () => {
   const [errors, setErrors] = useState({});
   const [adminId, setAdminId] = useState("");
   const supabase = createClientComponentClient();
-  const router = useRouter()
 
   useEffect(() => {
     getCurrentUser();
@@ -43,21 +39,20 @@ const EntryPointAdd = () => {
 
   const addEntryPoint = async () => {
     try {
-      console.log(adminId)
       const { data, error } = await supabase.from("access-point").insert([
         {
           name: entryPoint,
           description: entryPointDescription,
           admin_id: adminId,
         },
-      ]).select();
+      ]);
 
       if (error) throw error;
 
       toast("Added Entry Point ✅", {
         description: "The entry point has been added successfully",
       });
-      data && router.push(`/onboarding/managers/${data[0].id}`)
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -103,7 +98,7 @@ const EntryPointAdd = () => {
             name="point"
             value={entryPoint}
             onChange={(e) => setEntryPoint(e.target.value)}
-            className="border border-gray-300 rounded-md p-2 dark:text-white"
+            className="border border-gray-300 rounded-md p-2"
           />
           {errors.entryPoint && (
             <p className="text-red-500 text-sm">{errors.entryPoint}</p>
@@ -123,7 +118,7 @@ const EntryPointAdd = () => {
             placeholder="Main gate for the school"
             value={entryPointDescription}
             onChange={(e) => setEntryPointDescription(e.target.value)}
-            className="border border-gray-300 rounded-md p-2 dark:text-white"
+            className="border border-gray-300 rounded-md p-2"
           />
           {errors.entryPointDescription && (
             <p className="text-red-500 text-sm">

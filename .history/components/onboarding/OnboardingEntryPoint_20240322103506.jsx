@@ -1,4 +1,3 @@
-"use client"
 import SideInfo from "./SideInfo";
 import EntryPointAdd from "./EntryPointAdd";
 import {  useRouter } from "next/navigation";

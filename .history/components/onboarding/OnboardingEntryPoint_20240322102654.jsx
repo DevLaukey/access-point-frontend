@@ -1,12 +1,57 @@
 "use client"
+import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
 import EntryPointAdd from "./EntryPointAdd";
-import {  useRouter } from "next/navigation";
+import EntryPointTable from "./EntryPointTable";
+import { toast } from "sonner";
+import { useParams, useRouter } from "next/navigation";
+import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
 const OnboardingEntryPoint = () => {
+  const [entryPoint, setEntryPoint] = useState("");
+  const [entryPointDescription, setEntryPointDescription] = useState("");
+  const [entryPoints, setEntryPoints] = useState([]);
+  const [errors, setErrors] = useState({});
 
+  const id = useParams().id;
   const router = useRouter();
+  const supabase = createClientComponentClient();
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!entryPoint.trim()) {
+      newErrors.entryPoint = "Entry point name is required";
+    }
+
+    if (!entryPointDescription.trim()) {
+      newErrors.entryPointDescription = "Entry point description is required";
+    }
+
+    setErrors(newErrors);
+
+    return Object.keys(newErrors).length === 0;
+  };
+
+
+
+  const getEntryPoints = async () => {
+    try {
+      const { data, error } = await supabase.from("entry_manager").select("*");
+
+      if (error) throw error;
+
+      setEntryPoints(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getEntryPoints();
+  }, []);
 
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
@@ -71,7 +116,17 @@ const OnboardingEntryPoint = () => {
               >
                 Add Details Later
               </Button>
-             
+              <Button
+                type="button" // Specify type as "button" to prevent form submission
+                variant="primary"
+                onClick={() => {
+                  router.push(`/onboarding/managers/${id}`);
+                }}
+                className="w-full justify-center bg-blue-300 hover:bg-gray-400 text-gray-800  dark:text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center"
+              >
+                <span>Continue</span>
+                <ChevronRight className="h-4 w-4 mx-2" />
+              </Button>
             </div>
           </div>
 

@@ -1,12 +1,91 @@
-"use client"
+"use client";
+import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
 import EntryPointAdd from "./EntryPointAdd";
-import {  useRouter } from "next/navigation";
+import EntryPointTable from "./EntryPointTable";
+import { toast } from "sonner";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 const OnboardingEntryPoint = () => {
-
+  const [entryPoint, setEntryPoint] = useState("");
+  const [entryPointDescription, setEntryPointDescription] = useState("null");
+  const [entryPoints, setEntryPoints] = useState([]);
+  const id = useParams().id;
   const router = useRouter();
+
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Validate entry point name
+    if (!entryPoint.trim()) {
+      newErrors.entryPoint = "Entry point name is required";
+    }
+
+    // Validate entry point description
+    if (!entryPointDescription.trim()) {
+      newErrors.entryPointDescription = "Entry point description is required";
+    }
+
+    setErrors(newErrors);
+
+    // Return true if there are no errors
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const addEntryPoint = async (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      addEntryPoint();
+      setEntryPoint("");
+      setEntryPointDescription("");
+    }
+    try {
+      if (entryPoint === null)
+        return toast("Please enter an entry point", {
+          description:
+            "This is the gate name or the entry point to your institution.",
+        });
+
+      if (entryPointDescription === null)
+        return toast("Please enter an entry point details", {
+          description: "This is an entry point description",
+        });
+
+      // supabase
+      const { data, error } = await supabase.from("access-point").insert([
+        {
+          name: entryPoint,
+        },
+      ]);
+
+      if (error) throw error;
+
+      toast("Added Entry Point ✅", {
+        description: "The entry point has been added successfully",
+      });
+
+      data && getEntryPoints();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getEntryPoints = async () => {
+    try {
+      const { data, error } = await supabase.from("entry_manager").select("*");
+
+      if (error) throw error;
+
+      setEntryPoints(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
@@ -59,11 +138,13 @@ const OnboardingEntryPoint = () => {
               </div>
             </div>
             <EntryPointAdd
-             
+              errors={errors}
+              entryPoint={entryPoint}
+              setEntryPoint={setEntryPoint}
+              addEntryPoints={addEntryPoint}
             />
             <div className="flex flex-col justify-center items-center gap-2">
               <Button
-                type="button" // Specify type as "button" to prevent form submission
                 onClick={() => {
                   router.push("/");
                 }}
@@ -71,13 +152,22 @@ const OnboardingEntryPoint = () => {
               >
                 Add Details Later
               </Button>
-             
+              <Button
+                variant="primary"
+                onClick={() => {
+                  router.push(`/onboarding/managers/${id}`);
+                }}
+                className="w-full justify-center bg-blue-300 hover:bg-gray-400 text-gray-800  dark:text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center"
+              >
+                <span>Continue</span>
+                <ChevronRight className="h-4 w-4 mx-2" />
+              </Button>
             </div>
           </div>
 
-          {/* <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
+          <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
             <EntryPointTable entryPoints={entryPoints} />
-          </div> */}
+          </div>
         </div>
       </div>
       <SideInfo />

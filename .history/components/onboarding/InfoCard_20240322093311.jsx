@@ -14,16 +14,14 @@ function InfoCard() {
 
   const tier = localStorage.getItem("tier");
 
+
   const supabase = createClientComponentClient();
 
-  useEffect( () => {
-   getUserEmail();
-  }, []);
+  useEffect(() => { 
+      getCurrentUser(),
 
-  const getUserEmail = async () => {
-     const { data } = await supabase.auth.getUser();
-     setEmail(data.user.email);
-  }
+  }, [])
+
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);
@@ -76,7 +74,8 @@ function InfoCard() {
       if (error) {
         throw error;
       }
-      data && router.push(`/onboarding/entry-point/${data.id}`);
+      console.log(data);
+      router.push(`/onboarding/entry-point/${data.id}`);
     } catch (error) {
       console.log("Error while submitting details:", error);
     } finally {

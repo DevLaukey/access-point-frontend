@@ -16,14 +16,11 @@ function InfoCard() {
 
   const supabase = createClientComponentClient();
 
-  useEffect( () => {
-   getUserEmail();
+  useEffect(async () => {
+    const {data} = await supabase.auth.getUser();
+    console.log(data.user.email);
+    setEmail(data.user.email);
   }, []);
-
-  const getUserEmail = async () => {
-     const { data } = await supabase.auth.getUser();
-     setEmail(data.user.email);
-  }
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);

@@ -4,7 +4,6 @@ import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 
 
 const EntryPointAdd = () => {
@@ -13,7 +12,6 @@ const EntryPointAdd = () => {
   const [errors, setErrors] = useState({});
   const [adminId, setAdminId] = useState("");
   const supabase = createClientComponentClient();
-  const router = useRouter()
 
   useEffect(() => {
     getCurrentUser();
@@ -57,7 +55,7 @@ const EntryPointAdd = () => {
       toast("Added Entry Point ✅", {
         description: "The entry point has been added successfully",
       });
-      data && router.push(`/onboarding/managers/${data[0].id}`)
+      console.log(data);
     } catch (error) {
       console.log(error);
     }

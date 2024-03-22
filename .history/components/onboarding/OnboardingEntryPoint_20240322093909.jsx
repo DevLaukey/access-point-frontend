@@ -1,12 +1,52 @@
-"use client"
+"use client";
+import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
 import EntryPointAdd from "./EntryPointAdd";
-import {  useRouter } from "next/navigation";
+import EntryPointTable from "./EntryPointTable";
+import { toast } from "sonner";
+import { useParams, useRouter } from "next/navigation";
+import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 
 const OnboardingEntryPoint = () => {
-
+  const [entryPoint, setEntryPoint] = useState();
+  const [entryPoints, setEntryPoints] = useState([]);
+  const id = useParams().id;
   const router = useRouter();
+
+  console.log("id", id);
+
+  const addEntryPoint = async () => {
+    try {
+      // supabase
+      const { data, error } = await supabase
+        .from("entry_manager")
+        .insert([{ email: managerEmail }]);
+
+      if (error) throw error;
+
+      toast("Added Entry Point ✅", {
+        description: "The entry point has been added successfully",
+      });
+
+      getEntryPoints();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getEntryPoints = async () => {
+    try {
+      const { data, error } = await supabase.from("entry_manager").select("*");
+
+      if (error) throw error;
+
+      setEntryPoints(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
@@ -27,6 +67,7 @@ const OnboardingEntryPoint = () => {
                 >
                   <div className="absolute h-full w-1/3 bg-gray-900"></div>
                   <div className="left absolute left-1/3 h-full w-1/3 bg-gradient-to-r from-gray-900"></div>
+                  
                 </div>
                 <ul className="relative flex w-full justify-between ">
                   <li className="text-left">
@@ -59,11 +100,12 @@ const OnboardingEntryPoint = () => {
               </div>
             </div>
             <EntryPointAdd
-             
+              entryPoint={entryPoint}
+              setEntryPoint={setEntryPoint}
+              addEntryPoints={addEntryPoint}
             />
             <div className="flex flex-col justify-center items-center gap-2">
               <Button
-                type="button" // Specify type as "button" to prevent form submission
                 onClick={() => {
                   router.push("/");
                 }}
@@ -71,13 +113,22 @@ const OnboardingEntryPoint = () => {
               >
                 Add Details Later
               </Button>
-             
+              <Button
+                variant="primary"
+                onClick={() => {
+                  router.push(`/onboarding/managers/${id}`);
+                }}
+                className="w-full justify-center bg-blue-300 hover:bg-gray-400 text-gray-800  dark:text-slate-50 font-bold py-2 px-4 rounded inline-flex items-center"
+              >
+                <span>Continue</span>
+                <ChevronRight className="h-4 w-4 mx-2" />
+              </Button>
             </div>
           </div>
 
-          {/* <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
+          <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
             <EntryPointTable entryPoints={entryPoints} />
-          </div> */}
+          </div>
         </div>
       </div>
       <SideInfo />

@@ -1,12 +1,10 @@
-"use client"
 import SideInfo from "./SideInfo";
 import EntryPointAdd from "./EntryPointAdd";
-import {  useRouter } from "next/navigation";
+import {  redirect } from "next/navigation";
 import { Button } from "../ui/button";
 
 const OnboardingEntryPoint = () => {
 
-  const router = useRouter();
 
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
@@ -65,7 +63,7 @@ const OnboardingEntryPoint = () => {
               <Button
                 type="button" // Specify type as "button" to prevent form submission
                 onClick={() => {
-                  router.push("/");
+                  redirect('/')
                 }}
                 className="text-white dark:text-gray-400 text-md w-full"
               >

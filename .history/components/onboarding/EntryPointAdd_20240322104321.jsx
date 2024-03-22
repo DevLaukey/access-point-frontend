@@ -1,29 +1,12 @@
-"use client";
-import React, { useEffect, useState } from "react";
+"use client"
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { ChevronRight } from "lucide-react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-
 
 const EntryPointAdd = () => {
   const [entryPoint, setEntryPoint] = useState("");
   const [entryPointDescription, setEntryPointDescription] = useState("");
   const [errors, setErrors] = useState({});
-  const [adminId, setAdminId] = useState("");
-  const supabase = createClientComponentClient();
-  const router = useRouter()
-
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
-
-  const getCurrentUser = async () => {
-    const { data } = await supabase.auth.getUser();
-
-    setAdminId(data.user.id);
-  };
 
   const validateForm = () => {
     const newErrors = {};
@@ -43,21 +26,18 @@ const EntryPointAdd = () => {
 
   const addEntryPoint = async () => {
     try {
-      console.log(adminId)
       const { data, error } = await supabase.from("access-point").insert([
         {
           name: entryPoint,
-          description: entryPointDescription,
-          admin_id: adminId,
         },
-      ]).select();
+      ]);
 
       if (error) throw error;
 
       toast("Added Entry Point ✅", {
         description: "The entry point has been added successfully",
       });
-      data && router.push(`/onboarding/managers/${data[0].id}`)
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -76,7 +56,7 @@ const EntryPointAdd = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50 mt-6">
+      <h1 className="text-2xl font-bold text-slate-800 dark:text-slate-50 mt-10">
         Add Entry Points
       </h1>
       <p className="text-slate-800 dark:text-slate-50 my-2 text-wrap">
@@ -99,11 +79,10 @@ const EntryPointAdd = () => {
           <input
             type="text"
             id="point"
-            placeholder="MAIN GATE"
             name="point"
             value={entryPoint}
             onChange={(e) => setEntryPoint(e.target.value)}
-            className="border border-gray-300 rounded-md p-2 dark:text-white"
+            className="border border-gray-300 rounded-md p-2"
           />
           {errors.entryPoint && (
             <p className="text-red-500 text-sm">{errors.entryPoint}</p>
@@ -120,10 +99,9 @@ const EntryPointAdd = () => {
             type="text"
             id="description"
             name="description"
-            placeholder="Main gate for the school"
             value={entryPointDescription}
             onChange={(e) => setEntryPointDescription(e.target.value)}
-            className="border border-gray-300 rounded-md p-2 dark:text-white"
+            className="border border-gray-300 rounded-md p-2"
           />
           {errors.entryPointDescription && (
             <p className="text-red-500 text-sm">

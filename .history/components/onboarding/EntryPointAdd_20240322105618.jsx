@@ -57,7 +57,7 @@ const EntryPointAdd = () => {
       toast("Added Entry Point ✅", {
         description: "The entry point has been added successfully",
       });
-      data && router.push(`/onboarding/managers/${data[0].id}`)
+      data && router.push(`/onboarding/manager/${data[0].id}`)
     } catch (error) {
       console.log(error);
     }
