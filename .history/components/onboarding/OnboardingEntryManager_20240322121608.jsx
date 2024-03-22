@@ -15,7 +15,7 @@ const OnboardingSlider = () => {
 
         <div className="my-auto mx-auto flex flex-col justify-center pt-8 md:justify-start lg:w-[34rem]">
           <div className="flex w-full flex-col  px-2 sm:px-14">
-            <div className="mx-auto w-full max-w-md pb-2 px-8 sm:px-0">
+            <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
               <div className="relative">
                 <div
                   className="absolute left-0 top-2 h-0.5 w-full"

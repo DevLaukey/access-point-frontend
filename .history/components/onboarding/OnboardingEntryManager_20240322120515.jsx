@@ -1,9 +1,50 @@
+"use client";
+import React, { useEffect, useState } from "react";
 import SideInfo from "./SideInfo";
 import EntryManagerEmailAdd from "./EntryManagerEmailAdd";
-
-import Link from "next/link";
+import EntryManagersTable from "./EntryManagersTable";
+import { toast } from "sonner";
+import { useParams } from "next/navigation";
+import Link from "next/link"
 
 const OnboardingSlider = () => {
+  const [managerEmail, setManagerEmail] = useState();
+  const [managerEmails, setManagerEmails] = useState([]);
+  const id = useParams().id;
+
+  console.log("id", id);
+
+  const addEntryManagerEmail = async () => {
+    try {
+      // supabase
+      const { data, error } = await supabase
+        .from("entry_manager")
+        .insert([{ email: managerEmail }]);
+
+      if (error) throw error;
+
+      toast("Added Entry Manager Email", {
+        description: "The email has been added successfully",
+      });
+
+      getEntryManagerEmails();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getEntryManagerEmails = async () => {
+    try {
+      const { data, error } = await supabase.from("entry_manager").select("*");
+
+      if (error) throw error;
+
+      setManagerEmails(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="flex w-screen flex-wrap text-slate-800 mt-6">
       <div className="flex w-full flex-col md:w-1/2">
@@ -15,7 +56,7 @@ const OnboardingSlider = () => {
 
         <div className="my-auto mx-auto flex flex-col justify-center pt-8 md:justify-start lg:w-[34rem]">
           <div className="flex w-full flex-col  px-2 sm:px-14">
-            <div className="mx-auto w-full max-w-md pb-2 px-8 sm:px-0">
+            <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
               <div className="relative">
                 <div
                   className="absolute left-0 top-2 h-0.5 w-full"
@@ -56,7 +97,11 @@ const OnboardingSlider = () => {
                 </ul>
               </div>
             </div>
-            <EntryManagerEmailAdd />
+            <EntryManagerEmailAdd
+              addEntryManagerEmail={addEntryManagerEmail}
+              managerEmail={managerEmail}
+              setManagerEmail={setManagerEmail}
+            />
 
             {/* link to / */}
             <Link
@@ -67,9 +112,9 @@ const OnboardingSlider = () => {
             </Link>
           </div>
 
-          {/* <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
+          <div className="mx-auto w-full max-w-md pb-12 px-8 sm:px-0">
             <EntryManagersTable managerEmails={managerEmails} />
-          </div> */}
+          </div>
         </div>
       </div>
       <SideInfo />

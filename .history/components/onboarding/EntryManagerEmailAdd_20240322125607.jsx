@@ -1,6 +1,6 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -14,19 +14,22 @@ const EntryManagerEmailAdd = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [adminId, setAdminId] = useState("");
   const { id } = useParams();
-  const router = useRouter();
+
+
 
   const supabase = createClientComponentClient();
 
-  useEffect(() => {
+
+  useEffect(() => { 
     getCurrentUser();
   }, []);
 
-  const getCurrentUser = async () => {
-    const { data } = await supabase.auth.getUser();
+  const getCurrentUser = async () => { 
+        const { data } = await supabase.auth.getUser();
 
     setAdminId(data.user.id);
   };
+  
 
   const validateForm = () => {
     const newErrors = {};
@@ -83,11 +86,15 @@ const EntryManagerEmailAdd = () => {
 
         if (error) throw error;
 
+        console.log(data);
         toast("Added Entry Manager Email", {
           description: "The email has been added successfully",
         });
-
-        router.push("/");
+        // Clear input fields after submission
+        setManagerEmail("");
+        setFirstName("");
+        setLastName("");
+        setPhoneNumber("");
       } catch (error) {
         console.log(error);
         // Display error notification
@@ -95,12 +102,6 @@ const EntryManagerEmailAdd = () => {
           description: error,
           status: "error",
         });
-      } finally {
-        // Clear input fields after submission
-        setManagerEmail("");
-        setFirstName("");
-        setLastName("");
-        setPhoneNumber("");
       }
     }
   };
@@ -114,10 +115,7 @@ const EntryManagerEmailAdd = () => {
         Add the email addresses of the people who will be responsible for
         managing the entries.
       </p>
-      <form
-        onSubmit={addEntryManagerEmail}
-        className="mt-6 w-full max-w-md h-auto"
-      >
+      <form onSubmit={addEntryManagerEmail} className="mt-6 w-full max-w-md h-auto">
         <div className="grid grid-cols-2 gap-4">
           <div className="flex flex-col">
             <label

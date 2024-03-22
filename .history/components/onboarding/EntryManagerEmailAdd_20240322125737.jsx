@@ -14,7 +14,7 @@ const EntryManagerEmailAdd = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [adminId, setAdminId] = useState("");
   const { id } = useParams();
-  const router = useRouter();
+  const router = useRouter()
 
   const supabase = createClientComponentClient();
 
@@ -83,11 +83,12 @@ const EntryManagerEmailAdd = () => {
 
         if (error) throw error;
 
+        console.log(data);
         toast("Added Entry Manager Email", {
           description: "The email has been added successfully",
         });
-
-        router.push("/");
+      
+        router.push('/')
       } catch (error) {
         console.log(error);
         // Display error notification

@@ -83,6 +83,7 @@ const EntryManagerEmailAdd = () => {
 
         if (error) throw error;
 
+        console.log(data);
         toast("Added Entry Manager Email", {
           description: "The email has been added successfully",
         });

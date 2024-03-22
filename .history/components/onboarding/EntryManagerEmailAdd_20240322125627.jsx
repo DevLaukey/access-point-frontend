@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { ChevronRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -14,7 +14,6 @@ const EntryManagerEmailAdd = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [adminId, setAdminId] = useState("");
   const { id } = useParams();
-  const router = useRouter();
 
   const supabase = createClientComponentClient();
 
@@ -83,11 +82,15 @@ const EntryManagerEmailAdd = () => {
 
         if (error) throw error;
 
+        console.log(data);
         toast("Added Entry Manager Email", {
           description: "The email has been added successfully",
         });
-
-        router.push("/");
+        // Clear input fields after submission
+        setManagerEmail("");
+        setFirstName("");
+        setLastName("");
+        setPhoneNumber("");
       } catch (error) {
         console.log(error);
         // Display error notification
@@ -95,12 +98,6 @@ const EntryManagerEmailAdd = () => {
           description: error,
           status: "error",
         });
-      } finally {
-        // Clear input fields after submission
-        setManagerEmail("");
-        setFirstName("");
-        setLastName("");
-        setPhoneNumber("");
       }
     }
   };
