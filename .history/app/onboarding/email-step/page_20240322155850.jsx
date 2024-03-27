@@ -2,8 +2,7 @@
 
 import PersonalDetailsOnboarding from "../../../components/onboarding/PersonalDetailsOnboarding";
 import { useParams } from "next/navigation";
-
-function EmailStep() {
+function page() {
 
   const { tier } = useParams();
   console.log(tier)
@@ -12,4 +11,4 @@ function EmailStep() {
   );
 }
 
-export default EmailStep;
+export default page;
