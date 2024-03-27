@@ -39,19 +39,6 @@ import { useEffect, useState } from "react";
 export function DataTable({ columns, data, searchKey, accessPoints }) {
   const [date, setDate] = useState(new Date());
 
-  const [showNoDataMessage, setShowNoDataMessage] = useState(false);
-
-  useEffect(() => {
-    // Set a timeout to display the message if data is empty for 5 seconds
-    const timer = setTimeout(() => {
-      if (data.length === 0) {
-        setShowNoDataMessage(true);
-      }
-    }, 5000);
-
-    return () => clearTimeout(timer); // Clear the timeout on component unmount
-  }, [data]);
-
   // console.log(data);
   const table = useReactTable({
     data,
@@ -151,13 +138,7 @@ export function DataTable({ columns, data, searchKey, accessPoints }) {
               <TableRow>
                 {columns.map((column) => (
                   <TableCell key={column.id}>
-                    {showNoDataMessage && data.length === 0 ? (
-                      <div className="text-center text-red-500">
-                        No data available.
-                      </div>
-                    ) : (
-                      <Skeleton className="h-24" />
-                    )}
+                    <Skeleton className="h-24" />
                   </TableCell>
                 ))}
               </TableRow>

@@ -198,6 +198,8 @@ const Page = () => {
       localStorage.setItem("access_point", selectedAccessPoint);
       // route to capture/[id] page and pass both the access point and the fingerprint id
       router.push(`capture/${data[0].id}`);
+
+     
     } catch (e) {
       console.log(e.message);
       toast.error("Details not saved. Please try again");
