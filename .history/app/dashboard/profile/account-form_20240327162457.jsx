@@ -76,7 +76,7 @@ export default function AccountForm({ user }) {
                     className="rounded-full"
                   />
                 ) : (
-                  <Avatar size={150} initials={user?.email} />
+                  <Avatar size={150} initials={user?.user_metadata.full_name} />
                 )}
               </div>
               <div className="flex flex-col">

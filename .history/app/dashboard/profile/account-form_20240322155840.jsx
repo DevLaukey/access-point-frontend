@@ -1,10 +1,10 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Avatar from "react-avatar";
+import Avatar from "./avatar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image";
+import Image from "next/image"
 export default function AccountForm({ user }) {
   const supabase = createClientComponentClient();
   const [loading, setLoading] = useState(true);
@@ -38,7 +38,9 @@ export default function AccountForm({ user }) {
   //   getProfile();
   // }, [user, getProfile]);
 
+
   async function updateProfile({ username, website, avatar_url }) {
+
     try {
       setLoading(true);
 
@@ -67,17 +69,14 @@ export default function AccountForm({ user }) {
           <div className="mt-5 bg-white  border-2 border-b-8 border-black rounded-xl grid grid-cols-12  justify-between duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 ">
             <div className="col-span-12 md:col-span-8 sm:pt-10 sm:px-8 p-5 flex ">
               <div className="col-span-4 hidden md:inline m-4">
-                {user?.user_metadata.avatar_url ? (
-                  <img
-                    src={user?.user_metadata.avatar_url}
-                    alt="User Image"
-                    width={200}
-                    height={200}
-                    className="rounded-full"
-                  />
-                ) : (
-                  <Avatar size={150} initials={user?.email} />
-                )}
+                
+                <img
+                  src={user?.user_metadata.avatar_url}
+                  alt="User Image"
+                  width={200}
+                  height={200}
+                  className="rounded-full"
+                />
               </div>
               <div className="flex flex-col">
                 <h1 className="font-bold sm:text-4xl text-2xl  text-black">
