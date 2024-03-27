@@ -12,19 +12,19 @@ function InfoCard() {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   const router = useRouter();
-  const [tier, setTier] = useState("");
+
+  const tier = localStorage.getItem("tier");
 
   const supabase = createClientComponentClient();
 
-  useEffect(() => {
-    setTier(localStorage.getItem("tier"));
-    getUserEmail();
+  useEffect( () => {
+   getUserEmail();
   }, []);
 
   const getUserEmail = async () => {
-    const { data } = await supabase.auth.getUser();
-    setEmail(data.user.email);
-  };
+     const { data } = await supabase.auth.getUser();
+     setEmail(data.user.email);
+  }
 
   const handleFirstNameChange = (e) => {
     setFirstName(e.target.value);

@@ -12,7 +12,7 @@ function InfoCard() {
   const [email, setEmail] = useState("");
   const [errors, setErrors] = useState({});
   const router = useRouter();
-  const [tier, setTier] = useState("");
+  cosnt[(tier, setTier)] = useState("");
 
   const supabase = createClientComponentClient();
 
