@@ -49,7 +49,7 @@ function SubscriptionCards() {
           ))}
         </div>
 
-        <div className=" my-2 sm:my-4 space-y-2 sm:space-y-3">
+        <div className="my-4 space-y-3">
           <label htmlFor="terms" className="flex space-x-4">
             <input
               id="terms"

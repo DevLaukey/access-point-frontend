@@ -8,7 +8,7 @@ function RadioSelector({
   onRadioChange,
 }) {
   return (
-    <div className="relative mb-2">
+    <div className="relative mb-4">
       <input
         className="peer hidden"
         id={title}
@@ -27,10 +27,8 @@ function RadioSelector({
           <span className="text-lg font-semibold">{title}</span>
           {price && (
             <>
-              <span className="text-lg ml-3 font-semibold">
-                {price}
-                <span className="text-sm text-muted-foreground"> /year</span>
-              </span>
+              <span className="text-lg ml-3 font-semibold">{price}</span>
+              <span className="text-muted-foreground"> /year</span>
             </>
           )}
         </div>

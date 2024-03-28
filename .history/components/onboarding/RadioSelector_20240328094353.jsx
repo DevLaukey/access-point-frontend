@@ -8,7 +8,7 @@ function RadioSelector({
   onRadioChange,
 }) {
   return (
-    <div className="relative mb-2">
+    <div className="relative mb-4">
       <input
         className="peer hidden"
         id={title}

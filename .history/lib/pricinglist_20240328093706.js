@@ -49,5 +49,3 @@ const pricingList = [
     ],
   },
 ];
-
-export default pricingList

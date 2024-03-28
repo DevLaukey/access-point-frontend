@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import RadioSelector from "./RadioSelector";
@@ -25,18 +24,17 @@ function SubscriptionCards() {
     } else {
       toast("Please select a payment plan to continue", {
         description: "You are not allowed to continue without selecting a plan",
-      })
-  
+      });
     }
   };
 
   return (
-    <>
-      <h2 className="font-serif text-lg sm:text-2xl font-semibold text-gray-700 dark:text-gray-200">
-        Choose Subscription Plan
-      </h2>
-      <div className="mt-4 flex w-full flex-col pb-4">
-        <div className="flex flex-col space-y-4 h-80 overflow-y-auto">
+    <div className="flex flex-col justify-between h-screen">
+      <div className="flex flex-col">
+        <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-200">
+          Choose Subscription Plan
+        </h2>
+        <div className="mt-4 flex flex-col space-y-4 overflow-y-auto">
           {tiers.map((tier, index) => (
             <RadioSelector
               key={index}
@@ -49,7 +47,7 @@ function SubscriptionCards() {
           ))}
         </div>
 
-        <div className=" my-2 sm:my-4 space-y-2 sm:space-y-3">
+        <div className="my-4 space-y-3">
           <label htmlFor="terms" className="flex space-x-4">
             <input
               id="terms"
@@ -77,32 +75,32 @@ function SubscriptionCards() {
             </span>
           </label>
         </div>
-
-        <button
-          onClick={handleContinue}
-          disabled={!termsChecked}
-          className={`my-2 flex items-center justify-center rounded-md ${
-            !termsChecked ? "bg-gray-400 cursor-not-allowed" : "bg-gray-900"
-          } py-3 font-medium text-white`}
-        >
-          Continue
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="ml-4 h-4 w-4"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            strokeWidth="2"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M14 5l7 7m0 0l-7 7m7-7H3"
-            />
-          </svg>
-        </button>
       </div>
-    </>
+
+      <button
+        onClick={handleContinue}
+        disabled={!termsChecked}
+        className={`my-2 flex items-center justify-center rounded-md ${
+          !termsChecked ? "bg-gray-400 cursor-not-allowed" : "bg-gray-900"
+        } py-3 font-medium text-white`}
+      >
+        Continue
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="ml-4 h-4 w-4"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth="2"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M14 5l7 7m0 0l-7 7m7-7H3"
+          />
+        </svg>
+      </button>
+    </div>
   );
 }
 

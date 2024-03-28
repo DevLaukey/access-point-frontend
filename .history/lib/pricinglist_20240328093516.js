@@ -17,7 +17,7 @@ const pricingList = [
   {
     title: "Premium",
     popular: 1,
-    price: "KES 9,999",
+    price: " KES 9,999",
     description:
       "Get the Premium entry and exit management system, Ideal for malls, hotels, Hotel reception, parks.",
     buttonText: "Start Free Trial",
@@ -49,5 +49,3 @@ const pricingList = [
     ],
   },
 ];
-
-export default pricingList

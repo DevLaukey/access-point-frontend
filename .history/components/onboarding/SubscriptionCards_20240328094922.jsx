@@ -32,7 +32,7 @@ function SubscriptionCards() {
 
   return (
     <>
-      <h2 className="font-serif text-lg sm:text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      <h2 className="font-serif text-2xl font-semibold text-gray-700 dark:text-gray-200">
         Choose Subscription Plan
       </h2>
       <div className="mt-4 flex w-full flex-col pb-4">
@@ -49,7 +49,7 @@ function SubscriptionCards() {
           ))}
         </div>
 
-        <div className=" my-2 sm:my-4 space-y-2 sm:space-y-3">
+        <div className="my-4 space-y-3">
           <label htmlFor="terms" className="flex space-x-4">
             <input
               id="terms"

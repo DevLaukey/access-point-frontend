@@ -2,7 +2,7 @@ const pricingList = [
   {
     title: "Basic",
     popular: 0,
-    price: " KES 6,999",
+    price: " KES 6,999/Year",
     description:
       "Get the basic entry and exit management system, Ideal for small hotels, hospitals, commercial buildings, hotel reception ",
     benefitList: [
@@ -17,7 +17,7 @@ const pricingList = [
   {
     title: "Premium",
     popular: 1,
-    price: "KES 9,999",
+    price: " KES 9,999/Year",
     description:
       "Get the Premium entry and exit management system, Ideal for malls, hotels, Hotel reception, parks.",
     buttonText: "Start Free Trial",
@@ -34,7 +34,7 @@ const pricingList = [
   {
     title: "Enterprise",
     popular: 0,
-    price: "KES 17,999",
+    price: "KES 17,999/Year",
     description:
       "Ideal for Security Companies with multiple guards, entry and exit points",
     buttonText: "Contact US",
@@ -49,5 +49,3 @@ const pricingList = [
     ],
   },
 ];
-
-export default pricingList
