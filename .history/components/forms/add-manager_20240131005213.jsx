@@ -19,7 +19,6 @@ function AddManager({ title, description }) {
   const [accessPoints, setAccessPoints] = useState([]);
   const [first_name, setFirstName] = useState("");
   const [last_name, setLastName] = useState("");
-  const [email, setEmail] = useState("");
   const [phone_number, setPhoneNumber] = useState("");
   const [entry_point_id, setEntryPointId] = useState("");
 
@@ -50,13 +49,8 @@ function AddManager({ title, description }) {
     setLoading(true);
 
     try {
-      console.log(first_name, last_name, email, phone_number, entry_point_id);
-      if (
-        first_name === "" ||
-        last_name === "" ||
-        email === "" ||
-        phone_number === ""
-      ) {
+      console.log(first_name, last_name, phone_number, entry_point_id);
+      if (first_name === "" || last_name === "" || phone_number === "") {
         setError(true);
         return;
       }
@@ -67,7 +61,6 @@ function AddManager({ title, description }) {
         {
           first_name,
           last_name,
-          email,
           phone_number,
           entry_point_id,
           admin_id: id,
@@ -84,7 +77,6 @@ function AddManager({ title, description }) {
       setError(false);
       setFirstName("");
       setLastName("");
-      setEmail("");
       setPhoneNumber("");
       setEntryPointId("");
       router.push("/dashboard/users");
@@ -98,7 +90,6 @@ function AddManager({ title, description }) {
     setData([]);
     setFirstName("");
     setLastName("");
-    setEmail("");
     setPhoneNumber("");
     setEntryPointId("");
   };
@@ -134,7 +125,7 @@ function AddManager({ title, description }) {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
-                htmlFor="grid-first-name"
+                for="grid-first-name"
               >
                 First Name
               </label>
@@ -146,11 +137,16 @@ function AddManager({ title, description }) {
                 onChange={(e) => setFirstName(e.target.value)}
                 placeholder="Jane"
               />
+              {/* {error && (
+                <p className="text-red-500 text-xs italic">
+                  Please fill out this field.
+                </p>
+              )} */}
             </div>
             <div className="w-full md:w-1/2 px-3">
               <label
                 className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
-                htmlFor="grid-last-name"
+                for="grid-last-name"
               >
                 Last Name
               </label>
@@ -169,23 +165,23 @@ function AddManager({ title, description }) {
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
-                htmlFor="grid-email"
+                for="grid-phone_number"
               >
-                Email
+                Phone Number
               </label>
               <input
                 className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"
-                id="grid-email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="user@access.com"
+                id="grid-phone_number"
+                type="text"
+                value={phone_number}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="0707070707"
               />
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
-                htmlFor="grid-state"
+                for="grid-state"
               >
                 Entry Point
               </label>
@@ -220,22 +216,6 @@ function AddManager({ title, description }) {
                 </div>
               </div>
             </div>
-            <div className="w-full mt-2 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
-                htmlFor="grid-phone_number"
-              >
-                Phone Number
-              </label>
-              <input
-                className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"
-                id="grid-phone_number"
-                type="text"
-                value={phone_number}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder="0707070707"
-              />
-            </div>
           </div>
           <div className="text-center mt-4">
             <Button
@@ -244,9 +224,8 @@ function AddManager({ title, description }) {
                 e.preventDefault();
                 addManager();
               }}
-              disabled={loading}
             >
-              {loading ? "Adding..." : "Add Manager"}
+              Add Manager
             </Button>
           </div>
         </form>

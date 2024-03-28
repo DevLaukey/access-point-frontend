@@ -179,7 +179,23 @@ function AddManager({ title, description }) {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="user@access.com"
+                placeholder="example@example.com"
+              />
+            </div>
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+              <label
+                className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
+                htmlFor="grid-phone_number"
+              >
+                Phone Number
+              </label>
+              <input
+                className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"
+                id="grid-phone_number"
+                type="text"
+                value={phone_number}
+                onChange={(e) => setPhoneNumber(e.target.value)}
+                placeholder="0707070707"
               />
             </div>
             <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -219,22 +235,6 @@ function AddManager({ title, description }) {
                   </svg>
                 </div>
               </div>
-            </div>
-            <div className="w-full mt-2 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
-                htmlFor="grid-phone_number"
-              >
-                Phone Number
-              </label>
-              <input
-                className="appearance-none block w-full  text-gray-700 dark:text-gray-300 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none  focus:border-gray-500"
-                id="grid-phone_number"
-                type="text"
-                value={phone_number}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                placeholder="0707070707"
-              />
             </div>
           </div>
           <div className="text-center mt-4">

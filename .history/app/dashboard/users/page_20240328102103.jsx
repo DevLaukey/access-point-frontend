@@ -13,12 +13,10 @@ export default function page() {
     getUserData();
   }, [processedData, setProcessedData]);
 
-  
   async function getUserData() {
     const user = await supabase.auth.getUser();
 
     const id = user.data.user?.id;
-    console.log(id);
     let { data: userDetails, error: userError } = await supabase
       .from("users")
       .select(

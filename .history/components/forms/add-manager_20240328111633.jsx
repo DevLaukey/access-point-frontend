@@ -220,7 +220,7 @@ function AddManager({ title, description }) {
                 </div>
               </div>
             </div>
-            <div className="w-full mt-2 px-3 mb-6 md:mb-0">
+            <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
               <label
                 className="block uppercase tracking-wide text-gray-700 dark:text-gray-300 text-xs font-bold mb-2"
                 htmlFor="grid-phone_number"
