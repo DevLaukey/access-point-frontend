@@ -99,8 +99,9 @@ const Page = () => {
       });
   }, [id, user]);
 
+
   const confirmEntry = () => {
-    router.push("/dashboard/users");
+    setConfirmEntryValues(true);
   };
 
   const submitUserDetails = async () => {

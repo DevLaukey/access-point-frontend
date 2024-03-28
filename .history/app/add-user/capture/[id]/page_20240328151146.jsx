@@ -34,9 +34,7 @@ import Header from "../../../../components/layout/header";
 const Page = () => {
   const router = useRouter();
   const { id } = useParams();
-  const selectedAccessPoint = localStorage.getItem("access_point")
-    ? localStorage.getItem("access_point")
-    : undefined;
+  const selectedAccessPoint = window.localStorage.getItem("access_point");
   console.log(id, selectedAccessPoint);
   const [uniqueId, setUniqueId] = useState({});
   const [firstName, setFirstName] = useState("");
@@ -99,8 +97,9 @@ const Page = () => {
       });
   }, [id, user]);
 
+
   const confirmEntry = () => {
-    router.push("/dashboard/users");
+    setConfirmEntryValues(true);
   };
 
   const submitUserDetails = async () => {

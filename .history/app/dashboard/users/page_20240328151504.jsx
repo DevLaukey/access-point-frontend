@@ -21,7 +21,8 @@ export default function page() {
     let { data: userDetails, error: userError } = await supabase
       .from("users")
       .select(
-        `*,
+        `
+    *,
     access_point_id: access-point(*)
     `
       )
