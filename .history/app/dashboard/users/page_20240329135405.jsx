@@ -17,6 +17,7 @@ export default function page() {
     const user = await supabase.auth.getUser();
 
     const id = user.data.user?.id;
+    console.log(id);
     let { data: userDetails, error: userError } = await supabase
       .from("users")
       .select(

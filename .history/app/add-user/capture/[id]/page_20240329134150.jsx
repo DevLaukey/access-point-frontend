@@ -25,6 +25,8 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   useParams,
   useRouter,
+  usePathname,
+  useSearchParams,
 } from "next/navigation";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Header from "../../../../components/layout/header";
@@ -35,9 +37,6 @@ const Page = () => {
   const selectedAccessPoint = localStorage.getItem("access_point")
     ? localStorage.getItem("access_point")
     : undefined;
-    const selectedEntryManager = localStorage.getItem("entry_manager")
-      ? localStorage.getItem("entry_manager")
-      : undefined;
   console.log(id, selectedAccessPoint);
   const [uniqueId, setUniqueId] = useState({});
   const [firstName, setFirstName] = useState("");
@@ -76,7 +75,7 @@ const Page = () => {
             admin_user: admin_user_id,
             arrival_time: new Date().toISOString(),
             access_point_id: selectedAccessPoint,
-            entry_manager_id: selectedEntryManager,
+            entry_manager_id: user.id,
           },
         ])
         .select();

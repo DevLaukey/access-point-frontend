@@ -17,6 +17,7 @@ export default function page() {
     const user = await supabase.auth.getUser();
 
     const id = user.data.user?.id;
+    console.log(id);
     let { data: userDetails, error: userError } = await supabase
       .from("users")
       .select(
@@ -30,6 +31,7 @@ export default function page() {
       console.log(userError);
     }
 
+    console.log(userDetails);
 
     const points = userDetails.map((obj) => ({
       id: obj.access_point_id?.id,
