@@ -28,9 +28,7 @@ const Page = () => {
   }, [fingerprintCaptured]);
 
   useEffect(() => {
-
-    console.log("selected user", selectedUser);
-    selectedUser? setIsMatch("success"): setIsMatch("failure");
+    setIsMatch("success");
   }, [selectedUser]);
 
   useEffect(() => {
@@ -70,7 +68,7 @@ const Page = () => {
 
       //  check if data is empty
       if (!data) {
-        toast.error("User not updated successful");
+      toast.error("User not found");
       }
 
       setSelectedUser(data);
@@ -79,6 +77,7 @@ const Page = () => {
       console.error(error);
     }
   };
+  
   const getUser = async (fingerprint_id) => {
     try {
       let { data: users, error } = await supabase
@@ -91,10 +90,7 @@ const Page = () => {
         throw new Error(error.message);
       }
 
-      //  check if data is empty
-      if (users.length === 0) {
-        toast.error("User not found");
-      }
+      console.log(users);
 
       setIsLoading(true);
       setSelectedUser(users);
@@ -159,46 +155,32 @@ const Page = () => {
       .catch((error) => console.log("error", error));
   };
 
-const handleCaptureFingerprint = async () => {
-  try {
-    // Check if there are any existing fingerprints for the user
-    if (fingerprints.length === 0) {
-      toast.error("No visitors found.");
-      return;
-    }
+  const handleCaptureFingerprint = async () => {
+    try {
+      const response = await fetch(
+        "https://localhost:7030/api/Fingerprint/capture",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setData(data);
 
-    const response = await fetch(
-      "https://localhost:7030/api/Fingerprint/capture",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      if (response.status !== 200) {
+        setfingerprintCapturedError(true);
+        throw new Error(data.message);
       }
-    );
-    const data = await response.json();
+      setFingerprintTemplate1(data.bmpBase64);
+      setFingerprintCaptured(true);
 
-    if (response.status !== 200) {
-      setfingerprintCapturedError(true);
-      throw new Error(data.message);
+      toast.success("Fingerprint captured successfully!");
+    } catch (error) {
+      console.log(error.message);
     }
-
-    setFingerprintTemplate1(data.bmpBase64);
-    setFingerprintCaptured(true);
-
-    toast.success("Fingerprint captured successfully!");
-
-    // Compare captured fingerprint with each existing fingerprint
-    fingerprints.forEach((fingerprint) => {
-      if (fingerprint.fingerprint_template !== null && data.bmpBase64) {
-        compareFingerPrints(data.bmpBase64, fingerprint);
-      }
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
+  };
 
   function redoCapture() {
     setData([]);

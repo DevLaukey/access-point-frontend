@@ -28,10 +28,8 @@ const Page = () => {
   }, [fingerprintCaptured]);
 
   useEffect(() => {
-
-    console.log("selected user", selectedUser);
-    selectedUser? setIsMatch("success"): setIsMatch("failure");
-  }, [selectedUser]);
+  setIsMatch("success");
+   }, [selectedUser]);
 
   useEffect(() => {
     fingerprints.forEach((fingerprint) => {
@@ -68,13 +66,8 @@ const Page = () => {
         throw new Error(error.message);
       }
 
-      //  check if data is empty
-      if (!data) {
-        toast.error("User not updated successful");
-      }
-
+      console.log(data);
       setSelectedUser(data);
-      router.push("/dashboard");
     } catch (error) {
       console.error(error);
     }
@@ -91,10 +84,7 @@ const Page = () => {
         throw new Error(error.message);
       }
 
-      //  check if data is empty
-      if (users.length === 0) {
-        toast.error("User not found");
-      }
+      console.log(users);
 
       setIsLoading(true);
       setSelectedUser(users);
@@ -159,46 +149,32 @@ const Page = () => {
       .catch((error) => console.log("error", error));
   };
 
-const handleCaptureFingerprint = async () => {
-  try {
-    // Check if there are any existing fingerprints for the user
-    if (fingerprints.length === 0) {
-      toast.error("No visitors found.");
-      return;
-    }
+  const handleCaptureFingerprint = async () => {
+    try {
+      const response = await fetch(
+        "https://localhost:7030/api/Fingerprint/capture",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setData(data);
 
-    const response = await fetch(
-      "https://localhost:7030/api/Fingerprint/capture",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      if (response.status !== 200) {
+        setfingerprintCapturedError(true);
+        throw new Error(data.message);
       }
-    );
-    const data = await response.json();
+      setFingerprintTemplate1(data.bmpBase64);
+      setFingerprintCaptured(true);
 
-    if (response.status !== 200) {
-      setfingerprintCapturedError(true);
-      throw new Error(data.message);
+      toast.success("Fingerprint captured successfully!");
+    } catch (error) {
+      console.log(error.message);
     }
-
-    setFingerprintTemplate1(data.bmpBase64);
-    setFingerprintCaptured(true);
-
-    toast.success("Fingerprint captured successfully!");
-
-    // Compare captured fingerprint with each existing fingerprint
-    fingerprints.forEach((fingerprint) => {
-      if (fingerprint.fingerprint_template !== null && data.bmpBase64) {
-        compareFingerPrints(data.bmpBase64, fingerprint);
-      }
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
+  };
 
   function redoCapture() {
     setData([]);
@@ -256,7 +232,14 @@ const handleCaptureFingerprint = async () => {
           {fingerprintCaptured ? (
             <div className="flex w-full justify-center items-center mt-3">
               {isMatch === "success" && selectedUser ? (
-                <Button onClick={updateUser}>Continue</Button>
+                <Button
+                  onClick={() => {
+                    updateUser();
+                    router.push("/dashboard");
+                  }}
+                >
+                  Continue
+                </Button>
               ) : (
                 <div className="flex flex-col space-y-2">
                   <div className="flex space-x-2 justify-center items-center hover:underline">

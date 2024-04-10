@@ -159,46 +159,32 @@ const Page = () => {
       .catch((error) => console.log("error", error));
   };
 
-const handleCaptureFingerprint = async () => {
-  try {
-    // Check if there are any existing fingerprints for the user
-    if (fingerprints.length === 0) {
-      toast.error("No visitors found.");
-      return;
-    }
+  const handleCaptureFingerprint = async () => {
+    try {
+      const response = await fetch(
+        "https://localhost:7030/api/Fingerprint/capture",
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      setData(data);
 
-    const response = await fetch(
-      "https://localhost:7030/api/Fingerprint/capture",
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+      if (response.status !== 200) {
+        setfingerprintCapturedError(true);
+        throw new Error(data.message);
       }
-    );
-    const data = await response.json();
+      setFingerprintTemplate1(data.bmpBase64);
+      setFingerprintCaptured(true);
 
-    if (response.status !== 200) {
-      setfingerprintCapturedError(true);
-      throw new Error(data.message);
+      toast.success("Fingerprint captured successfully!");
+    } catch (error) {
+      console.log(error.message);
     }
-
-    setFingerprintTemplate1(data.bmpBase64);
-    setFingerprintCaptured(true);
-
-    toast.success("Fingerprint captured successfully!");
-
-    // Compare captured fingerprint with each existing fingerprint
-    fingerprints.forEach((fingerprint) => {
-      if (fingerprint.fingerprint_template !== null && data.bmpBase64) {
-        compareFingerPrints(data.bmpBase64, fingerprint);
-      }
-    });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
+  };
 
   function redoCapture() {
     setData([]);
