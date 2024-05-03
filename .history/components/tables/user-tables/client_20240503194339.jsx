@@ -57,7 +57,7 @@ const UserClient = ({ data, accessPoints }) => {
     <>
       <Toaster />
 
-      <div className="flex flex-col md:flex-row mt-2 w-full items-start justify-between">
+      <div className="flex items-start justify-between">
         <Heading
           title={`Existing Visitors (${data.length})`}
           description="Manage the visitors from all the access points"
@@ -109,8 +109,8 @@ const UserClient = ({ data, accessPoints }) => {
                     onClick={saveEntryPoint}
                     disabled={saving} // Disable button when saving
                   >
-                    {/* <Plus className="hidden h-4 w-4 " /> */}
-                    <span className="ml-2 text-sm">Add Entry Point</span>
+                    <Plus className="h-4 w-4" />
+                    <span className="ml-2">Add Entry Point</span>
                   </Button>
                 </DialogClose>
               </DialogFooter>
@@ -122,7 +122,7 @@ const UserClient = ({ data, accessPoints }) => {
             onClick={() => router.push(`/dashboard/users/add-manager`)}
           >
             <Plus className="mr-2 h-4 w-4" />
-            Add Entry Manager
+            <span className="hidden md:flex">Add Entry Manager</span>
           </Button>
         </div>
       </div>

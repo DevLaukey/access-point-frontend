@@ -29,20 +29,35 @@ const UserClient = ({ data, accessPoints }) => {
   const router = useRouter();
 
   const [entryPoint, setEntryPoint] = useState("");
+  const [entryPointDescription, setEntryPointDescription] = useState("");
+  const [saving, setSaving] = useState(false); // State to manage saving state
+
   const saveEntryPoint = async () => {
-    const response = await saveAccessPoint(entryPoint);
+    if (!entryPoint) {
+      toast("Entry Point is required.");
+      return;
+    }
+
+    setSaving(true); // Set saving state to true when saving starts
+
+    const response = await saveAccessPoint(entryPoint, entryPointDescription);
     if (response.length > 0) {
       toast("Access Point has been created.");
 
       setEntryPoint("");
+      setEntryPointDescription("");
     }
+
+    // close the dialog
+
+    setSaving(false); // Set saving state to false after saving completes
   };
 
   return (
     <>
       <Toaster />
 
-      <div className="flex items-start justify-between">
+      <div className="flex flex-col w-full items-start justify-between">
         <Heading
           title={`Existing Visitors (${data.length})`}
           description="Manage the visitors from all the access points"
@@ -51,7 +66,8 @@ const UserClient = ({ data, accessPoints }) => {
           <Dialog>
             <DialogTrigger asChild>
               <Button className="text-xs md:text-sm">
-                <Plus className="mr-2 h-4 w-4" /> Add Entry Point
+                <Plus className="mr-2 h-4 w-4" />
+                Add Entry Point
               </Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-md">
@@ -61,32 +77,40 @@ const UserClient = ({ data, accessPoints }) => {
                   This is an access point to the premises
                 </DialogDescription>
               </DialogHeader>
-              <div className="flex items-center space-x-2">
-                <div className="grid flex-1 gap-2">
-                  <Label htmlFor="link" className="sr-only">
-                    Link
-                  </Label>
-
+              <div className="grid gap-4">
+                <div className="flex flex-col">
                   <Input
-                    id="link"
+                    id="entryPoint"
                     value={entryPoint}
                     onChange={(e) => setEntryPoint(e.target.value)}
+                    placeholder="Enter Entry Point"
                   />
                 </div>
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="px-3"
-                  onClick={saveEntryPoint}
-                >
-                  <span className="sr-only">Add </span>
-                  <Plus className="h-4 w-4" />
-                </Button>
+                <div className="flex flex-col">
+                  <Input
+                    id="entryPointDescription"
+                    value={entryPointDescription}
+                    onChange={(e) => setEntryPointDescription(e.target.value)}
+                    placeholder="Enter Entry Point Description"
+                  />
+                </div>
               </div>
-              <DialogFooter className="sm:justify-start">
+              <DialogFooter className="sm:justify-between gap-2">
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">
                     Close
+                  </Button>
+                </DialogClose>
+                <DialogClose asChild>
+                  <Button
+                    type="submit"
+                    size="sm"
+                    className="px-3 flex justify-center items-center"
+                    onClick={saveEntryPoint}
+                    disabled={saving} // Disable button when saving
+                  >
+                    {/* <Plus className="hidden h-4 w-4 " /> */}
+                    <span className="ml-2">Add Entry Point</span>
                   </Button>
                 </DialogClose>
               </DialogFooter>
@@ -97,7 +121,8 @@ const UserClient = ({ data, accessPoints }) => {
             className="text-xs md:text-sm"
             onClick={() => router.push(`/dashboard/users/add-manager`)}
           >
-            <Plus className="mr-2 h-4 w-4" /> Add Entry Manager
+            <Plus className="mr-2 h-4 w-4" />
+            Add Entry Manager
           </Button>
         </div>
       </div>

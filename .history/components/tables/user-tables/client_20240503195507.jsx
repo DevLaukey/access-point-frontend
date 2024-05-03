@@ -48,6 +48,8 @@ const UserClient = ({ data, accessPoints }) => {
       setEntryPointDescription("");
     }
 
+    // close the dialog
+
     setSaving(false); // Set saving state to false after saving completes
   };
 
@@ -77,7 +79,6 @@ const UserClient = ({ data, accessPoints }) => {
               </DialogHeader>
               <div className="grid gap-4">
                 <div className="flex flex-col">
-               
                   <Input
                     id="entryPoint"
                     value={entryPoint}
@@ -86,7 +87,6 @@ const UserClient = ({ data, accessPoints }) => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  
                   <Input
                     id="entryPointDescription"
                     value={entryPointDescription}
@@ -95,22 +95,24 @@ const UserClient = ({ data, accessPoints }) => {
                   />
                 </div>
               </div>
-              <DialogFooter className="sm:justify-start">
+              <DialogFooter className="sm:justify-between gap-2">
                 <DialogClose asChild>
                   <Button type="button" variant="secondary">
                     Close
                   </Button>
                 </DialogClose>
-                <Button
-                  type="submit"
-                  size="sm"
-                  className="px-3 flex justify-center items-center"
-                  onClick={saveEntryPoint}
-                  disabled={saving} // Disable button when saving
-                >
-                  <span className="">Add Entry Point</span>
-                  <Plus className="h-4 w-4" />
-                </Button>
+                <DialogClose asChild>
+                  <Button
+                    type="submit"
+                    size="sm"
+                    className="px-3 flex justify-center items-center"
+                    onClick={saveEntryPoint}
+                    disabled={saving} // Disable button when saving
+                  >
+                    {/* <Plus className="hidden h-4 w-4 " /> */}
+                    <span className="ml-2">Add Entry Point</span>
+                  </Button>
+                </DialogClose>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -119,7 +121,8 @@ const UserClient = ({ data, accessPoints }) => {
             className="text-xs md:text-sm"
             onClick={() => router.push(`/dashboard/users/add-manager`)}
           >
-            <Plus className="mr-2 h-4 w-4" /> Add Entry Manager
+            <Plus className="mr-2 h-4 w-4" />
+            Add Entry Manager
           </Button>
         </div>
       </div>

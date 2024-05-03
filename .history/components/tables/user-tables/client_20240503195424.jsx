@@ -109,7 +109,7 @@ const UserClient = ({ data, accessPoints }) => {
                     onClick={saveEntryPoint}
                     disabled={saving} // Disable button when saving
                   >
-                    <Plus className="h-4 w-4" />
+                    {/* <Plus className="hidden h-4 w-4 " /> */}
                     <span className="ml-2">Add Entry Point</span>
                   </Button>
                 </DialogClose>
@@ -121,7 +121,8 @@ const UserClient = ({ data, accessPoints }) => {
             className="text-xs md:text-sm"
             onClick={() => router.push(`/dashboard/users/add-manager`)}
           >
-            <Plus className="mr-2 h-4 w-4" /> Add Entry Manager
+            <Plus className="mr-2 h-4 w-4" />
+            Add Entry Manager
           </Button>
         </div>
       </div>
