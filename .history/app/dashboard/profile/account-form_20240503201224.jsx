@@ -65,8 +65,8 @@ export default function AccountForm({ user }) {
       <div className=" bg-myBG min-h-screen py-5 mx-5 ">
         <div className="container max-w-screen-md mx-auto md:px-0 px-4 flex justify-center items-center h-[85vh]">
           <div className="mt-5 bg-white px-4 border-2 border-b-8 border-black rounded-xl grid grid-cols-12  justify-between duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 ">
-            <div className=" flex-col sm:flex-col p-4 ">
-              <div className=" md:inline m-4">
+            <div className="p-4 ">
+              <div className=" flex-col sm:flex md:inline m-4">
                 {user?.user_metadata.avatar_url ? (
                   <img
                     src={user?.user_metadata.avatar_url}

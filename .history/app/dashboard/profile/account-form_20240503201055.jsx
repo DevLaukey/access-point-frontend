@@ -1,10 +1,10 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
-import Avatar from "./avatar";
+import Avatar from "react-avatar";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Image from "next/image"
+import Image from "next/image";
 export default function AccountForm({ user }) {
   const supabase = createClientComponentClient();
   const [loading, setLoading] = useState(true);
@@ -38,9 +38,7 @@ export default function AccountForm({ user }) {
   //   getProfile();
   // }, [user, getProfile]);
 
-
   async function updateProfile({ username, website, avatar_url }) {
-
     try {
       setLoading(true);
 
@@ -66,23 +64,26 @@ export default function AccountForm({ user }) {
       <ToastContainer />
       <div className=" bg-myBG min-h-screen py-5 mx-5 ">
         <div className="container max-w-screen-md mx-auto md:px-0 px-4 flex justify-center items-center h-[85vh]">
-          <div className="mt-5 bg-white  border-2 border-b-8 border-black rounded-xl grid grid-cols-12  justify-between duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 ">
+          <div className="mt-5 bg-white px-4 border-2 border-b-8 border-black rounded-xl grid grid-cols-12  justify-between duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-100 ">
             <div className="col-span-12 md:col-span-8 sm:pt-10 sm:px-8 p-5 flex ">
-              <div className="col-span-4 hidden md:inline m-4">
-                
-                <img
-                  src={user?.user_metadata.avatar_url}
-                  alt="User Image"
-                  width={200}
-                  height={200}
-                  className="rounded-full"
-                />
+              <div className="col-span-4  md:inline m-4">
+                {user?.user_metadata.avatar_url ? (
+                  <img
+                    src={user?.user_metadata.avatar_url}
+                    alt="User Image"
+                    width={200}
+                    height={200}
+                    className="rounded-full"
+                  />
+                ) : (
+                  <Avatar size={150} initials={user?.email} />
+                )}
               </div>
               <div className="flex flex-col">
-                <h1 className="font-bold sm:text-4xl text-2xl  text-black">
+                <h1 className="font-bold sm:text-xl text-2xl  text-black">
                   {user?.user_metadata.full_name}
                 </h1>
-                <h2 className="font-semibold sm:text-2xl text-xl text-black">
+                <h2 className="font-semibold text-sm sm:text-xl  text-black">
                   {user?.email}
                 </h2>
               </div>

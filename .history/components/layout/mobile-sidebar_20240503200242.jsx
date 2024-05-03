@@ -6,6 +6,7 @@ import { DashboardNav } from "../dashboard-nav";
 import { navItems } from "../../constants/data";
 import { Button } from "../ui/button";
 
+
 export function MobileSidebar({ className }) {
   const [open, setOpen] = useState(false);
   return (
@@ -22,6 +23,15 @@ export function MobileSidebar({ className }) {
               </h2>
               <div className="space-y-1">
                 <DashboardNav items={navItems} setOpen={setOpen} />
+                <div className="flex justify-between items-center">
+                  <Button onClick={() => router.push("/existing-user/fingerprint")}>
+                    Existing Users
+                  </Button>
+                  <Button onClick={() => router.push("/add-user/fingerprint")}>
+                    Add New Visitor
+                  </Button>
+                </div>
+            
               </div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { MenuIcon } from "lucide-react";
 import { useState } from "react";
 import { DashboardNav } from "../dashboard-nav";
 import { navItems } from "../../constants/data";
-import { Button } from "../ui/button";
+
 
 export function MobileSidebar({ className }) {
   const [open, setOpen] = useState(false);
@@ -22,6 +22,14 @@ export function MobileSidebar({ className }) {
               </h2>
               <div className="space-y-1">
                 <DashboardNav items={navItems} setOpen={setOpen} />
+                <Button
+                  onClick={() => router.push("/existing-user/fingerprint")}
+                >
+                  Existing Users
+                </Button>
+                <Button onClick={() => router.push("/add-user/fingerprint")}>
+                  <Plus className="mr-2 h-4 w-4" /> Add New Visitor
+                </Button>
               </div>
             </div>
           </div>

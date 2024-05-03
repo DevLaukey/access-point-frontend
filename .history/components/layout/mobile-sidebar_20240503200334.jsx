@@ -6,6 +6,7 @@ import { DashboardNav } from "../dashboard-nav";
 import { navItems } from "../../constants/data";
 import { Button } from "../ui/button";
 
+
 export function MobileSidebar({ className }) {
   const [open, setOpen] = useState(false);
   return (
@@ -22,6 +23,7 @@ export function MobileSidebar({ className }) {
               </h2>
               <div className="space-y-1">
                 <DashboardNav items={navItems} setOpen={setOpen} />
+           
               </div>
             </div>
           </div>

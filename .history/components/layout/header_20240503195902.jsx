@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
 import Logo from "../../assets/adaptive-icon.png";
-import Image from "next/image"
+import Image from "next/image";
 
 export const dm_serif_display = DM_Serif_Display({
   subsets: ["latin"],
@@ -71,12 +71,14 @@ export default function Header() {
           <MobileSidebar />
         </div>
         <div className="flex space-x-4">
-          <Button onClick={() => router.push("/existing-user/fingerprint")}>
-            Existing Users
-          </Button>
-          <Button onClick={() => router.push("/add-user/fingerprint")}>
-            <Plus className="mr-2 h-4 w-4" /> Add New Visitor
-          </Button>
+          <div className="hidden md:flex text-sm">
+            <Button onClick={() => router.push("/existing-user/fingerprint")}>
+              Existing Users
+            </Button>
+            <Button onClick={() => router.push("/add-user/fingerprint")}>
+              <Plus className="mr-2 h-4 w-4" /> Add New Visitor
+            </Button>
+          </div>
           <UserNav />
           <ModeToggle />
         </div>

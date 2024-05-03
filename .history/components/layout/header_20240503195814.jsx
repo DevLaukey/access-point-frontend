@@ -9,6 +9,8 @@ import { ModeToggle } from "../toggle-component";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 import { Plus } from "lucide-react";
+import Logo from "../../assets/adaptive-icon.png";
+import Image from "next/image"
 
 export const dm_serif_display = DM_Serif_Display({
   subsets: ["latin"],
@@ -54,26 +56,21 @@ export default function Header() {
           href="/dashboard"
           className="hidden md:flex justify-center items-center ml-2"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="mr-2 h-6 w-6"
-          >
-            <path d="M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3" />
-          </svg>
+          <Image
+            src={Logo}
+            alt="POEMS Logo"
+            width={40}
+            height={40}
+            className="rounded-full"
+          />
           <span className="self-center text-3xl font-semibold whitespace-nowrap dark:text-white dm_serif_display-500">
-            ACCESS IT.
+            P.O.E.M.S
           </span>
         </a>
         <div className={cn("block sm:!hidden")}>
           <MobileSidebar />
         </div>
-        <div className="flex space-x-4">
+        <div className="hidden md:flex space-x-4">
           <Button onClick={() => router.push("/existing-user/fingerprint")}>
             Existing Users
           </Button>
