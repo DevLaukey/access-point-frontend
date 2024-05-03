@@ -7,10 +7,7 @@ export default function DashboardLayout({ children }) {
     <>
       <Header />
       <div className="flex h-screen overflow-hidden">
-        <div className="hidden md:flex">
-
-        <Sidebar  />
-        </div>
+        <Sidebar />
         <main className="w-full mt-16">{children}</main>
       </div>
     </>

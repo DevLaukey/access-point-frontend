@@ -6,7 +6,7 @@ export default function Sidebar() {
   return (
     // to add hidden
     <nav
-      className=" md:block relative h-screen border-r mt-10 lg:block w-72">
+      className=" md:block relative h-screen border-r mt-20 lg:block w-72">
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <div className="space-y-1">
