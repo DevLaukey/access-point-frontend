@@ -19,7 +19,7 @@ import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 function Page() {
   const [numberPlate, setNumberPlate] = useState("");
   const router = useRouter();
-  const { idNumber } = useParams();
+  const { user_id } = useParams();
   const supabase = createClientComponentClient();
 
   const handleSubmit = async (e) => {
@@ -30,7 +30,7 @@ function Page() {
       const { data, error } = await supabase
         .from("users")
         .update({ number_plate: numberPlate })
-        .eq("id_number", idNumber);
+        .eq("user_id", user_id);
 
       if (error) {
         throw error;

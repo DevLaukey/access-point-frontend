@@ -47,6 +47,7 @@ const Page = () => {
   const supabase = createClientComponentClient();
   const [fingerprintTemplate, setFingerprintTemplate] = useState("");
   const [confirmEntryValues, setConfirmEntryValues] = useState(false);
+  const [userId, setUserId] = useState("");
 
   useEffect(() => {
     getUserDetails();
@@ -207,6 +208,9 @@ const Page = () => {
             </form>
           </CardContent>
           <CardFooter className="items-center justify-center w-full space-x-2">
+            <Link href={`/add-user/number-plate/${userId}`}>
+              <a className="text-blue-500 hover:underline">Add Number Plate</a>
+            </Link>
             <Button
               type="submit"
               onClick={updateUserDetails}
@@ -221,9 +225,6 @@ const Page = () => {
             >
               Confirm
             </Button>
-            <Link href={`/add-user/number-plate/${idNumber}`}>
-              <a className="text-blue-500 hover:underline">Add Number Plate</a>
-            </Link>
           </CardFooter>
         </Card>
       </div>

@@ -221,9 +221,6 @@ const Page = () => {
             >
               Confirm
             </Button>
-            <Link href={`/add-user/number-plate/${idNumber}`}>
-              <a className="text-blue-500 hover:underline">Add Number Plate</a>
-            </Link>
           </CardFooter>
         </Card>
       </div>
