@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from "react-router-dom"; // Import useHistory for navigation
 import Header from "../../../components/layout/header";
 import {
   Card,
@@ -13,11 +14,10 @@ import {
 import { Input } from "../../../components/ui/input";
 import { Label } from "../../../components/ui/label";
 import { Button } from "../../../components/ui/button";
-import { useRouter } from "next/navigation";
 
 function Page() {
   const [numberPlate, setNumberPlate] = useState("");
-  const history = useRouter(); // Initialize history for navigation
+  const history = useHistory(); // Initialize history for navigation
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,9 +25,6 @@ function Page() {
     // For now, let's just navigate to "/dashboard"
     history.push("/dashboard");
   };
-
-  // Regular expression to match the format "KBS 090V"
-  const plateRegex = /^[A-Z]{3}\s\d{3}[A-Z]$/;
 
   return (
     <div className="container mx-auto p-4">
@@ -58,10 +55,6 @@ function Page() {
                   value={numberPlate}
                   onChange={(e) => setNumberPlate(e.target.value)}
                   className="border border-gray-300 px-4 py-2 rounded-md w-full"
-                  placeholder="Enter number plate (e.g., KBS 090V)"
-                  // Apply regex pattern to enforce format
-                  pattern={plateRegex}
-                  title="Please enter a valid number plate in the format 'KBS 090V'"
                 />
               </div>
             </form>

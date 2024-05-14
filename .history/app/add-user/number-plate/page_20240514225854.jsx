@@ -26,9 +26,6 @@ function Page() {
     history.push("/dashboard");
   };
 
-  // Regular expression to match the format "KBS 090V"
-  const plateRegex = /^[A-Z]{3}\s\d{3}[A-Z]$/;
-
   return (
     <div className="container mx-auto p-4">
       <div className="flex flex-col items-center justify-center h-screen px-2 text-center">
@@ -58,10 +55,6 @@ function Page() {
                   value={numberPlate}
                   onChange={(e) => setNumberPlate(e.target.value)}
                   className="border border-gray-300 px-4 py-2 rounded-md w-full"
-                  placeholder="Enter number plate (e.g., KBS 090V)"
-                  // Apply regex pattern to enforce format
-                  pattern={plateRegex}
-                  title="Please enter a valid number plate in the format 'KBS 090V'"
                 />
               </div>
             </form>
